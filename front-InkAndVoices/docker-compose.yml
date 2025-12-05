@@ -4,7 +4,7 @@ services:
   dev:
     build:
       context: .
-    command: npm run dev -- --host 0.0.0.0 --port 5173
+      dockerfile: Dockerfile
     ports:
       - "5173:5173"
     environment:
@@ -12,11 +12,14 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
+    command: npm run dev -- --host 0.0.0.0 --port 5173  
 
   prod:
     build:
       context: .
+      dockerfile: Dockerfile
     ports:
       - "5173:5173"
     environment:
       - NODE_ENV=production
+    command: npm run preview -- --host 0.0.0.0 --port 5173    
