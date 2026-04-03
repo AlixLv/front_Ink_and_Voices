@@ -8,11 +8,13 @@ const signUpUser = async( username: string, email: string, password: string) =>{
         },
         body: JSON.stringify({username, email, password})
     })
-    return res => res.json();
+    const data = await res.json();
+    return {status: res.status, data}; // permet de récupérer le status envoyé par le back
 }
 
-// object typé qui indique quelle type de valeur est attendue si on ajoute une valeur à l'une des clé optionnelle
+// type TypScript décrivant la forme d'un objet et qui indique quelle type de valeur est attendue si on ajoute une valeur à l'une des clé optionnelle
 type FormErrors = {
+    username?: string;
     email?: string;
     password?: string;
     global?: string;
@@ -28,12 +30,16 @@ const SignUpForm = () => {
     const validateInputs = (): FormErrors => {
         const newErrors: FormErrors = {};
 
+        if (username.length <= 0){
+            newErrors.username = "Le nom d'utilisateurice ne doit pas être vide."
+        }
+
         if (!email.includes('@')){
             newErrors.email = "L'adresse email n'est pas valide.";
         }
 
         if (password.length < 8){
-            newErrors.password = "Le mot de passe doit contenir au moins 8 caractères";
+            newErrors.password = "Le mot de passe doit contenir au moins 8 caractères.";
         }
 
         return newErrors;
@@ -53,12 +59,19 @@ const SignUpForm = () => {
             const response = await signUpUser(username, email, password);
             console.log('🌼 Réponse du backend: ', response);
 
-            if (response.error){
-                setErrors({global: response.error});
+            if (response.status === 409){
+                setErrors({global: response.data.message}); 
+                return;
             }
+
+            if (response.status === 201){
+                window.location.href = `/api/users/login`;
+                return;
+            }
+
         } catch (error) {
             console.log('🚨 Erreur: ', error);
-            setErrors({global: "L'email est déjà associé à un.e utilisateurice."});
+            setErrors({global: "Une erreur est survenue, réessayer plus tard"});
         }
     }      
 
@@ -72,6 +85,7 @@ const SignUpForm = () => {
                     onChange={e => setUsername(e.target.value)}
                 />
             </label>
+             {errors.username && <p style={{ color: 'red' }}>{errors.username}</p>}
 
             <label>
                 <p>Email</p>
