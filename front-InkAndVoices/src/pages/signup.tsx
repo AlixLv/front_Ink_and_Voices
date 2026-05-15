@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 const signUpUser = async( username: string, email: string, password: string) =>{
-    const res = await fetch('http://localhost:8032/api/users/signup', {
+    const res = await fetch('http://localhost:8032/api/auth/signup', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -9,7 +9,7 @@ const signUpUser = async( username: string, email: string, password: string) =>{
         body: JSON.stringify({username, email, password})
     })
     const data = await res.json();
-    return {status: res.status, data}; // permet de récupérer le status envoyé par le back
+    return {status: res.status, data}; // permet de récupérer le status (code HTTP) envoyé par le back
 }
 
 // type TypScript décrivant la forme d'un objet et qui indique quelle type de valeur est attendue si on ajoute une valeur à l'une des clé optionnelle
