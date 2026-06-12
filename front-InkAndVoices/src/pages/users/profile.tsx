@@ -24,7 +24,7 @@ const ProfileCard = () => {
             }
         }
         fetchProfile();
-    }, []) // [] pour que le useEffect ne s'exécute qu'une seule fois au montage du composant
+    }, [])
 
     if (!userData) return <p>Chargement en cours...</p>
 
@@ -44,7 +44,7 @@ const Profile = () => {
         <>
         <h1>Page profile</h1>
         <div>
-            Ceci est un test de page profile du user id: {id} 
+            Page profile en construction
         </div>
         <ProfileCard />
         </>
