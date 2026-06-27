@@ -17,12 +17,19 @@ export default function Homepage() {
         <>
             <h1>Homepage</h1>
             <div>
-                Ceci est un test de homepage
-            </div>
-            <div>
-                <Link to="/submit">
-                    <button>Proposer un livre</button>
+                <Link to="/profile">
+                    <button className="button">PROFIL UTILISATEUR si connecté</button>
                 </Link>
+                <Link to="/submit">
+                    <button className="button">Proposer un livre</button>
+                </Link>
+                <div>
+                    LISTE DES LIVRES
+                    <br />
+                    <Link to="/book">
+                        <button className="button">DETAIL D'UN LIVRE</button>
+                    </Link>
+                </div>
             </div>
         </>
     )
