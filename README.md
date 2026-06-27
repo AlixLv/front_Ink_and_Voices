@@ -94,3 +94,6 @@ For questions or suggestions, please reach out to inkandvoices264@gmail.com
 
 depuis le 2eme front : docker-compose up dev
 docker exec -ti front-inkand-voices-dev-1 sh
+
+
+accessible à l'url : localhost:5177
