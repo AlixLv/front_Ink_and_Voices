@@ -96,4 +96,8 @@ depuis le 2eme front : docker-compose up dev
 docker exec -ti front-inkand-voices-dev-1 sh
 
 
+<<<<<<< HEAD
 accessible à l'url : localhost:5177
+=======
+accessible à l'url : localhost:5177
+>>>>>>> df172f7 (style: ajout de titres et d'un peu de style)
