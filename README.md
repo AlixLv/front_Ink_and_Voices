@@ -85,15 +85,3 @@ For questions or suggestions, please reach out to inkandvoices264@gmail.com
 ---
 
 **Note**: This project is currently in active development as part of our RNCP6 certification program.
-
-
-
-
-
-
-
-depuis le 2eme front : docker-compose up dev
-docker exec -ti front-inkand-voices-dev-1 sh
-
-
-accessible à l'url : localhost:5177
