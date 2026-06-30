@@ -11,26 +11,24 @@
 // ET AUSSI AVEC AUTHENTIFICATION MAIS EN RAJOUTANT DES COMPOSANTS
 
 import { Link } from 'react-router-dom';
+import BooksContainer from '../containers/BooksContainer';
 
 export default function Homepage() {
     return (
         <>
-            <h1>Homepage</h1>
-            <div>
+            <div style={{ backgroundColor: 'lightblue' }}>
                 <Link to="/profile">
-                    <button className="button">PROFIL UTILISATEUR si connecté</button>
+                    <p>PHOTO</p> <p> Hey Sarah !!!</p>
                 </Link>
-                <Link to="/submit">
-                    <button className="button">Proposer un livre</button>
+                                <Link to="/submit">
+                    <button className="button">Ajouter un livre</button>
                 </Link>
-                <div>
-                    LISTE DES LIVRES
-                    <br />
-                    <Link to="/book">
-                        <button className="button">DETAIL D'UN LIVRE</button>
-                    </Link>
-                </div>
             </div>
+            {/* <div style={{ backgroundColor: 'orange' }}> */}
+            <div>
+                <BooksContainer />
+            </div>
+
         </>
     )
 }

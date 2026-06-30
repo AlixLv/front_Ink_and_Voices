@@ -1,0 +1,9 @@
+.recent-books-container {
+   display: flex;
+   flex-direction: column;
+   align-items: stretch;
+   gap: 13px;
+   margin-top: 10px;
+   /* background-color: #cf0d0d; */
+   
+ }
