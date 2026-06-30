@@ -22,6 +22,11 @@ export default function Homepage() {
             <div>
                 <RecentBooksContainer />
             </div>
+            {/* <div style={{ backgroundColor: 'orange' }}> */}
+            <div>
+                <BooksContainer />
+            </div>
+
         </>
     )
 }
