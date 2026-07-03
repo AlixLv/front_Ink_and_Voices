@@ -10,25 +10,18 @@
 // IL FAUT QUE CETTE PAGE SOIT ACCESSIBLE SANS AUTHENTIFICATION
 // ET AUSSI AVEC AUTHENTIFICATION MAIS EN RAJOUTANT DES COMPOSANTS
 
-import { Link } from 'react-router-dom';
-import BooksContainer from '../containers/BooksContainer';
-
+import UserCardContainer from '../containers/userCardContainer';
+import RecentBooksContainer from '../containers/recentBooksContainer';
+import '../containers/RecentBooksContainer.css'; // obligé d'importer le css ici car on importe des containers, pas des composants, donc le css doit être appelé dans le coposant où il est utilisé... et ça doit être index.tsx. A voir si on rajoute juste ce titre dans index.css ou si on fait une page à part (au cas où il y aie d'autres styles sur index.tsx)
 export default function Homepage() {
     return (
         <>
-            <div style={{ backgroundColor: 'lightblue' }}>
-                <Link to="/profile">
-                    <p>PHOTO</p> <p> Hey Sarah !!!</p>
-                </Link>
-                                <Link to="/submit">
-                    <button className="button">Ajouter un livre</button>
-                </Link>
-            </div>
-            {/* <div style={{ backgroundColor: 'orange' }}> */}
             <div>
-                <BooksContainer />
+                <UserCardContainer />
             </div>
-
+            <div>
+                <RecentBooksContainer />
+            </div>
         </>
     )
 }
