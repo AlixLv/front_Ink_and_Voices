@@ -1,6 +1,6 @@
 import genreIcon from '../../assets/genre-icons/genre-icon.svg';
 import './BookCard.css';
-import ThemeButton from '../ThemeButton/ThemeButton.tsx';
+import ThemeButton from '../ThemeButtons/ThemeButtons.tsx';
 import type { BookCardProps } from '../../types/Book.tsx';
 
 
@@ -18,7 +18,7 @@ export default function BookCard({ book }: BookCardProps) {
         <p className="book-author">{book.author}</p>
       </div>
       <div className="theme-buttons-list">
-        <ThemeButton />
+        <ThemeButton theme={book.theme} />
       </div>
     </div>
   );
