@@ -1,5 +1,5 @@
 // src/components/BooksList.tsx
-import BookCard from './BookCard';
+import BookCard from '../BookCardOne/BookCard';
 import './BooksList.css';
 
 interface Book {

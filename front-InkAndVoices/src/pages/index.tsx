@@ -11,7 +11,7 @@
 // ET AUSSI AVEC AUTHENTIFICATION MAIS EN RAJOUTANT DES COMPOSANTS
 
 import UserCardContainer from '../containers/userCardContainer';
-import RecentBooksContainer from '../containers/recentBooksContainer';
+import RecentBooksContainer from '../containers/RecentBooksContainer';
 import '../containers/RecentBooksContainer.css'; // obligé d'importer le css ici car on importe des containers, pas des composants, donc le css doit être appelé dans le coposant où il est utilisé... et ça doit être index.tsx. A voir si on rajoute juste ce titre dans index.css ou si on fait une page à part (au cas où il y aie d'autres styles sur index.tsx)
 export default function Homepage() {
     return (
