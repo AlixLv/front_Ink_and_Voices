@@ -1,10 +1,6 @@
 import { Link } from 'react-router-dom'
 import './SubmitButton.css'
-
-interface SubmitButtonProps {
-  route: string;
-  text: string;
-}
+import type { SubmitButtonProps } from '../../types/Button.tsx'
 
 export default function SubmitButton({ route, text }: SubmitButtonProps) {
     return (
