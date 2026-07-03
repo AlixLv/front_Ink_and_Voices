@@ -3,6 +3,7 @@ export interface Book {
   title: string;
   author: string;
   genre: string;
+  theme: string;
   description: string;
 }
 

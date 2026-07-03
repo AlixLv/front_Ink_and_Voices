@@ -1,11 +1,5 @@
 // Données statiques des livres récents
-interface Book {
-  uuid: string;
-  title: string;
-  author: string;
-  genre: string;
-  description: string;
-}
+import type { Book } from '../types/Book';
 
 const BOOKS_DATA: Book[] = [
   {
@@ -13,6 +7,7 @@ const BOOKS_DATA: Book[] = [
     title: 'Peau noire, masques blancs',
     author: 'Frantz Fanon',
     genre: 'Essai',
+    theme: 'Colonialisme',
     description: 'Une analyse profonde des effets du colonialisme sur l\'identité',
   },
   {
@@ -20,6 +15,7 @@ const BOOKS_DATA: Book[] = [
     title: 'Métro, boulot, chimio',
     author: 'Sophie Rambert',
     genre: 'Dystopie',
+    theme: 'Santé',
     description: 'Un roman d\'anticipation sombre et captivant',
   },
   {
@@ -27,6 +23,7 @@ const BOOKS_DATA: Book[] = [
     title: 'Le deuxième sexe',
     author: 'Simone de Beauvoir',
     genre: 'Essai',
+    theme: 'Féminisme',
     description: 'Une analyse philosophique et féministe',
   },
   {
@@ -34,6 +31,7 @@ const BOOKS_DATA: Book[] = [
     title: 'No Logo',
     author: 'Naomi Klein',
     genre: 'Essai',
+    theme: 'Mondialisation',
     description: 'Une critique des pratiques des grandes marques et de la mondialisation',
   },
 ];

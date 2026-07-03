@@ -15,5 +15,11 @@
     border: none;
 }
 
-
- /* il faut que le bouton se stretch sur la longueur de son texte */
+.theme-buttons-list {
+    margin-bottom: 2px;
+    margin-right: 10px;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 8px;
+    transform: translateY(-1px);
+}

@@ -1,9 +1,11 @@
 // src/components/BooksList.tsx
 import BookCard from '../BookCardOne/BookCard';
 import './BooksList.css';
-import type { BooksListProps } from '../../types/Book.tsx';
+import { useBooks } from '../../hooks/useBooks';
 
-export default function BooksList({ books }: BooksListProps) {
+export default function BooksList() {
+  const books = useBooks();
+  
   return (
     <div className="recent-books-container">
       {books.map(book => (
