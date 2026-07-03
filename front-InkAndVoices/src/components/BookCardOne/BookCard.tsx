@@ -1,7 +1,6 @@
-import genreIcon from '../assets/genre-icon.svg';
+import genreIcon from '../../assets/genre-icons/genre-icon.svg';
 import './BookCard.css';
-import ThemeButton from './ThemeButton.tsx';
-import './ThemeButtonsList.css';
+import ThemeButton from '../ThemeButton/ThemeButton.tsx';
 
 
 
