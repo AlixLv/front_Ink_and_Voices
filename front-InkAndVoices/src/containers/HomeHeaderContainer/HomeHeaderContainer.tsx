@@ -1,4 +1,4 @@
-import SubmitButton from "../components/SubmitButton/SubmitButton.tsx";
+import SubmitButton from "../../components/SubmitButton/SubmitButton.tsx";
 import './userCardContainer.css';
 import sarahImg from "../assets/sarah.png";
 
