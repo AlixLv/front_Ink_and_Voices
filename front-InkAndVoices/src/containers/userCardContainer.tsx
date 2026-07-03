@@ -1,4 +1,4 @@
-import SubmitButton from "../components/SubmitButton";
+import SubmitButton from "../components/SubmitButton/SubmitButton.tsx";
 import './userCardContainer.css';
 import sarahImg from "../assets/sarah.png";
 
@@ -17,7 +17,7 @@ export default function UserCardContainer() {
                     <div className="user-name">Hey {userName} !!!</div>
                 </div>
                 <div className="submit-button-container">
-                    <SubmitButton />
+                    <SubmitButton route="/add-book" text="Ajouter un livre" />
                 </div>
             </div>
         </>

@@ -1,8 +1,8 @@
 // src/containers/BooksContainer.tsx
 
 import { useEffect, useState } from 'react';
-import { getBooks } from '../services/BooksService.tsx';
-import BooksList from '../components/BooksList.tsx';
+import { getBooks } from '../services/BooksService';
+import BooksList from '../components/BookList/BooksList';
 
 interface Book {
   uuid: string;
