@@ -1,20 +1,9 @@
 import genreIcon from '../../assets/genre-icons/genre-icon.svg';
 import './BookCard.css';
 import ThemeButton from '../ThemeButton/ThemeButton.tsx';
+import type { BookCardProps } from '../../types/Book.tsx';
 
 
-
-interface Book {
-  uuid: string;
-  title: string;
-  author: string;
-  genre: string;
-  description: string;
-}
-
-interface BookCardProps {
-  book: Book;
-}
 
 export default function BookCard({ book }: BookCardProps) {
   return (
