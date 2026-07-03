@@ -24,9 +24,11 @@ export default function Homepage() {
             </div>
             {/* <div style={{ backgroundColor: 'orange' }}> */}
             <div>
-                <BooksContainer />
+                <UserCardContainer />
             </div>
-
+            <div>
+                <RecentBooksContainer />
+            </div>
         </>
     )
 }
