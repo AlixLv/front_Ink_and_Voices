@@ -4,7 +4,7 @@ import sarahImg from "../../assets/sarah.png";
 
 
 
-export default function UserCardContainer() {
+export default function HomeHeaderContainer() {
     let userName = "Sarah";
 
     return (

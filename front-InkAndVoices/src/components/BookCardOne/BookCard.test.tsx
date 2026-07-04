@@ -1,5 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
 import BookCard from './BookCard';
 
 vi.mock('../ThemeButtons/ThemeButtons', () => ({
@@ -20,7 +21,7 @@ describe('BookCard Component', () => {
 
   it('should display correct datas', () => {
 
-    const { container } = render(<BookCard book={mockBook} />);
+    const { container } = render(<BrowserRouter><BookCard book={mockBook} /></BrowserRouter>);
     const titleElement = container.querySelector('.book-title');
     const authorElement = container.querySelector('.book-author');
 
@@ -29,7 +30,7 @@ describe('BookCard Component', () => {
 
     });
   it('should display correct icons and tags', () => {
-    render(<BookCard book={mockBook} />);
+    render(<BrowserRouter><BookCard book={mockBook} /></BrowserRouter>);
     
     const genreImg = screen.getByAltText('icône Drame');
     expect(genreImg).toBeInTheDocument();

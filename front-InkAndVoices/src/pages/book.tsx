@@ -1,1 +1,0 @@
-<div>DETAIL LIVRE</div>
