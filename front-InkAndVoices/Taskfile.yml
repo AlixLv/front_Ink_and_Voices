@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+
+version: '3'
+
+tasks:
+  run-tests:
+    desc: run the tests
+    cmds: 
+      - docker exec front-inkandvoices-dev-1 sh -c "npm run test"
+
