@@ -1,6 +1,6 @@
 import genreIcon from '../../assets/genre-icons/genre-icon.svg';
 import './BookCard.css';
-import ThemeButton from '../ThemeButtons/ThemeButtons.tsx';
+import ThemeButton from '../ThemeButton/ThemeButton.tsx';
 import type { BookCardProps } from '../../types/Book.tsx';
 import { Link } from 'react-router-dom';
 
@@ -20,7 +20,9 @@ export default function BookCard({ book }: BookCardProps) {
           <p className="book-author">{book.author}</p>
         </div>
         <div className="theme-buttons-list">
-          <ThemeButton themes={book.themes} />
+          {book.themes.map(theme => (
+            <ThemeButton key={theme.id} theme={theme} />
+          ))}
         </div>
       </div>
     </Link>

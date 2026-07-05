@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import BookCard from './BookCard';
 
-vi.mock('../ThemeButtons/ThemeButtons', () => ({
+vi.mock('../ThemeButton/ThemeButton', () => ({
   default: ({ theme }: { theme: string }) => (
     <div data-testid="theme-button">{theme}</div>
   )
@@ -15,7 +15,7 @@ describe('BookCard Component', () => {
     title: 'Hasta Fuego',
     author: 'Marta Randomski',
     genre: 'Drame',
-    theme: 'Roman',
+    themes: 'Roman',
     description: 'Une drôle de péripétie en autarcie.',
   };
 

@@ -1,9 +1,14 @@
+export interface Theme {
+  id: number;
+  theme_name: string;
+}
+
 export interface Book {
   uuid: string;
   title: string;
   author: string;
   genre: string;
-  themes: string[];
+  themes: Theme[];
   description: string;
 }
 
