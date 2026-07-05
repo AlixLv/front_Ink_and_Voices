@@ -20,7 +20,7 @@ export default function BookCard({ book }: BookCardProps) {
           <p className="book-author">{book.author}</p>
         </div>
         <div className="theme-buttons-list">
-          <ThemeButton theme={book.theme} />
+          <ThemeButton themes={book.themes} />
         </div>
       </div>
     </Link>
