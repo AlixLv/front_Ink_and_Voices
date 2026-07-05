@@ -13,7 +13,17 @@
     justify-content: center;
     cursor: pointer;
     border: none;
+    transition: background-color 0.2s ease;
 }
+
+.theme-button:active {
+    background-color: #FFDA47;
+}
+
+.theme-button:hover {
+ background-color: #FFDA47;
+}
+
 
 .theme-buttons-list {
     margin-bottom: 2px;
