@@ -10,13 +10,6 @@ export default function Homepage() {
             <div>
                 <RecentBooksList />
             </div>
-            {/* <div style={{ backgroundColor: 'orange' }}> */}
-            <div>
-                <UserCardContainer />
-            </div>
-            <div>
-                <RecentBooksContainer />
-            </div>
         </>
     )
 }
