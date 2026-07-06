@@ -1,0 +1,18 @@
+.contributions-title {
+    font-family: Poppins;
+    font-weight: bold;
+    font-size: 24px;
+    justify-self: flex-start;
+    /* background-color: red; */
+}
+
+.contributions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: #F1F1F1;
+  border-radius: 2%;
+  max-height: 50vh;
+  overflow-y: auto;
+  padding: 20px;
+}

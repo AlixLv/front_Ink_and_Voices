@@ -1,0 +1,64 @@
+.contribution-card {
+background-color: #FFFFFF;
+padding: 0px;
+display:flex;
+flex-direction: row;
+height: 75px;
+}
+
+
+.contribution-datas {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* background-color: #e21313; */
+    gap: 0px;
+    padding: 0px 0px 0px 10px;;
+    margin: 0px ;
+    text-align: left;
+    line-height: 1;
+    width: 70%;
+}
+
+.contribution-title {
+    gap: 0px;
+    padding: 0px;
+    margin: 0px;
+    font-family: Poppins;
+    font-weight: 200;
+}
+
+.contribution-author {
+    gap: 0px;
+    padding: 0px;
+    margin: 0px;
+    font-family: Poppins;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.contribution-date {
+    gap: 0px;
+    padding: 0px;
+    margin: 0px;
+    /* font-family: Public Sans; trouver une police publique pour remplacer Public sans */
+    font-weight: regular;
+}
+
+.contribution-state-container {
+    background-color: #FFFFFF;
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    align-content: center;
+    height: 100%
+}
+
+.contribution-state {
+    background-color: #CFCFCF;
+    border-radius: 5%;
+    width: 40%;
+    height: 30px;
+}

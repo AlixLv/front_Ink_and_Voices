@@ -14,7 +14,9 @@ export default function HomeHeader() {
             <div className="home-card-container">
                 <div className="user-card">
                     <div className="user-icon-container">
-                        <img src={sarahImg} alt="Icône utilisateur" className="user-icon" />
+                        <Link to="./profile">
+                            <img src={sarahImg} alt="Icône utilisateur" className="user-icon" />
+                        </Link>
                     </div>
                     <div className="user-name">Hey {displayName} !!!</div>
                 </div>
