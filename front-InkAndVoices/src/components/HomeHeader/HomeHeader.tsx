@@ -1,10 +1,10 @@
-import SubmitButton from "../../components/SubmitButton/SubmitButton.tsx";
-import './HomeHeaderContainer.css';
+import SubmitButton from "../SubmitButton/SubmitButton.tsx";
+import './HomeHeader.css';
 import sarahImg from "../../assets/sarah.png";
 
 
 
-export default function HomeHeaderContainer() {
+export default function HomeHeader() {
     let userName = "Sarah";
 
     return (
