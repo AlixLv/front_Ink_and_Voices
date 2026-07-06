@@ -1,5 +1,5 @@
 // src/components/BooksList.tsx
-import BookCard from '../BookCardOne/BookCard';
+import BookCard from '../BookCard/BookCard';
 import './BooksList.css';
 import { useBooks } from '../../hooks/useBooks';
 
