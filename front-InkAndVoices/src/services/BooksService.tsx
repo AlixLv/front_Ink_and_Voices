@@ -37,8 +37,6 @@ const BOOKS_DATA: Book[] = [
 ];
 
 export const getBooks = async (): Promise<Book[]> => {
-  // Simule un appel API avec un délai
-  return new Promise((resolve) => {
-    setTimeout(() => resolve(BOOKS_DATA), 50);
-  });
-};
+  // Simule un appel API 
+    return new Promise((resolve) => resolve(BOOKS_DATA));
+  };
