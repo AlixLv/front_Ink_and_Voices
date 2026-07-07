@@ -1,0 +1,54 @@
+.home-card-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+    padding-bottom: 10px;
+}
+
+.user-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    border-radius: 8px;
+}
+
+.user-icon-container {
+    display: flex;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-right: 20px;
+    margin-left: -20px;
+}
+
+
+.user-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user-name {
+    font-family: 'Poppins';
+    font-weight: medium;
+    font-size: 17px;
+    color: rgb(0, 0, 0);
+}
+
+.submit-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: stretch;
+    width: 100%;
+    height: 60px;
+}

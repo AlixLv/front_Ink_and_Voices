@@ -1,12 +1,16 @@
-const Homepage = () => {
+import HomeHeader from '../components/HomeHeader/HomeHeader';
+import RecentBooksList from '../components/RecentBooksList/RecentBooksList';
+import '../components/RecentBooksList/RecentBooksList.css'; 
+export default function Homepage() {
     return (
         <>
-        <h1>Homepage</h1>
-        <div>
-            Ceci est un test de homepage
-        </div>
+            <div>
+                <HomeHeader />
+            </div>
+            <div>
+                <RecentBooksList />
+            </div>
         </>
     )
 }
 
-export default Homepage; 

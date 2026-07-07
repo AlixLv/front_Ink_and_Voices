@@ -1,0 +1,25 @@
+.theme-button {
+    display: flex;
+    background-color: #ffffff;
+    color: black;
+    border-radius: 4px;
+    padding: 1px 19px 1px 19px;
+    min-width: 10px;
+    width: auto;
+    height: auto;
+    font-family: Poppins;
+    font-size: 8px;
+    font-weight: 200;
+    justify-content: center;
+    cursor: pointer;
+    border: none;
+}
+
+.theme-buttons-list {
+    margin-bottom: 2px;
+    margin-right: 10px;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 8px;
+    transform: translateY(-1px);
+}
