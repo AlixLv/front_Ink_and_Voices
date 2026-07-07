@@ -11,7 +11,7 @@ vi.mock('../../hooks/useBooks', () => ({
   ]
 }));
 
-vi.mock('../BookCardOne/BookCard', () => ({
+vi.mock('../BookCard/BookCard', () => ({
   default: ({ book }: { book: any }) => (
     <div data-testid={`book-card-${book.uuid}`}>{book.title}</div>
   )
@@ -19,7 +19,11 @@ vi.mock('../BookCardOne/BookCard', () => ({
 
 describe('BooksList Component', () => {
   it('should render a list of books', () => {
-    render(<BooksList />);
+    render(
+      <BrowserRouter>
+        <BooksList />
+      </BrowserRouter>
+    );
 
     expect(screen.getByTestId('book-card-1')).toBeInTheDocument();
     expect(screen.getByTestId('book-card-2')).toBeInTheDocument();
@@ -27,7 +31,11 @@ describe('BooksList Component', () => {
   });
 
   it('should render correct number of BookCard', () => {
-    const { container } = render(<BooksList />);
+    const { container } = render(
+      <BrowserRouter>
+        <BooksList />
+      </BrowserRouter>
+    );
     
     const bookCards = container.querySelectorAll('[data-testid^="book-card-"]');
     expect(bookCards.length).toBe(3);
