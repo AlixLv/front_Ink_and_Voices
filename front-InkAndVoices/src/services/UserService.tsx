@@ -21,5 +21,4 @@ export const signUpUser = async(
 
         const data = await response.json();
         return {status: response.status, data};
-    } 
-};
+    } ;
