@@ -1,9 +1,11 @@
+import LoginForm from "../components/LoginForm/LoginForm";
 import LogoContainer from "../components/LogoContainer/LogoContainer";
 
 export default function Login() {
   return (
     <>
         <LogoContainer />
+        <LoginForm />
     </>
   )
 }
