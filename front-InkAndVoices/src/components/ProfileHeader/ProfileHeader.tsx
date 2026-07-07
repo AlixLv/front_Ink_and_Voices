@@ -1,7 +1,7 @@
 import sarahImg from "../../assets/sarah.png";
-import './ProfileHeaderContainer.css';
+import './ProfileHeader.css';
 
-export default function ProfileHeaderContainer() {
+export default function ProfileHeader() {
     let userName = "Sarah";
 
     return (

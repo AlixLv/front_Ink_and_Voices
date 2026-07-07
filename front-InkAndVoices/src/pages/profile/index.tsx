@@ -1,13 +1,13 @@
-import ContributionsContainer from '../../containers/ContributionsContainer/ContributionsContainer';
-import ProfileHeaderContainer from '../../containers/ProfileHeaderContainer/ProfileHeaderContainer';
+import ContributionsList from '../../components/ContributionsList/ContributionsList';
+import ProfileHeader from '../../components/ProfileHeader/ProfileHeader';
 export default function Contributions() {
     return (
         <>
             <div>
-                <ProfileHeaderContainer />
+                <ProfileHeader />
             </div>
             <div>
-                <ContributionsContainer />
+                <ContributionsList />
             </div>
 
         </>
