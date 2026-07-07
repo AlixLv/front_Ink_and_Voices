@@ -1,29 +1,25 @@
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:803';
-interface FetchOptions extends RequestInit {
-  timeout?: number;
-}
-export const apiCall = async <T>(
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8032';
+
+export default async function getRessource<T>(
   endpoint: string,
-  options: FetchOptions = {}
-): Promise<T> => {
-  const { timeout = 5000, ...fetchOptions } = options;
-  const url = `${API_URL}${endpoint}`;
-  const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), timeout);
+  errorMsg: string = 'API Error'
+): Promise<T> {
   try {
-    const response = await fetch(url, {
-      ...fetchOptions,
-      signal: controller.signal,
-    });
+    const response = await fetch(`${API_URL}${endpoint}`, { method: 'GET' });
+    
     if (!response.ok) {
-      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      throw new Error(`HTTP error. status: ${response.status}`);
     }
-    const data: T = await response.json();
-    return data;
+    
+    return await response.json();
   } catch (error) {
-    console.error(`API Error (${endpoint}):`, error);
+    console.error(`${errorMsg}:`, error);
     throw error;
-  } finally {
-    clearTimeout(timeoutId);
   }
-};
+}
+
+
+// comment gérer les petits cas d'erreur individuels? on devrait pouvoir gérer si un livre n'existe pas,
+// si c'est une erreur serveur... quelles autres erreurs on peut avoir?
+
+// et on maitrise pas bien ce code. Au niveau pédagogique, ce serait mieux de coder nous-même les appels API
