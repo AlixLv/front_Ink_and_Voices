@@ -1,12 +1,15 @@
-// Used to create a session and store the user data in the context
-
 // import type { User } from '../types/User';
+interface LoginResponse {
+    email: string;
+    username: string;
+    token: string;
+}
+
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8032';
 
-// ça ne retourne pas un user mais une connexion? une promesse? de quoi?
-export const loginService = async(email: string, password: string) => {
+export const loginService = async(email: string, password: string): Promise<LoginResponse> => {
     try {
-        const response = await fetch(`${API_URL}/api/login`, {
+        const response = await fetch(`${API_URL}/api/auth/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -17,7 +20,9 @@ export const loginService = async(email: string, password: string) => {
         if (!response.ok) {
             throw new Error(`HTTP error. status: ${response.status}`);
         }
-        const data = await response.json()
+        const data: LoginResponse = await response.json()
+        return data;
+        // les datas retournées depuis le backend sont : email, aces_token jwt, username
     } catch (error) {
         console.error('Login failed:', error);
         throw error;

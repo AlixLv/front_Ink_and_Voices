@@ -15,34 +15,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    // checkAuth()
     setIsLoading(false)
   }, [])
 
-  // Used to check the session status with the server
-//   const checkAuth = async () => {
-//     try {
-//       const response = await fetch('/api/auth/me', {
-//         credentials: 'include',
-//       })
-//       const data = await response.json()
-//       setUser(data)
-//     } catch (error) {
-//       console.error('Failed to check auth status:', error)
-//       setUser(null)
-//     } finally {
-//       setIsLoading(false)
-//     }
-//   }
-
-
-  // Used to create a session and store the user data in the context
-// const useLogin = login = () // appeler le service puis     const data = await response.json()setUser(data)
-//   }
-  const login = async (email: string, password: string) => {
+const login = async (email: string, password: string) => {
     const data = await loginService(email, password)
-    setUser(data || null)
-  }
+    setUser({
+        email: data.email,
+        username: data.username,
+        // Le token est dans le cookie httpOnly, pas besoin de le stocker
+    })
+}
 
   return (
     <AuthContext.Provider value={{ user, login, isLoading }}>
@@ -59,3 +42,6 @@ export function useAuth() {
   }
   return context
 }
+
+
+// créer une route auth/me pour vérifier si le user est connecté jspk
