@@ -11,7 +11,7 @@ export const signUpUser = async(
     username: string, 
     email: string,
     password: string): Promise<SignUpResult> => {
-        const response = await fetch(`{${API_URL}/api/auth/signup`, { 
+        const response = await fetch(`${API_URL}/api/auth/signup`, { 
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
