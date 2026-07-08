@@ -11,7 +11,7 @@ export default function SignUpForm(){
     } = useSignUp();
  
     return (
-        <form onSubmit={handleSubmit}>
+        <form className="signup-form" onSubmit={handleSubmit}>
             <label>
                 <p>Nom d'utilisateurice</p> 
                 <input 
@@ -47,7 +47,7 @@ export default function SignUpForm(){
             
             {errors.global && <p style={{color:'red'}}>{errors.global}</p>}
 
-            <div>
+            <div className="submit-button-container">
                 <button type="submit" disabled={isLoading}>
                     {isLoading? 'Envoi en cours...': 'Valider'}
                 </button>
