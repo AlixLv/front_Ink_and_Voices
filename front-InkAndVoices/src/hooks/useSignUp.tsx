@@ -1,7 +1,6 @@
-import type { FormErrors } from '../types/User.tsx';
+import type { FormErrors, ApiError } from '../types/User.tsx';
 import { useState } from 'react';
 import { signUpUser } from '../services/UserService.tsx';
-import type { ApiError } from 'next/dist/server/api-utils/index';
 
 export const useSignUp = () => {
     const [username, setUsername] = useState<string>("");
@@ -62,7 +61,7 @@ export const useSignUp = () => {
         }
     };
 
-    // renvoi uniquement des info dont à besoin le component
+    // renvoi uniquement les info dont à besoin le component
     return {
         username, setUsername,
         email, setEmail,

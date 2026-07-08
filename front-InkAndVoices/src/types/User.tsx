@@ -17,7 +17,10 @@ export interface SignUpResponse {
 export interface ApiError {
     message: string;
 }
-
+export interface SignUpResult {
+    status: number;
+    data: SignUpResponse | ApiError;
+}
 export interface FormErrors {
     username?: string;
     email?: string;
