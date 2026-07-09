@@ -1,12 +1,6 @@
 import { useSignUp } from '../../hooks/useSignUp'; 
 import '../AuthForm.css';
 import SubmitButton from '../SubmitButton/SubmitButton';
-// interface SignUpFormUserDatas {
-//     username: string;
-//     email: string;
-//     password: string;
-// }
-
 
 // aria-invalid={errors.machin}  indique aux technologies d'assistance que le champ est en erreur dès que errors.xxx existe.
 // aria-describedby="xxx-error" : relie l'input à son message d'erreur — un lecteur d'écran lira le message quand l'utilisateur est focus sur le champ concerné.

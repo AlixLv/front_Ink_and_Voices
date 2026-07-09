@@ -6,15 +6,20 @@ export const signUpUser = async(
     email: string,
     password: string): Promise<SignUpResponse> => {
         try {
+        const payload = { username, email, password };
+        console.log('📤 Données envoyées au backend:', payload); // check pour vérifier que les données sont bien envoyées au back
+        
         const response = await fetch(`${API_URL}/api/auth/signup`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'}, 
-            body: JSON.stringify({ username, email, password})
+            body: JSON.stringify(payload) // plus standard ed faire comme ça
         });
-        if(!response.ok) {
-            throw new Error(`HTTP error. status: ${response.status}`);
-        }
+        // if(!response.ok) {
+        //     throw new Error(`HTTP error. status: ${response.status}`);
+        // }
+         // ça faut le garder ou pas? gestion des erreurs différente, jspk
         const data = await response.json();
+        console.log('📥 Réponse du backend:', { status: response.status, data });
         return {status: response.status, data};
         } catch (error) {
             console.error("Erreur lors de l'inscription de l'utilisateur", error);
