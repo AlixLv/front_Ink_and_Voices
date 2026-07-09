@@ -8,6 +8,7 @@ export const useSignUp = () => {
     const [username, setUsername] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
+    const [confirmPassword, setConfirmPassword] = useState<string>("");  // ← Nouveau
     const [errors, setErrors] = useState<FormErrors>({});
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -35,13 +36,19 @@ export const useSignUp = () => {
             newErrors.email = "L'email ne doit pas être vide.";
         } else if (!email.includes('@')) {
             newErrors.email = "L'adresse email n'est pas valide.";
-        } // c'est pas le msg d'erreur affiché dans la vidéo. On doit avoir un message natif web je crois
-        // d'autant plus important de faire des tests pour vérifier que ça ne passe pas si les conditiosn en sont pas respectées et qu'on a les noms msgs d'erreurs affichés
+        }
 
         if (password.length <= 0) {
             newErrors.password = "Le mot de passe ne doit pas être vide.";
         } else if (password.length < 8) {
             newErrors.password = "Le mot de passe doit contenir au moins 8 caractères.";
+        }
+
+        
+        if (confirmPassword.length <= 0) {
+            newErrors.confirmPassword = "Veuillez confirmer votre mot de passe.";  // ← Nouveau
+        } else if (password !== confirmPassword) {
+            newErrors.confirmPassword = "Les mots de passe ne correspondent pas.";  // ← Nouveau
         }
 
         return newErrors;
@@ -53,9 +60,9 @@ export const useSignUp = () => {
         setErrors({});
 
         const validationErrors = validateInputs();
-            if(Object.keys(validationErrors).length > 0) {
-                setErrors(validationErrors);
-                return; // pas d'envoi de la requête si les inputs du formulaire sont invalides
+        if(Object.keys(validationErrors).length > 0) {
+            setErrors(validationErrors);
+            return; // pas d'envoi de la requête si les inputs du formulaire sont invalides
         }
 
         setIsLoading(true);
@@ -92,7 +99,6 @@ export const useSignUp = () => {
         } catch (error) {
             //erreur réseau
             setErrors({global: "Une erreur est survenue, réessayer plus tard"});
-            // pas assez spécifique, mais askip il faut pas trop divulguer des infos??
         } finally {
             setIsLoading(false);
         }
@@ -102,9 +108,9 @@ export const useSignUp = () => {
         username, setUsername,
         email, setEmail,
         password, setPassword,
+        confirmPassword, setConfirmPassword,
         errors,
         isLoading,
         handleSubmit
     }
-
 }

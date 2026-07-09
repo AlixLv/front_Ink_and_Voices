@@ -27,6 +27,7 @@ export default function SignUpForm(){
         username, setUsername,
         email, setEmail,
         password, setPassword,
+        confirmPassword, setConfirmPassword,  // ← Nouveau
         errors,
         isLoading,
         handleSubmit
@@ -75,8 +76,22 @@ export default function SignUpForm(){
                     aria-describedby={errors.password ? "password-error" : undefined}
                 />
             </label>
-            {/* et la confirmation de mdp? */}
+
             {errors.password && <p id="password-error" role="alert" style={{color:'red'}}>{errors.password}</p>}
+
+            <label className="auth-form-label">
+                <p>Confirmer le mot de passe</p>
+                <input 
+                    className='auth-form-field'
+                    type="password"
+                    value={confirmPassword}
+                    onChange={e => setConfirmPassword(e.target.value)}
+                    disabled={isLoading}
+                    aria-invalid={!!errors.confirmPassword}
+                    aria-describedby={errors.confirmPassword ? "confirmPassword-error" : undefined}
+                />
+            </label>
+            {errors.confirmPassword && <p id="confirmPassword-error" role="alert" style={{color:'red'}}>{errors.confirmPassword}</p>}
             
             {errors.global && <p role="alert" style={{color:'red'}}>{errors.global}</p>}
             <div className="submit-button-container">
