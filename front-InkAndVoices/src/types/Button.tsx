@@ -1,4 +1,7 @@
 export interface SubmitButtonProps {
-  route: string;
   text: string;
+  type?: 'submit' | 'button';
+  disabled?: boolean; 
+  onClick?: () => void;
+  route?: string; 
 }
