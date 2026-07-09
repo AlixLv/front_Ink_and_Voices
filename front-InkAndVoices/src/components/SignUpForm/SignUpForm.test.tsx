@@ -95,20 +95,19 @@ describe('SignUpForm Validation', () => {
             expect(screen.getByText("L'email ne doit pas être vide.")).toBeInTheDocument();
         });
     });
-    // _____________________ ce test ne passe pas. Peut-être à cause de la surcharge du navigateur?
-    // it('should display error message when email is invalid', async () => {
-    //     const { usernameInput, emailInput, passwordInput, submitButton } = setupForm();
-        
-    //     fireEvent.change(usernameInput, { target: { value: 'testuser' } });
-    //     fireEvent.change(emailInput, { target: { value: 'invalidemail' } });
-    //     fireEvent.change(passwordInput, { target: { value: 'password123' } });
-    //     fireEvent.click(submitButton);
-        
-    //     await waitFor(() => {
-    //         expect(screen.getByText("L'adresse email n'est pas valide.")).toBeInTheDocument();
-    //     });
-    // });
 
+    it('should display error message when email is invalid', async () => {
+        const { usernameInput, emailInput, passwordInput, submitButton } = setupForm();
+        
+        fireEvent.change(usernameInput, { target: { value: 'testuser' } });
+        fireEvent.change(emailInput, { target: { value: 'invalidemail' } });
+        fireEvent.change(passwordInput, { target: { value: 'password123' } });
+        fireEvent.click(submitButton);
+        
+        await waitFor(() => {
+            expect(screen.getByText("L'adresse email n'est pas valide.")).toBeInTheDocument();
+        });
+    });
 
     it('should display error message when no password is filled', async () => {
         const { usernameInput, emailInput, passwordInput, submitButton } = setupForm();
