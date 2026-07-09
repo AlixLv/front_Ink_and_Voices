@@ -1,5 +1,5 @@
 import { useSignUp } from '../../hooks/useSignUp'; 
-
+import '../AuthForm.css';
 // interface SignUpFormUserDatas {
 //     username: string;
 //     email: string;
@@ -32,10 +32,12 @@ export default function SignUpForm(){
     } = useSignUp();
  
     return (
-        <form className="signup-form" onSubmit={handleSubmit} noValidate>
-            <label>
+        <div className="auth-form-container">
+        <form className="auth-form" onSubmit={handleSubmit} noValidate>
+            <label className="auth-form-label">
                 <p>Nom d'utilisateurice</p> 
                 <input 
+                className='auth-form-field'
                     type="text"
                     value={username}
                     onChange={e => setUsername(e.target.value)}
@@ -46,9 +48,10 @@ export default function SignUpForm(){
             </label>
              {errors.username && <p id="username-error" role="alert" style={{ color: 'red' }}>{errors.username}</p>}
 
-            <label>
+            <label className="auth-form-label">
                 <p>Email</p>
                 <input 
+                    className='auth-form-field'
                     type="email"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
@@ -59,9 +62,10 @@ export default function SignUpForm(){
             </label>
             {errors.email && <p id="email-error" role="alert" style={{ color: 'red' }}>{errors.email}</p>}
 
-            <label>
+            <label className="auth-form-label">
                 <p>Mot de passe</p>
                 <input 
+                    className='auth-form-field'
                     type="password"
                     value={password}
                     onChange={e => setPassword(e.target.value)}
@@ -74,7 +78,6 @@ export default function SignUpForm(){
             {errors.password && <p id="password-error" role="alert" style={{color:'red'}}>{errors.password}</p>}
             
             {errors.global && <p role="alert" style={{color:'red'}}>{errors.global}</p>}
-            {/* est-ce que les erreurs sont écrites de façon user-friendly? */}
             <div className="submit-button-container">
                 <button type="submit" disabled={isLoading}>
                     {isLoading? 'Envoi en cours...': 'Valider'}
@@ -82,5 +85,6 @@ export default function SignUpForm(){
                 {/*  ici il faut utiliser le composant SubmitButton. Peut-être adapter sa logique (lui rajouter des arguments optionnels pour qu'il accepte isLoading, je sais pas) */}
             </div>
         </form>
+    </div>
     )
 }
