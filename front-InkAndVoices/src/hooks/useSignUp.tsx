@@ -8,30 +8,22 @@ export const useSignUp = () => {
     const [username, setUsername] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
-    const [confirmPassword, setConfirmPassword] = useState<string>("");  // ← Nouveau
+    const [confirmPassword, setConfirmPassword] = useState<string>("");
     const [errors, setErrors] = useState<FormErrors>({});
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
-//     const [formData, setFormData] = useState<SignUpFormData>({
-//     username: "",
-//     email: "",
-//     password: ""
-// });
-// const [errors, setErrors] = useState<FormErrors>({});
-// const [isLoading, setIsLoading] = useState<boolean>(false);
-    
-// les données user, les erreurs et le loading ont des cycles de vie différents, donc ils doivent être dans des états séparés askip;
 
     // logique métier du formulaire
     const validateInputs = (): FormErrors => {
         const newErrors: FormErrors = {};
 
-// pour chaque form, on doit vérifier que le champ n'est aps vide. S'il ne l'eest pas, alors on vérifie les conditions
+
         if (username.length <= 0) {
             newErrors.username = "Le nom d'utilisateurice ne doit pas être vide."
         } else if (username.length < 8) {
-            newErrors.username = "Le nom d'utilisateurice doit contenir au moins 8 caractères."; // on doit aussi vérifier la longueur max qu'on a déclaré en backend sur le schema prisma et vérifier que ce username est unique
+            newErrors.username = "Le nom d'utilisateurice doit contenir au moins 8 caractères.";
         }
+
         if (email.length <= 0) {
             newErrors.email = "L'email ne doit pas être vide.";
         } else if (!email.includes('@')) {
@@ -46,9 +38,9 @@ export const useSignUp = () => {
 
         
         if (confirmPassword.length <= 0) {
-            newErrors.confirmPassword = "Veuillez confirmer votre mot de passe.";  // ← Nouveau
+            newErrors.confirmPassword = "Veuillez confirmer votre mot de passe.";
         } else if (password !== confirmPassword) {
-            newErrors.confirmPassword = "Les mots de passe ne correspondent pas.";  // ← Nouveau
+            newErrors.confirmPassword = "Les mots de passe ne correspondent pas.";
         }
 
         return newErrors;
