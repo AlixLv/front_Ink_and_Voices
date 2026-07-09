@@ -1,4 +1,4 @@
-import SignUpForm from '../components/SignUpFrom/SignUpForm';
+import SignUpForm from '../components/SignUpForm/SignUpForm';
 
 // rajouter le css
 // il faut refactorer en un seul form le login et le signup (sinon c'ets pas react logic)

@@ -26,16 +26,21 @@ export const useSignUp = () => {
         const newErrors: FormErrors = {};
 
 // pour chaque form, on doit vérifier que le champ n'est aps vide. S'il ne l'eest pas, alors on vérifie les conditions
-        if (username.length <= 0){
+        if (username.length <= 0) {
             newErrors.username = "Le nom d'utilisateurice ne doit pas être vide."
-        } // on doit aussi vérifier la longueur max qu'on a déclaré en backend sur le schema prisma et vérifier que ce username est unique
-
-        if (!email.includes('@')){
+        } else if (username.length < 8) {
+            newErrors.username = "Le nom d'utilisateurice doit contenir au moins 8 caractères."; // on doit aussi vérifier la longueur max qu'on a déclaré en backend sur le schema prisma et vérifier que ce username est unique
+        }
+        if (email.length <= 0) {
+            newErrors.email = "L'email ne doit pas être vide.";
+        } else if (!email.includes('@')) {
             newErrors.email = "L'adresse email n'est pas valide.";
         } // c'est pas le msg d'erreur affiché dans la vidéo. On doit avoir un message natif web je crois
         // d'autant plus important de faire des tests pour vérifier que ça ne passe pas si les conditiosn en sont pas respectées et qu'on a les noms msgs d'erreurs affichés
 
-        if (password.length < 8){
+        if (password.length <= 0) {
+            newErrors.password = "Le mot de passe ne doit pas être vide.";
+        } else if (password.length < 8) {
             newErrors.password = "Le mot de passe doit contenir au moins 8 caractères.";
         }
 
