@@ -1,7 +1,22 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import SignUpForm from './SignUpForm';
+
+
+// ✅ Mocks au top-level
+const mockNavigate = vi.fn();
+vi.mock('react-router-dom', async () => {
+    const actual = await vi.importActual('react-router-dom');
+    return {
+        ...actual,
+        useNavigate: () => mockNavigate,
+    };
+});
+
+vi.mock('../../services/AuthService', () => ({
+    signUpUser: vi.fn(),
+}));
 
 //helper pour créer un formulaire
 const setupForm = () => {
@@ -136,8 +151,34 @@ describe('SignUpForm Validation', () => {
     });
 });
 
+
+
+
+
+describe('SignUpForm Redirection', () => {
+    beforeEach(() => {
+        vi.clearAllMocks();
+    });
+
+    it('should redirect to login on successful signup', async () => {
+        const { signUpUser } = await import('../../services/AuthService');
+        vi.mocked(signUpUser).mockResolvedValueOnce({
+            status: 201,
+            data: { username: 'testuser123', email: 'test@example.com' }
+        });
+
+        const { usernameInput, emailInput, passwordInput, submitButton } = setupForm();
+        
+        fireEvent.change(usernameInput, { target: { value: 'testuser123' } });
+        fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
+        fireEvent.change(passwordInput, { target: { value: 'password123' } });
+        fireEvent.click(submitButton);
+        
+        await waitFor(() => {
+            expect(mockNavigate).toHaveBeenCalledWith('/login');
+        });
+    });
+});
+
 // vérifier que les datas s'envoient bien 
 
-// vérifier le message d'erreur
-
-// vérifier la redirection
