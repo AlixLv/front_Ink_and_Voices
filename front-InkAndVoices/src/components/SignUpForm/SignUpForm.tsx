@@ -1,5 +1,6 @@
 import { useSignUp } from '../../hooks/useSignUp'; 
 import '../AuthForm.css';
+import SubmitButton from '../SubmitButton/SubmitButton';
 // interface SignUpFormUserDatas {
 //     username: string;
 //     email: string;
@@ -79,10 +80,11 @@ export default function SignUpForm(){
             
             {errors.global && <p role="alert" style={{color:'red'}}>{errors.global}</p>}
             <div className="submit-button-container">
-                <button type="submit" disabled={isLoading}>
-                    {isLoading? 'Envoi en cours...': 'Valider'}
-                </button>
-                {/*  ici il faut utiliser le composant SubmitButton. Peut-être adapter sa logique (lui rajouter des arguments optionnels pour qu'il accepte isLoading, je sais pas) */}
+            <SubmitButton 
+                text={isLoading ? 'Envoi en cours...' : 'Valider'}
+                type="submit"
+                disabled={isLoading}
+            />
             </div>
         </form>
     </div>
