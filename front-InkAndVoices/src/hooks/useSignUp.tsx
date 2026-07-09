@@ -85,6 +85,7 @@ export const useSignUp = () => {
             }
 
         } catch (error) {
+            //erreur réseau
             setErrors({global: "Une erreur est survenue, réessayer plus tard"});
             // pas assez spécifique, mais askip il faut pas trop divulguer des infos??
         } finally {
@@ -92,34 +93,6 @@ export const useSignUp = () => {
         }
     };
 
-    // renvoi uniquement les info dont à besoin le component
-    // Le composant ne doit pas avoir accès aux setters individuels. Il faut exposer le moins de code possible
-    // copilot propose : 
-//     return {
-//     formData: { username, email, password },
-//     errors,
-//     isLoading,
-//     handleInputChange: (field, value) => { /* ... */ },
-//     handleSubmit
-// }
-// ou il dit que si le hook gère tout, on peut juste renvoyer pareil sans les setters
-
-// si un composant a accès à des setters, un hacker peut modifier les données du formulaire sans passer par la validation. Donc on ne renvoie pas les setters, on renvoie juste les valeurs et la fonction handleSubmit. Le composant peut gérer les changements d'input en interne, mais il ne peut pas modifier directement les valeurs du hook.
-
-
-// copilot dit qu'en fait le composant a besoin des setters. Donc on doit lui renvoyer quand même, mais on peut refactorer:
-// const handleInputChange = (field: keyof SignUpFormData, value: string) => {
-//     if (field === 'username') setUsername(value);
-//     if (field === 'email') setEmail(value);
-//     if (field === 'password') setPassword(value);
-// };
-
-// return {
-//     username, email, password,
-//     errors, isLoading, handleSubmit,
-//     handleInputChange  // ← Une seule fonction au lieu de 3 setters
-// }
-// mais que c'est pas nécéssaire sur une si petite app
     return {
         username, setUsername,
         email, setEmail,
