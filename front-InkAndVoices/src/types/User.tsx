@@ -9,7 +9,7 @@ export interface UserCardProps {
     user: User;
 }
 
-export interface SignUpResponse {
+export interface SignedUserDatas {
     email: string;
     username: string;
 }
@@ -17,9 +17,9 @@ export interface SignUpResponse {
 export interface ApiError {
     message: string;
 }
-export interface SignUpResult {
+export interface SignUpResponse {
     status: number;
-    data: SignUpResponse | ApiError;
+    data: SignedUserDatas | ApiError;
 }
 export interface FormErrors {
     username?: string;
