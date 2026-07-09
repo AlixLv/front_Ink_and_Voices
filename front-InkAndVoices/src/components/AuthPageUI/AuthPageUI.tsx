@@ -1,4 +1,3 @@
-// import LoginForm ou SignUpForm
 import LogoContainer from "../LogoContainer/LogoContainer";
 
 export default function AuthPageUI({ children }: { children: React.ReactNode }) {
@@ -9,16 +8,3 @@ export default function AuthPageUI({ children }: { children: React.ReactNode }) 
     </>
   )
 }
-
-
-
-// import SignUpForm from "../SignUpForm/SignUpForm";
-
-// export default function AuthForm() {
-//   return (
-//     <>
-//         <LogoContainer />
-//         {/* <LoginForm /> ou <SignUpForm */}
-//     </>
-//   )
-// }
