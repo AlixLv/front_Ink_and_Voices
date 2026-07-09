@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 
 export default function BookCard({ book }: BookCardProps) {
   return (
-    <Link to={`/book/${book.uuid}`}>
+    <Link to={`/book/${book.id}`}>
       <div className="book-card">
         <div className="book-header">
             <h3 className="book-title">{book.title}</h3>
