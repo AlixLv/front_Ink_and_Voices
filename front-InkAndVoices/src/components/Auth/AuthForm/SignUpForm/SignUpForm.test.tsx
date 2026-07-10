@@ -13,7 +13,7 @@ vi.mock('react-router-dom', async () => {
     };
 });
 
-vi.mock('../../services/AuthService', () => ({
+vi.mock('../../../../services/AuthService', () => ({
     signUpUser: vi.fn(),
 }));
 
@@ -180,7 +180,7 @@ describe('SignUpForm Redirection', () => {
     });
 
     it('should redirect to login on successful signup', async () => {
-        const { signUpUser } = await import('../../services/AuthService');
+        const { signUpUser } = await import('../../../../services/AuthService');
         vi.mocked(signUpUser).mockResolvedValueOnce({
             status: 201,
             data: { username: 'testuser123', email: 'test@example.com' }
@@ -200,5 +200,4 @@ describe('SignUpForm Redirection', () => {
     });
 });
 
-// vérifier que les datas s'envoient bien 
 

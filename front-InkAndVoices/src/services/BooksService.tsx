@@ -12,7 +12,7 @@ export const getBooks = async(): Promise<Book[]> => {
     const data = await response.json();
     return data;
   } catch(error) {
-    console.error("Erreur lors de la récupération de l'ensemble des livres", error)
+      console.error("Erreur lors de la récupération de l'ensemble des livres", error)
     return [];
   }
 }

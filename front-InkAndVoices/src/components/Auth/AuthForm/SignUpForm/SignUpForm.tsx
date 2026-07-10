@@ -1,13 +1,13 @@
-import { useSignUp } from '../../hooks/useSignUp'; 
+import { useSignUp } from '../../../../hooks/useSignUp';
 import '../AuthForm.css';
-import SubmitButton from '../SubmitButton/SubmitButton';
+import SubmitButton from '../../../../components/SubmitButton/SubmitButton';
 
 export default function SignUpForm(){
     const {
         username, setUsername,
         email, setEmail,
         password, setPassword,
-        confirmPassword, setConfirmPassword,  // ← Nouveau
+        confirmPassword, setConfirmPassword,
         errors,
         isLoading,
         handleSubmit

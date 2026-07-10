@@ -1,10 +1,10 @@
-import AuthPageUI from '../components/AuthPageUI/AuthPageUI';
-import SignUpForm from '../components/SignUpForm/SignUpForm';
+import AuthPage from '../components/Auth/AuthPage/AuthPage';
+import SignUpForm from '../components/Auth/AuthForm/SignUpForm/SignUpForm';
 
 export default function Signup() {
   return (
-    <AuthPageUI>
+    <AuthPage>
       <SignUpForm />
-    </AuthPageUI>
+    </AuthPage>
   )
 }
