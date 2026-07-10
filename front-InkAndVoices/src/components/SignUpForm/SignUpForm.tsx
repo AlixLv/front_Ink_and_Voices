@@ -2,22 +2,8 @@ import { useSignUp } from '../../hooks/useSignUp';
 import '../AuthForm.css';
 import SubmitButton from '../SubmitButton/SubmitButton';
 
-// aria-invalid={errors.machin}  indique aux technologies d'assistance que le champ est en erreur dès que errors.xxx existe.
-// aria-describedby="xxx-error" : relie l'input à son message d'erreur — un lecteur d'écran lira le message quand l'utilisateur est focus sur le champ concerné.
-// Pourquoi undefined et pas juste une chaîne vide "" ?
-// C'est là le point important : en React, quand un attribut JSX a la valeur undefined (ou null), React n'ajoute pas du tout l'attribut au DOM final. Alors que si vous mettiez "", l'attribut serait bien présent dans le HTML, mais vide :
-// html<!-- avec undefined : l'attribut disparaît complètement -->
-// <input />
-
-// <!-- avec "" : l'attribut existe mais est vide -->
-// <input aria-describedby="" />
-// Le deuxième cas est problématique pour l'accessibilité : un aria-describedby="" vide peut semer la confusion chez certains lecteurs d'écran, qui s'attendent à trouver un élément avec cet id (même vide) et peuvent générer un comportement inattendu. On veut donc que l'attribut soit totalement absent quand il n'y a pas d'erreur, pas juste vide.
-// En résumé : ce undefined sert à dire "si pas d'erreur, ne mets même pas l'attribut aria-describedby sur l'input" — plutôt que de le laisser avec une valeur vide ou pointant vers un id qui n'existe pas dans le DOM (ce qui arriverait si vous mettiez juste "username-error" en dur, sans condition, alors que le <p> correspondant n'est rendu que quand il y a une erreur).
-
-//role=alert sert à annoncer l'erreur même si le user n'est pas focus sur l'input
-
 export default function SignUpForm(){
-    const { //créer une interface dans le composant, qui regroupe username, email et password (à voir si on refato ça du coup)
+    const {
         username, setUsername,
         email, setEmail,
         password, setPassword,
