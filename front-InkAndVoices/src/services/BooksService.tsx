@@ -19,7 +19,7 @@ export const getBooks = async(): Promise<Book[]> => {
 
 export const getSingleBook = async(id: number): Promise<Book> => {
   try {
-    const response = await fetch(`${API_URL}api/book/${id}`, { method: 'GET' });
+    const response = await fetch(`${API_URL}api/books/${id}`, { method: 'GET' });
     if(!response.ok){
       throw new Error(`HTTP error. status: ${response.status}`);
     }
