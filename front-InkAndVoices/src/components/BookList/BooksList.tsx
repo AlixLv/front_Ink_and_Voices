@@ -9,7 +9,7 @@ export default function BooksList() {
   return (
     <div className="recent-books-container">
       {books.map(book => (
-        <BookCard key={book.uuid} book={book} />
+        <BookCard key={book.id} book={book} />
       ))}
     </div>
   );
