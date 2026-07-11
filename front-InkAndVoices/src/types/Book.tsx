@@ -6,6 +6,7 @@ export interface Theme {
 export interface Type {
   id: number;
   type_name: string;
+  url_image?: string;
 }
 export interface Book {
   id: number;
