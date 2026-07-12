@@ -42,3 +42,42 @@ export const signUpUser = async(
             throw error;
         }
     };
+
+
+
+    export const LoginUser = async(
+    email: string,
+    password: string): Promise<LoginResponse> => {
+        try {
+        const payload = { email, password };
+        console.log('📤 Données envoyées au backend:', payload);
+        
+        const response = await fetch(`${API_URL}/api/auth/login`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'}, 
+            body: JSON.stringify(payload)
+        });
+        
+        if(!response.ok) {
+            // Essayer de parser la réponse d'erreur du backend
+            let errorData;
+            try {
+                errorData = await response.json();
+            } catch {
+                // Si le backend retourne une réponse vide (500, 503, etc)
+                errorData = { message: 'Erreur serveur' };
+            }
+            throw new Error(JSON.stringify({
+                status: response.status,
+                message: errorData.message || 'Erreur serveur'
+            }));
+        }
+
+        const data = await response.json();
+        console.log('📥 Réponse du backend:', { status: response.status, data });
+        return {status: response.status, data};
+        } catch (error) {
+            console.error("Erreur lors de la connexion de l'utilisateur", error);
+            throw error;
+        }
+    };
