@@ -7,15 +7,27 @@ export const signUpUser = async(
     password: string): Promise<SignUpResponse> => {
         try {
         const payload = { username, email, password };
-        console.log('📤 Données envoyées au backend:', payload); // check pour vérifier que les données sont bien envoyées au back
+        console.log('📤 Données envoyées au backend:', payload);
         
         const response = await fetch(`${API_URL}/api/auth/signup`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'}, 
-            body: JSON.stringify(payload) // plus standard ed faire comme ça
+            body: JSON.stringify(payload)
         });
+        
         if(!response.ok) {
-            throw new Error(`HTTP error. status: ${response.status}`);
+            // Essayer de parser la réponse d'erreur du backend
+            let errorData;
+            try {
+                errorData = await response.json();
+            } catch {
+                // Si le backend retourne une réponse vide (500, 503, etc)
+                errorData = { message: 'Erreur serveur' };
+            }
+            throw new Error(JSON.stringify({
+                status: response.status,
+                message: errorData.message || 'Erreur serveur'
+            }));
         }
 
         const data = await response.json();
@@ -26,8 +38,3 @@ export const signUpUser = async(
             throw error;
         }
     };
-
-
-
-    // Pour le response.ok, je préfère demander à Anaïs ce qu'elle en pense. 
-    // C'est un gros truc la gestion de l'erreur et son affichage, et là je 

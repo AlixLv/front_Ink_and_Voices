@@ -1,4 +1,4 @@
-import type { FormErrors, ApiError } from '../types/User.tsx';
+import type { FormErrors } from '../types/User.tsx';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signUpUser } from '../services/AuthService.tsx';
@@ -60,37 +60,23 @@ export const useSignUp = () => {
         setIsLoading(true);
         
         try {
-            const response = await signUpUser(username, email, password);
-            // on renvoie le password en clair au backend. Le backend hash le password avant de le stocker, mais est-ce qu'il n'y a pas un risque qu'il soit intercepté pendant le transport?
-            //  omment sécuriser ça? On doit jamais sécuriser que le backend
-
-
-            if (response.status === 201){
-                navigate(`/login`);
-                return;
-            }
-
-            // Conflit: user/email déjà existant
-            if (response.status === 409){
-                setErrors({global: (response.data as ApiError).message}); 
-                return;
-            }
-
-            // Erreur de validation : JSON invalide, type attendu incorrect, caractères iterdits... normalement le front gère déjà la validation
-            if (response.status === 400 ){
-                setErrors({global: "Les données entrées ne sont pas valides."});
-                return;
-            }
-
-            // Erreur serveur : backend cassé donc db inexistante, hash du password qui échoue, serveur, var d'environnement manquantes...
-            if (response.status >= 500){
-                setErrors({global: "Erreur serveur. Veuillez réessayer plus tard."});
-                return;
-            }
-
+            await signUpUser(username, email, password);
+            // Si on arrive ici, c'est que le statut est 2xx (succès)
+            navigate(`/login`);
         } catch (error) {
-            //erreur réseau
-            setErrors({global: "Une erreur est survenue, réessayer plus tard"});
+            // Toutes les erreurs (réseau + HTTP) arrivent ici
+            let errorMessage = "Une erreur est survenue, réessayez plus tard";
+            
+            if (error instanceof Error) {
+                try {
+                    const errorData = JSON.parse(error.message);
+                    errorMessage = errorData.message || errorMessage;
+                } catch {
+                    errorMessage = error.message || errorMessage;
+                }
+            }
+            
+            setErrors({ global: errorMessage });
         } finally {
             setIsLoading(false);
         }
