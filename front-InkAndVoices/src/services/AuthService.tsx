@@ -14,10 +14,10 @@ export const signUpUser = async(
             headers: {'Content-Type': 'application/json'}, 
             body: JSON.stringify(payload) // plus standard ed faire comme ça
         });
-        // if(!response.ok) {
-        //     throw new Error(`HTTP error. status: ${response.status}`);
-        // }
-         // ça faut le garder ou pas? gestion des erreurs différente, jspk
+        if(!response.ok) {
+            throw new Error(`HTTP error. status: ${response.status}`);
+        }
+
         const data = await response.json();
         console.log('📥 Réponse du backend:', { status: response.status, data });
         return {status: response.status, data};
@@ -26,3 +26,8 @@ export const signUpUser = async(
             throw error;
         }
     };
+
+
+
+    // Pour le response.ok, je préfère demander à Anaïs ce qu'elle en pense. 
+    // C'est un gros truc la gestion de l'erreur et son affichage, et là je 
