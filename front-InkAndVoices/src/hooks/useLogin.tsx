@@ -1,10 +1,12 @@
-import type { FormErrors } from '../types/User.tsx';
+import type { FormErrors, LoggedUserDatas } from '../types/User.tsx';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LoginUser } from '../services/AuthService.tsx';
+import { useAuth } from '../contexts/AuthContext.tsx';
 
 export const useLogin = () => {
     const navigate = useNavigate();
+    const { login } = useAuth();
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [errors, setErrors] = useState<FormErrors>({});
@@ -45,8 +47,13 @@ export const useLogin = () => {
         
         try {
             const response = await LoginUser(email, password);
+            const userData = response.data as LoggedUserDatas;
+            
+            // Sauvegarder le token et les infos dans le contexte
+            login(userData.token, userData.email, userData.username);
+            
             // Si on arrive ici, c'est que le statut est 2xx (succès)
-            console.log('✅ Connexion réussie:', response.data);
+            console.log('✅ Connexion réussie:', userData);
             navigate(`/`);
         } catch (error) {
             // Toutes les erreurs (réseau + HTTP) arrivent ici

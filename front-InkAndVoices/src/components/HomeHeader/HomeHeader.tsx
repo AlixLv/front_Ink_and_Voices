@@ -1,11 +1,13 @@
 import SubmitButton from "../SubmitButton/SubmitButton.tsx";
 import './HomeHeader.css';
 import sarahImg from "../../assets/sarah.png";
+import { useAuth } from "../../contexts/AuthContext.tsx";
 
 
 
 export default function HomeHeader() {
-    let userName = "Sarah";
+    const { username } = useAuth();
+    const displayName = username || "Sarah";
 
     return (
         <>
@@ -14,7 +16,7 @@ export default function HomeHeader() {
                     <div className="user-icon-container">
                         <img src={sarahImg} alt="Icône utilisateur" className="user-icon" />
                     </div>
-                    <div className="user-name">Hey {userName} !!!</div>
+                    <div className="user-name">Hey {displayName} !!!</div>
                 </div>
                 <div className="submit-button-container">
                     <SubmitButton route="/add-book" text="Ajouter un livre" />
