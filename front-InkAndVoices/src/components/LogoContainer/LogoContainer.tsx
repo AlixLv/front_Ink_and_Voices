@@ -1,5 +1,5 @@
 import './LogoContainer.css';
-import logoImg from "../../assets/logo.png";
+import logoImg from "../../assets/logo2.svg";
 
 export default function LogoContainer() {
     return (
