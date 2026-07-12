@@ -1,4 +1,4 @@
-import type { FormErrors, ApiError } from '../types/User.tsx';
+import type { FormErrors } from '../types/User.tsx';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signUpUser, HttpError } from '../services/AuthService.tsx';
