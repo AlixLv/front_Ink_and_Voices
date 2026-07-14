@@ -1,0 +1,104 @@
+.detailed-book-card {
+  background-color: #e8e8e8;
+  border-radius: 16px;
+  padding: 16px 20px;
+  max-width: 600px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.detailed-book-header {
+  margin-bottom: 20px;
+}
+
+.detailed-book-title {
+  font-family: Poppins, sans-serif;
+  margin: 0 0 4px;
+  font-size: 22px;
+  font-weight: 550;
+  color: black;
+  text-align: right;
+}
+
+.detailed-book-author {
+  font-family: Poppins, sans-serif;
+  margin: 0;
+  font-size: 20px;
+  font-weight: bold;
+  color: #000000;
+  text-align: right;
+}
+
+.detailed-book-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.detail-row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.detail-label {
+  font-family: Poppins, sans-serif;
+  margin: 0;
+  font-size: 11px;
+  font-weight: bold;
+  color: #000000;
+  flex: 0 0 140px;
+  text-align: left;
+}
+
+.detail-value {
+  font-family: Poppins, sans-serif;
+  margin: 0;
+  font-size: 12px;
+  font-weight: 500;
+  color: #000000;
+  text-align: left;
+}
+
+.detail-themes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  flex: 1;
+}
+
+/* Reuses the .theme-button visual language for consistency with BookCard's theme chips */
+.detail-themes .detail-value {
+  background-color: #ffffff;
+  border-radius: 4px;
+  padding: 2px 12px;
+  font-size: 8px;
+  font-weight: 500;
+}
+
+.detail-description {
+  line-height: 1.5;
+}
+
+@media (max-width: 480px) {
+  .detailed-book-card {
+    padding: 12px 14px;
+    border-radius: 12px;
+  }
+
+  .detailed-book-title {
+    font-size: 17px;
+  }
+
+  .detail-row {
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .detail-label {
+    flex: none;
+    font-size: 10px;
+    color: #555555; /* slight de-emphasis so label doesn't compete with value when stacked */
+  }
+}

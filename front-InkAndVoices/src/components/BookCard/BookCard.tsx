@@ -14,6 +14,7 @@ export default function BookCard({ book }: BookCardProps) {
             <h3 className="book-title">{book.title}</h3>
           <div className="genre-icon">
             <img src={genreIcon} alt={`icône ${book.type.type_name}`} />
+            <p className="book-type">{book.type.type_name}</p>
           </div>
         </div>
         <div className="book-details">
