@@ -1,5 +1,4 @@
 .detailed-book-card {
-  background-color: #e8e8e8;
   border-radius: 16px;
   padding: 16px 20px;
   max-width: 600px;
@@ -14,8 +13,8 @@
 .detailed-book-title {
   font-family: Poppins, sans-serif;
   margin: 0 0 4px;
-  font-size: 22px;
-  font-weight: 550;
+  font-size: 26px;
+  font-weight: 600;
   color: black;
   text-align: right;
 }
@@ -23,7 +22,7 @@
 .detailed-book-author {
   font-family: Poppins, sans-serif;
   margin: 0;
-  font-size: 20px;
+  font-size: 24px;
   font-weight: bold;
   color: #000000;
   text-align: right;
@@ -33,20 +32,25 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+  padding: 15px;
+  background-color: #e8e8e8;
+  border-radius: 12px; /* coins arrondis demandés */
 }
 
 .detail-row {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
+  margin-bottom: 15px; /* espace conservé entre chaque ligne */
   gap: 8px;
+  text-align: left;
 }
 
 .detail-label {
   font-family: Poppins, sans-serif;
   margin: 0;
   font-size: 11px;
-  font-weight: bold;
+  font-weight: 700; /* légèrement plus bold que detail-value pour bien ressortir */
   color: #000000;
   flex: 0 0 140px;
   text-align: left;
@@ -77,8 +81,13 @@
   font-weight: 500;
 }
 
+.detail-row-description {
+  align-items: flex-start;
+}
+
 .detail-description {
   line-height: 1.5;
+  text-align: justify; /* description justifiée */
 }
 
 @media (max-width: 480px) {
@@ -94,11 +103,16 @@
   .detail-row {
     flex-direction: column;
     gap: 2px;
+    margin-bottom: 12px; /* espace conservé même en colonne */
   }
 
   .detail-label {
     flex: none;
     font-size: 10px;
     color: #555555; /* slight de-emphasis so label doesn't compete with value when stacked */
+  }
+
+  .detail-description {
+    text-align: left; /* évite les "trous" de justification sur petits écrans */
   }
 }
