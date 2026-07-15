@@ -6,19 +6,19 @@ describe('AuthService - signUpUser', () => {
         vi.clearAllMocks();
     });
 
+    const testData = {
+        username: 'testuser123',
+        email: 'test@example.com',
+        password: 'password123'
+    };
+
     it('should send correct data to the backend', async () => {
         const mockFetch = vi.fn().mockResolvedValueOnce({
             status: 201,
             ok: true,
-            json: async () => ({ username: 'testuser123', email: 'test@example.com' })
+            json: async () => ({ username: testData.username, email: testData.email })
         });
         vi.stubGlobal('fetch', mockFetch);
-
-        const testData = {
-            username: 'testuser123',
-            email: 'test@example.com',
-            password: 'password123'
-        };
 
         await signUpUser(testData.username, testData.email, testData.password);
 
@@ -46,14 +46,14 @@ describe('AuthService - signUpUser', () => {
         const mockFetch = vi.fn().mockResolvedValueOnce({
             status: 201,
             ok: true,
-            json: async () => ({ username: 'testuser123', email: 'test@example.com' })
+            json: async () => ({ username: testData.username, email: testData.email })
         });
         vi.stubGlobal('fetch', mockFetch);
 
-        const response = await signUpUser('testuser123', 'test@example.com', 'password123');
+        const response = await signUpUser(testData.username, testData.email, testData.password);
 
         expect(response.status).toBe(201);
-        expect(response.data).toEqual({ username: 'testuser123', email: 'test@example.com' });
+        expect(response.data).toEqual({ username: testData.username, email: testData.email });
     });
 
     it('should handle conflict response (409)', async () => {
@@ -64,7 +64,7 @@ describe('AuthService - signUpUser', () => {
         });
         vi.stubGlobal('fetch', mockFetch);
 
-        await expect(signUpUser('testuser123', 'test@example.com', 'password123')).rejects.toThrow('HTTP error. status: 409');
+        await expect(signUpUser(testData.username, testData.email, testData.password)).rejects.toThrow('HTTP error. status: 409');
     });
 
     it('should handle validation error response (400)', async () => {
@@ -75,7 +75,7 @@ describe('AuthService - signUpUser', () => {
         });
         vi.stubGlobal('fetch', mockFetch);
 
-        await expect(signUpUser('testuser123', 'test@example.com', 'password123')).rejects.toThrow('HTTP error. status: 400');
+        await expect(signUpUser(testData.username, testData.email, testData.password)).rejects.toThrow('HTTP error. status: 400');
     });
 
     it('should handle server error response (500)', async () => {
@@ -86,13 +86,13 @@ describe('AuthService - signUpUser', () => {
         });
         vi.stubGlobal('fetch', mockFetch);
 
-        await expect(signUpUser('testuser123', 'test@example.com', 'password123')).rejects.toThrow('HTTP error. status: 500');
+        await expect(signUpUser(testData.username, testData.email, testData.password)).rejects.toThrow('HTTP error. status: 500');
     });
 
     it('should throw error on network failure', async () => {
         const mockFetch = vi.fn().mockRejectedValueOnce(new Error('Network error'));
         vi.stubGlobal('fetch', mockFetch);
 
-        await expect(signUpUser('testuser123', 'test@example.com', 'password123')).rejects.toThrow('Network error');
+        await expect(signUpUser(testData.username, testData.email, testData.password)).rejects.toThrow('Network error');
     });
 });

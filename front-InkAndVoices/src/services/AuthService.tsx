@@ -22,8 +22,6 @@ export const signUpUser = async(
     password: string): Promise<SignUpResponse> => {
         try {
         const payload = { username, email, password };
-        console.log('📤 Données envoyées au backend:', payload); // check pour vérifier que les données sont bien envoyées au back
-
         const response = await fetch(`${API_URL}/api/auth/signup`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
@@ -39,11 +37,8 @@ export const signUpUser = async(
         if (!response.ok) {
             throw new HttpError(response.status, data);
         }
-
-        console.log('📥 Réponse du backend:', { status: response.status, data });
         return {status: response.status, data};
         } catch (error) {
-            console.error("Erreur lors de l'inscription de l'utilisateur", error);
             throw error;
         }
     };
