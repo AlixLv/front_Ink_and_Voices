@@ -1,7 +1,7 @@
 import type { FormErrors, ApiError } from '../types/User.tsx';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { signUpUser } from '../services/AuthService.tsx';
+import { signUpUser, HttpError } from '../services/AuthService.tsx';
 
 export const useSignUp = () => {
     const navigate = useNavigate();
@@ -60,37 +60,33 @@ export const useSignUp = () => {
         setIsLoading(true);
         
         try {
-            const response = await signUpUser(username, email, password);
+            await signUpUser(username, email, password);
             // on renvoie le password en clair au backend. Le backend hash le password avant de le stocker, mais est-ce qu'il n'y a pas un risque qu'il soit intercepté pendant le transport?
             //  omment sécuriser ça? On doit jamais sécuriser que le backend
 
-
-            if (response.status === 201){
-                navigate(`/login`);
-                return;
-            }
-
-            // Conflit: user/email déjà existant
-            if (response.status === 409){
-                setErrors({global: (response.data as ApiError).message}); 
-                return;
-            }
-
-            // Erreur de validation : JSON invalide, type attendu incorrect, caractères iterdits... normalement le front gère déjà la validation
-            if (response.status === 400 ){
-                setErrors({global: "Les données entrées ne sont pas valides."});
-                return;
-            }
-
-            // Erreur serveur : backend cassé donc db inexistante, hash du password qui échoue, serveur, var d'environnement manquantes...
-            if (response.status >= 500){
-                setErrors({global: "Erreur serveur. Veuillez réessayer plus tard."});
-                return;
-            }
-
+            // Si on arrive ici, c'est que le service n'a pas levé d'erreur : réponse 2xx,
+            // le compte est créé, on redirige vers le login.
+            navigate(`/login`);
         } catch (error) {
-            //erreur réseau
-            setErrors({global: "Une erreur est survenue, réessayer plus tard"});
+            // Le service lève une HttpError pour les réponses non-2xx (409/400/500...),
+            // et une erreur classique pour un problème réseau. On choisit le message ici.
+            if (error instanceof HttpError) {
+                // Conflit : user/email déjà existant → on affiche le message du backend
+                if (error.status === 409){
+                    setErrors({global: (error.data as ApiError).message});
+                // Erreur de validation : JSON invalide, type attendu incorrect, caractères interdits... normalement le front gère déjà la validation
+                } else if (error.status === 400){
+                    setErrors({global: "Les données entrées ne sont pas valides."});
+                // Erreur serveur : backend cassé donc db inexistante, hash du password qui échoue, var d'environnement manquantes...
+                } else if (error.status >= 500){
+                    setErrors({global: "Erreur serveur. Veuillez réessayer plus tard."});
+                } else {
+                    setErrors({global: "Une erreur est survenue, réessayez plus tard."});
+                }
+            } else {
+                // erreur réseau (fetch a échoué, pas de réponse du serveur)
+                setErrors({global: "Une erreur est survenue, réessayez plus tard."});
+            }
         } finally {
             setIsLoading(false);
         }
