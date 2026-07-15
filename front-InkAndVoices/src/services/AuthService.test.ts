@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { LoginUser, signUpUser } from './AuthService';
-import type { LoggedUserDatas, SignedUserDatas } from '../types/User';
+import type { LoggedUserDatas } from '../types/User';
 
 describe('AuthService - signUpUser', () => {
     beforeEach(() => {
