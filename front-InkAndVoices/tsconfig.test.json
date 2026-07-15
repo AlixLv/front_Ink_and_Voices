@@ -6,5 +6,5 @@
     "noUncheckedSideEffectImports": false,
     "erasableSyntaxOnly": false
   },
-  "include": ["src/**/*.test.ts", "src/**/*.test.tsx", "vitest.config.ts"]
+  "include": ["src/**/*.test.ts", "src/**/*.test.tsx", "src/tests/setup.ts", "vitest.config.ts"]
 }
