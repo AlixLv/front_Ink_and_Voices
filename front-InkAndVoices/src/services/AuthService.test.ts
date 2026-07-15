@@ -1,5 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { signUpUser } from './AuthService';
+import { LoginUser, signUpUser } from './AuthService';
+import type { LoggedUserDatas, SignedUserDatas } from '../types/User';
 
 describe('AuthService - signUpUser', () => {
     beforeEach(() => {
@@ -92,7 +93,65 @@ describe('AuthService - signUpUser', () => {
     it('should throw error on network failure', async () => {
         const mockFetch = vi.fn().mockRejectedValueOnce(new Error('Network error'));
         vi.stubGlobal('fetch', mockFetch);
-
         await expect(signUpUser(testData.username, testData.email, testData.password)).rejects.toThrow('Network error');
+    });
+});
+
+
+describe('AuthService - loginUser', () => {
+    beforeEach(() => {
+        vi.clearAllMocks();
+    });
+
+    const testData = {
+        username: 'testuser123',
+        email: 'test@example.com',
+        password: 'password123'
+    };
+
+    it('should send a correctly structured request', async () => {
+        const mockFetch = vi.fn().mockResolvedValueOnce({
+            status: 200,
+            ok: true,
+            json: async () => ({ token: 'abc123', email: testData.email, username: testData.username })
+        });
+        vi.stubGlobal('fetch', mockFetch);
+
+        await LoginUser(testData.email, testData.password);
+
+        expect(mockFetch).toHaveBeenCalled();
+        const [url, options] = mockFetch.mock.calls[0];
+        expect(url).toContain('/api/auth/login');
+        expect(options.method).toBe('POST');
+        expect(JSON.parse(options.body)).toEqual({ email: testData.email, password: 'password123' });
+    });
+
+    it('should handle successful login response (200) with token', async () => {
+        const mockFetch = vi.fn().mockResolvedValueOnce({
+            status: 200,
+            ok: true,
+            json: async () => ({ token: 'abc123', email: testData.email, username: testData.username })
+        });
+        vi.stubGlobal('fetch', mockFetch);
+
+        const response = await LoginUser(testData.email, testData.password);
+        const userData = response.data as LoggedUserDatas;
+
+        expect(response.status).toBe(200);
+        expect(userData.token).toBe('abc123');
+        expect(userData.email).toBe(testData.email);
+    });
+
+    it('should handle invalid credentials error (401)', async () => {
+        const mockFetch = vi.fn().mockResolvedValueOnce({
+            status: 401,
+            ok: false,
+            json: async () => ({ message: 'Invalid email or password' })
+        });
+        vi.stubGlobal('fetch', mockFetch);
+
+        await expect(LoginUser(testData.email, 'wrongpassword')).rejects.toThrow(
+            JSON.stringify({ status: 401, message: 'Invalid email or password' })
+        );
     });
 });

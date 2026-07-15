@@ -1,4 +1,4 @@
-import type { SignUpResponse } from '../types/User';
+import type { LoginResponse, SignUpResponse } from '../types/User';
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8032';
 
 // Erreur HTTP "métier" : le fetch a abouti, mais le backend a répondu avec un
