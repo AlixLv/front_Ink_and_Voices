@@ -64,10 +64,7 @@ describe('AuthService - signUpUser', () => {
         });
         vi.stubGlobal('fetch', mockFetch);
 
-        const response = await signUpUser('testuser123', 'test@example.com', 'password123');
-
-        expect(response.status).toBe(409);
-        expect(response.data).toEqual({ message: 'User already exists' });
+        await expect(signUpUser('testuser123', 'test@example.com', 'password123')).rejects.toThrow('HTTP error. status: 409');
     });
 
     it('should handle validation error response (400)', async () => {
@@ -78,10 +75,7 @@ describe('AuthService - signUpUser', () => {
         });
         vi.stubGlobal('fetch', mockFetch);
 
-        const response = await signUpUser('testuser123', 'test@example.com', 'password123');
-
-        expect(response.status).toBe(400);
-        expect(response.data).toEqual({ message: 'Invalid data' });
+        await expect(signUpUser('testuser123', 'test@example.com', 'password123')).rejects.toThrow('HTTP error. status: 400');
     });
 
     it('should handle server error response (500)', async () => {
@@ -92,10 +86,7 @@ describe('AuthService - signUpUser', () => {
         });
         vi.stubGlobal('fetch', mockFetch);
 
-        const response = await signUpUser('testuser123', 'test@example.com', 'password123');
-
-        expect(response.status).toBe(500);
-        expect(response.data).toEqual({ message: 'Internal server error' });
+        await expect(signUpUser('testuser123', 'test@example.com', 'password123')).rejects.toThrow('HTTP error. status: 500');
     });
 
     it('should throw error on network failure', async () => {
