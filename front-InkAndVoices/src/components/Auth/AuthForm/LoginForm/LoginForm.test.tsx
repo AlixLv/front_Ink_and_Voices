@@ -20,7 +20,7 @@ vi.mock('../../../../contexts/AuthContext', () => ({
 }));
 
 vi.mock('../../../../services/AuthService', () => ({
-    LoginUser: vi.fn(),
+    loginUser: vi.fn(),
 }));
 
 const setupForm = () => {
@@ -93,8 +93,8 @@ describe('LoginForm Redirection', () => {
     });
 
     it('should redirect to home on successful login', async () => {
-        const { LoginUser } = await import('../../../../services/AuthService');
-        vi.mocked(LoginUser).mockResolvedValueOnce({
+        const { loginUser } = await import('../../../../services/AuthService');
+        vi.mocked(loginUser).mockResolvedValueOnce({
             status: 200,
             data: { token: 'abc123', email: 'test@example.com', username: 'testuser' }
         });

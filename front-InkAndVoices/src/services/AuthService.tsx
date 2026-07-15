@@ -45,7 +45,7 @@ export const signUpUser = async(
 
 
 
-    export const LoginUser = async(
+    export const loginUser = async(
     email: string,
     password: string): Promise<LoginResponse> => {
         try {

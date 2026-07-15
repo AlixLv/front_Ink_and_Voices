@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { LoginUser, signUpUser } from './AuthService';
-import type { LoggedUserDatas } from '../types/User';
+import { loginUser, signUpUser } from './AuthService';
+import type { LoggedUserDatas, SignedUserDatas } from '../types/User';
 
 describe('AuthService - signUpUser', () => {
     beforeEach(() => {
@@ -52,9 +52,11 @@ describe('AuthService - signUpUser', () => {
         vi.stubGlobal('fetch', mockFetch);
 
         const response = await signUpUser(testData.username, testData.email, testData.password);
+        const userData = response.data as SignedUserDatas;
 
         expect(response.status).toBe(201);
-        expect(response.data).toEqual({ username: testData.username, email: testData.email });
+        expect(userData.username).toBe(testData.username);
+        expect(userData.email).toBe(testData.email);
     });
 
     it('should handle conflict response (409)', async () => {
@@ -117,7 +119,7 @@ describe('AuthService - loginUser', () => {
         });
         vi.stubGlobal('fetch', mockFetch);
 
-        await LoginUser(testData.email, testData.password);
+        await loginUser(testData.email, testData.password);
 
         expect(mockFetch).toHaveBeenCalled();
         const [url, options] = mockFetch.mock.calls[0];
@@ -134,7 +136,7 @@ describe('AuthService - loginUser', () => {
         });
         vi.stubGlobal('fetch', mockFetch);
 
-        const response = await LoginUser(testData.email, testData.password);
+        const response = await loginUser(testData.email, testData.password);
         const userData = response.data as LoggedUserDatas;
 
         expect(response.status).toBe(200);
@@ -150,7 +152,7 @@ describe('AuthService - loginUser', () => {
         });
         vi.stubGlobal('fetch', mockFetch);
 
-        await expect(LoginUser(testData.email, 'wrongpassword')).rejects.toThrow(
+        await expect(loginUser(testData.email, 'wrongpassword')).rejects.toThrow(
             JSON.stringify({ status: 401, message: 'Invalid email or password' })
         );
     });

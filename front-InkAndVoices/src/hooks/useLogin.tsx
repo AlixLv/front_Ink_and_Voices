@@ -1,7 +1,7 @@
 import type { FormErrors, LoggedUserDatas } from '../types/User.tsx';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { LoginUser } from '../services/AuthService.tsx';
+import { loginUser } from '../services/AuthService.tsx';
 import { useAuth } from '../contexts/AuthContext.tsx';
 
 export const useLogin = () => {
@@ -46,7 +46,7 @@ export const useLogin = () => {
         setIsLoading(true);
         
         try {
-            const response = await LoginUser(email, password);
+            const response = await loginUser(email, password);
             const userData = response.data as LoggedUserDatas;
             
             // Sauvegarder le token et les infos dans le contexte
