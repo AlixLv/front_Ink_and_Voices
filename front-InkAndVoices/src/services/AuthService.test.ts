@@ -152,8 +152,6 @@ describe('AuthService - loginUser', () => {
         });
         vi.stubGlobal('fetch', mockFetch);
 
-        await expect(loginUser(testData.email, 'wrongpassword')).rejects.toThrow(
-            JSON.stringify({ status: 401, message: 'Invalid email or password' })
-        );
+        await expect(loginUser(testData.email, 'wrongpassword')).rejects.toThrow('HTTP error. status: 401');
     });
 });
