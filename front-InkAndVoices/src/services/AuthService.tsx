@@ -14,9 +14,9 @@ export const signUpUser = async(
             headers: {'Content-Type': 'application/json'}, 
             body: JSON.stringify(payload) // plus standard ed faire comme ça
         });
-        if(!response.ok) {
-            throw new Error(`HTTP error. status: ${response.status}`);
-        }
+        // if(!response.ok) {
+        //     throw new Error(`HTTP error. status: ${response.status}`);
+        // }
 
         const data = await response.json();
         console.log('📥 Réponse du backend:', { status: response.status, data });
