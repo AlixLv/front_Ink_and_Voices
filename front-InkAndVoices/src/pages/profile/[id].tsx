@@ -4,6 +4,7 @@ import BackButton from '../../components/BackButton/BackButton';
 import { useAuth } from '../../contexts/AuthContext';
 import ProfileHeader from '../../components/ProfileHeader/ProfileHeader';
 import ContributionsList from '../../components/ContributionsList/ContributionsList';
+import SubmitButton from '../../components/SubmitButton/SubmitButton';
 
 
 export default function Profile() {
@@ -15,6 +16,7 @@ export default function Profile() {
             <div>
                 <ProfileHeader username={username}/>
             </div>
+            <SubmitButton route="/settings" text="Paramètres" />
             <div>
                 <ContributionsList />
             </div>

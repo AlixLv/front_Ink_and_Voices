@@ -13,16 +13,19 @@ export default function ContributionList() {
        {/* J'ai mis plein de ContributionsCards pour avoir un rendu visuel, mais il faudrait faire un truc comme books.map(), comme dans BooksList.tsx! */}
         <ContributionCard />
         <ContributionCard />
-        <ContributionCard />        
-        <ContributionCard />        
-        <ContributionCard />        
-        <ContributionCard />        
-        <ContributionCard />        
-        <ContributionCard />        
-        <ContributionCard />        
-        <ContributionCard />        
-        <ContributionCard />        
+        <ContributionCard />     
         <ContributionCard />
+        <ContributionCard />
+        <ContributionCard />  
+        <ContributionCard />
+        <ContributionCard />
+        <ContributionCard />   
+          <ContributionCard />
+        <ContributionCard />
+        <ContributionCard />    
+          <ContributionCard />
+        <ContributionCard />
+        <ContributionCard />     
     </div>
     </>
   );

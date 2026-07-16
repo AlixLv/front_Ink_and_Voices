@@ -1,9 +1,12 @@
 .contributions-title {
-    font-family: Poppins;
-    font-weight: bold;
-    font-size: 24px;
+    font-family: 'Poppins', sans-serif;
+    text-decoration: underline;
+    font-weight: normal;
+    font-size: 18px;
     justify-self: flex-start;
     /* background-color: red; */
+    margin-top: 20px;
+    margin-bottom: 0px;
 }
 
 .contributions-list {
@@ -12,7 +15,10 @@
   gap: 10px;
   background-color: #F1F1F1;
   border-radius: 2%;
-  max-height: 50vh;
+  height: 40vh;
   overflow-y: auto;
   padding: 20px;
+  margin: 0px;
+  margin-top: 8px;
+  border: 4px solid #F1F1F1;
 }

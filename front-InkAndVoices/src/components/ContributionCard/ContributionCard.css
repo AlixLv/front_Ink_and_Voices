@@ -1,9 +1,10 @@
 .contribution-card {
 background-color: #FFFFFF;
-padding: 0px;
+padding: 10px;
 display:flex;
 flex-direction: row;
-height: 75px;
+height: 120px;
+align-items: center;
 }
 
 
@@ -53,12 +54,16 @@ height: 75px;
     justify-items: center;
     align-items: center;
     align-content: center;
-    height: 100%
+    height: 100%;
 }
 
 .contribution-state {
     background-color: #CFCFCF;
     border-radius: 5%;
-    width: 40%;
-    height: 30px;
+    display: flex;
+    justify-content: center;
+    justify-items: flex-end;
+    width: 120%;
+    height: 50px;
+    font-size: 14px;
 }
