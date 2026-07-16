@@ -1,21 +1,32 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styles from './profile.module.css';
 import BackButton from '../../components/BackButton/BackButton';
+import { useAuth } from '../../contexts/AuthContext';
+import ProfileHeader from '../../components/ProfileHeader/ProfileHeader';
+import ContributionsList from '../../components/ContributionsList/ContributionsList';
 
-const Profile = () => {
-    const {id} = useParams();
+
+export default function Profile() {
+    const { username } = useAuth();
+    
     return (
         <>
         <BackButton />
-        <h1>Page profile</h1>
-        <div>
-            Ceci est un test de page profile du user id: {id}
-        </div>
-        <p>
-            <Link to="/privacy-policy" className={styles.legalLink}>Politique de confidentialité</Link>
-        </p>
+            <div>
+                <ProfileHeader username={username}/>
+            </div>
+            <div>
+                <ContributionsList />
+            </div>
+            <p>
+                <Link to="/privacy-policy" className={styles.legalLink}>Politique de confidentialité</Link>
+            </p>
         </>
     )
 }
 
-export default Profile; 
+
+// il faut que 'image de l'utilisateur e soit pas cliquable si on n'est aps connectée, et il faut des tests,
+// et que l'url ne soit pas "undefined"
+
+

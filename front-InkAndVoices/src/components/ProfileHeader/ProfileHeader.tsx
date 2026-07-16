@@ -1,8 +1,12 @@
 import sarahImg from "../../assets/sarah.png";
 import './ProfileHeader.css';
 
-export default function ProfileHeader() {
-    let userName = "Sarah";
+interface ProfileHeaderProps {
+    username?: string | null;
+}
+
+export default function ProfileHeader({ username }: ProfileHeaderProps) {
+    let userName = username ? username : "Utilisateur";
 
     return (
         <>
