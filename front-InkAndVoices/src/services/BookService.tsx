@@ -25,8 +25,8 @@ export const getSingleBook = async(id: number): Promise<Book> => {
     if(!response.ok){
       throw new HttpError(response.status, data);
     }
-    const bookData = await response.json();
-    return bookData;
+    
+    return data;
   } catch(error){
     console.error("Erreur lors de la récupération du livre", error)
     throw error;
