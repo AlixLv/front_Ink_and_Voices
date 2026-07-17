@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import type { Book, UseSingleBookResult } from '../types/Book';
-import { getSingleBook } from '../services/BooksService';
+import { getSingleBook } from '../services/BookService';
 
 
 export function useSingleBook(id: number): UseSingleBookResult {

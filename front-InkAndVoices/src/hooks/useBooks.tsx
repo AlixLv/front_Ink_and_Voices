@@ -1,6 +1,6 @@
 // useBooks.ts
 import { useEffect, useState } from 'react';
-import { getBooks } from '../services/BooksService';
+import { getBooks } from '../services/BookService';
 import type { Book } from '../types/Book';
 
 export function useBooks() {
