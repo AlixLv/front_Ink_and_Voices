@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { loginUser, signUpUser } from './AuthService';
+import { getLoggedUser, loginUser, logoutUser, signUpUser } from './AuthService';
 import type { LoggedUserDatas, SignedUserDatas } from '../types/User';
 
 describe('AuthService - signUpUser', () => {
@@ -115,7 +115,7 @@ describe('AuthService - loginUser', () => {
         const mockFetch = vi.fn().mockResolvedValueOnce({
             status: 200,
             ok: true,
-            json: async () => ({ token: 'abc123', email: testData.email, username: testData.username })
+            json: async () => ({ email: testData.email, username: testData.username })
         });
         vi.stubGlobal('fetch', mockFetch);
 
@@ -128,11 +128,27 @@ describe('AuthService - loginUser', () => {
         expect(JSON.parse(options.body)).toEqual({ email: testData.email, password: 'password123' });
     });
 
-    it('should handle successful login response (200) with token', async () => {
+    // Sans credentials, le navigateur jette le cookie httpOnly du backend :
+    // ce test verrouille l'option pour que personne ne la retire par erreur.
+    it('should send credentials so the browser keeps the httpOnly cookie', async () => {
         const mockFetch = vi.fn().mockResolvedValueOnce({
             status: 200,
             ok: true,
-            json: async () => ({ token: 'abc123', email: testData.email, username: testData.username })
+            json: async () => ({ email: testData.email, username: testData.username })
+        });
+        vi.stubGlobal('fetch', mockFetch);
+
+        await loginUser(testData.email, testData.password);
+
+        const [, options] = mockFetch.mock.calls[0];
+        expect(options.credentials).toBe('include');
+    });
+
+    it('should handle successful login response (200)', async () => {
+        const mockFetch = vi.fn().mockResolvedValueOnce({
+            status: 200,
+            ok: true,
+            json: async () => ({ email: testData.email, username: testData.username })
         });
         vi.stubGlobal('fetch', mockFetch);
 
@@ -140,8 +156,8 @@ describe('AuthService - loginUser', () => {
         const userData = response.data as LoggedUserDatas;
 
         expect(response.status).toBe(200);
-        expect(userData.token).toBe('abc123');
         expect(userData.email).toBe(testData.email);
+        expect(userData.username).toBe(testData.username);
     });
 
     it('should handle invalid credentials error (401)', async () => {
@@ -153,5 +169,86 @@ describe('AuthService - loginUser', () => {
         vi.stubGlobal('fetch', mockFetch);
 
         await expect(loginUser(testData.email, 'wrongpassword')).rejects.toThrow('HTTP error. status: 401');
+    });
+});
+
+describe('AuthService - getLoggedUser', () => {
+    beforeEach(() => {
+        vi.clearAllMocks();
+    });
+
+    it('should ask the server who is logged in, sending the cookie', async () => {
+        const mockFetch = vi.fn().mockResolvedValueOnce({
+            status: 200,
+            ok: true,
+            json: async () => ({ email: 'test@example.com', username: 'testuser' })
+        });
+        vi.stubGlobal('fetch', mockFetch);
+
+        await getLoggedUser();
+
+        const [url, options] = mockFetch.mock.calls[0];
+        expect(url).toContain('/api/users/profile');
+        expect(options.method).toBe('GET');
+        expect(options.credentials).toBe('include');
+    });
+
+    it('should return the user when the cookie is valid (200)', async () => {
+        const mockFetch = vi.fn().mockResolvedValueOnce({
+            status: 200,
+            ok: true,
+            json: async () => ({ email: 'test@example.com', username: 'testuser' })
+        });
+        vi.stubGlobal('fetch', mockFetch);
+
+        const user = await getLoggedUser();
+
+        expect(user).toEqual({ email: 'test@example.com', username: 'testuser' });
+    });
+
+    // 401 = pas connectée : c'est une réponse normale, pas une erreur.
+    it('should return null when not logged in (401)', async () => {
+        const mockFetch = vi.fn().mockResolvedValueOnce({
+            status: 401,
+            ok: false,
+            json: async () => ({ message: 'Token invalide ou absent' })
+        });
+        vi.stubGlobal('fetch', mockFetch);
+
+        await expect(getLoggedUser()).resolves.toBeNull();
+    });
+
+    it('should throw on a real server error (500)', async () => {
+        const mockFetch = vi.fn().mockResolvedValueOnce({
+            status: 500,
+            ok: false,
+            json: async () => ({ message: 'Internal server error' })
+        });
+        vi.stubGlobal('fetch', mockFetch);
+
+        await expect(getLoggedUser()).rejects.toThrow('HTTP error. status: 500');
+    });
+});
+
+describe('AuthService - logoutUser', () => {
+    beforeEach(() => {
+        vi.clearAllMocks();
+    });
+
+    // Le cookie étant httpOnly, seul le backend peut le supprimer.
+    it('should call the backend so it can clear the httpOnly cookie', async () => {
+        const mockFetch = vi.fn().mockResolvedValueOnce({
+            status: 200,
+            ok: true,
+            json: async () => ({})
+        });
+        vi.stubGlobal('fetch', mockFetch);
+
+        await logoutUser();
+
+        const [url, options] = mockFetch.mock.calls[0];
+        expect(url).toContain('/api/auth/logout');
+        expect(options.method).toBe('DELETE');
+        expect(options.credentials).toBe('include');
     });
 });

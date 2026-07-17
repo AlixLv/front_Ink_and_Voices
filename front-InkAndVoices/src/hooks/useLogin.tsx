@@ -49,11 +49,11 @@ export const useLogin = () => {
             const response = await loginUser(email, password);
             const userData = response.data as LoggedUserDatas;
             
-            // Sauvegarder le token et les infos dans le contexte
-            login(userData.token, userData.email, userData.username);
-            
+            // On ne transmet QUE des infos d'affichage : le token est déjà dans
+            // le cookie httpOnly posé par le backend, le front n'y touche pas.
+            login(userData.email, userData.username);
+
             // Si on arrive ici, c'est que le statut est 2xx (succès)
-            console.log('✅ Connexion réussie:', userData);
             navigate(`/`);
         } catch (error) {
             // Toutes les erreurs (réseau + HTTP) arrivent ici
