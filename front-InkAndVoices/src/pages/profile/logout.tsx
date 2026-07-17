@@ -7,16 +7,19 @@ export default function Logout() {
     const { logout } = useAuth();
 
     useEffect(() => {
-        // Déconnecter l'utilisateur
-        logout();
-        console.log('✅ Utilisateur déconnecté');
-        
-        // Rediriger vers la page de login après 1 seconde
-        const timer = setTimeout(() => {
-            navigate('/login');
-        }, 1000);
+        let cancelled = false;
 
-        return () => clearTimeout(timer);
+        // logout() appelle le backend pour expirer le cookie httpOnly : on
+        // attend sa réponse avant de rediriger, sinon on annoncerait une
+        // déconnexion qui n'a pas encore eu lieu côté serveur.
+        const run = async () => {
+            await logout();
+            if (cancelled) return;
+            navigate('/login');
+        };
+        run();
+
+        return () => { cancelled = true; };
     }, [logout, navigate]);
 
     return (

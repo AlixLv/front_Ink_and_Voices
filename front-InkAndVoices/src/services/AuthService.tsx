@@ -1,4 +1,4 @@
-import type { LoginResponse, SignUpResponse } from '../types/User';
+import type { LoggedUserDatas, LoginResponse, SignUpResponse } from '../types/User';
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8032';
 
 // Erreur HTTP "métier" : le fetch a abouti, mais le backend a répondu avec un
@@ -50,7 +50,11 @@ export const loginUser = async(
         const payload = { email, password };
         const response = await fetch(`${API_URL}/api/auth/login`, {
             method: 'POST',
-            headers: {'Content-Type': 'application/json'}, 
+            headers: {'Content-Type': 'application/json'},
+            // Indispensable : sans credentials, le navigateur IGNORE le
+            // Set-Cookie d'une réponse cross-origin (front :5177, API :8032).
+            // C'est ce cookie httpOnly qui authentifie ensuite toutes les requêtes.
+            credentials: 'include',
             body: JSON.stringify(payload)
         });
 
@@ -68,39 +72,35 @@ export const loginUser = async(
         }
     };
 
-    // export const loginUser = async(
-    // email: string,
-    // password: string): Promise<LoginResponse> => {
-    //     try {
-    //     const payload = { email, password };
-    //     console.log('📤 Données envoyées au backend:', payload);
-        
-    //     const response = await fetch(`${API_URL}/api/auth/login`, {
-    //         method: 'POST',
-    //         headers: {'Content-Type': 'application/json'}, 
-    //         body: JSON.stringify(payload)
-    //     });
-        
-    //     if(!response.ok) {
-    //         // Essayer de parser la réponse d'erreur du backend
-    //         let errorData;
-    //         try {
-    //             errorData = await response.json();
-    //         } catch {
-    //             // Si le backend retourne une réponse vide (500, 503, etc)
-    //             errorData = { message: 'Erreur serveur' };
-    //         }
-    //         throw new Error(JSON.stringify({
-    //             status: response.status,
-    //             message: errorData.message || 'Erreur serveur'
-    //         }));
-    //     }
+// Qui est connectée ? C'est le SERVEUR qui répond, à partir du cookie httpOnly.
+// C'est notre unique source de vérité : contrairement au localStorage, la
+// personne qui utilise l'app ne peut pas mentir au serveur en éditant sa console.
+// Renvoie null si personne n'est connectée (401), ce qui est un cas normal.
+export const getLoggedUser = async (): Promise<LoggedUserDatas | null> => {
+    const response = await fetch(`${API_URL}/api/users/profile`, {
+        method: 'GET',
+        credentials: 'include',
+    });
 
-    //     const data = await response.json();
-    //     console.log('📥 Réponse du backend:', { status: response.status, data });
-    //     return {status: response.status, data};
-    //     } catch (error) {
-    //         console.error("Erreur lors de la connexion de l'utilisateur", error);
-    //         throw error;
-    //     }
-    // };
+    // 401 = pas (ou plus) connectée. Ce n'est pas une erreur, c'est une réponse.
+    if (response.status === 401) {
+        return null;
+    }
+
+    const data = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+        throw new HttpError(response.status, data);
+    }
+
+    return data as LoggedUserDatas;
+};
+
+// La déconnexion DOIT passer par le backend : le cookie étant httpOnly, JS ne
+// peut pas le supprimer lui-même. Vider un state côté front ne déconnecte rien.
+export const logoutUser = async (): Promise<void> => {
+    await fetch(`${API_URL}/api/auth/logout`, {
+        method: 'DELETE',
+        credentials: 'include',
+    });
+};

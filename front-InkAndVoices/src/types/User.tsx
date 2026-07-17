@@ -37,9 +37,10 @@ export interface LoginResponse {
     data: LoggedUserDatas | ApiError;
 }
 
+// Pas de `token` ici : il vit uniquement dans le cookie httpOnly posé par le
+// backend, invisible depuis JS. Le front ne manipule que des infos d'affichage.
 export interface LoggedUserDatas {
     email: string;
     username: string;
-    token: string;
 }
 

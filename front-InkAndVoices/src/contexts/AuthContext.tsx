@@ -1,63 +1,81 @@
-import { createContext, useState, useContext, useEffect } from 'react';
+import { createContext, useState, useContext, useEffect, useCallback } from 'react';
 import type { ReactNode } from 'react';
+import { getLoggedUser, logoutUser } from '../services/AuthService';
 
+// Le token n'apparaît nulle part ici, et c'est volontaire.
+// Il est stocké par le backend dans un cookie httpOnly : le navigateur l'envoie
+// tout seul à chaque requête (grâce à `credentials: 'include'`), et JS ne peut
+// NI le lire NI le voler. C'est le backend qui décide qui est connectée.
+// Ce contexte ne garde donc que des infos d'affichage (email, username).
 interface AuthContextType {
-    token: string | null;
     email: string | null;
     username: string | null;
-    login: (token: string, email: string, username: string) => void;
-    logout: () => void;
     isAuthenticated: boolean;
+    isLoading: boolean;
+    login: (email: string, username: string) => void;
+    logout: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-    const [token, setToken] = useState<string | null>(null);
     const [email, setEmail] = useState<string | null>(null);
     const [username, setUsername] = useState<string | null>(null);
+    // true tant qu'on n'a pas demandé au serveur qui est connectée : ça évite
+    // d'afficher brièvement "déconnectée" alors que le cookie est valide.
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
-    // Charger le token depuis localStorage au démarrage
+    // Au démarrage, on demande au serveur "qui suis-je ?" (le cookie part tout
+    // seul). Avant, on relisait le localStorage : mais le localStorage est
+    // éditable à la main dans la console, donc il ne prouvait rien.
     useEffect(() => {
-        const storedToken = localStorage.getItem('authToken');
-        const storedEmail = localStorage.getItem('userEmail');
-        const storedUsername = localStorage.getItem('username');
-        
-        if (storedToken) {
-            setToken(storedToken);
-            setEmail(storedEmail);
-            setUsername(storedUsername);
+        let cancelled = false;
+
+        getLoggedUser()
+            .then((user) => {
+                if (cancelled) return;
+                setEmail(user?.email ?? null);
+                setUsername(user?.username ?? null);
+            })
+            .catch(() => {
+                // Serveur injoignable : on considère qu'on n'est pas connectée.
+                if (cancelled) return;
+                setEmail(null);
+                setUsername(null);
+            })
+            .finally(() => {
+                if (!cancelled) setIsLoading(false);
+            });
+
+        return () => { cancelled = true; };
+    }, []);
+
+    // Appelée après un login réussi : le cookie est déjà posé par le backend,
+    // on ne mémorise ici que de quoi afficher le pseudo dans le header.
+    const login = useCallback((newEmail: string, newUsername: string) => {
+        setEmail(newEmail);
+        setUsername(newUsername);
+    }, []);
+
+    // On demande au backend d'expirer le cookie AVANT de vider l'affichage :
+    // sans cet appel, la session resterait valide côté serveur.
+    const logout = useCallback(async () => {
+        try {
+            await logoutUser();
+        } finally {
+            setEmail(null);
+            setUsername(null);
         }
     }, []);
 
-    const login = (newToken: string, newEmail: string, newUsername: string) => {
-        setToken(newToken);
-        setEmail(newEmail);
-        setUsername(newUsername);
-        
-        // Stocker dans localStorage pour la persistance
-        localStorage.setItem('authToken', newToken);
-        localStorage.setItem('userEmail', newEmail);
-        localStorage.setItem('username', newUsername);
-    };
-
-    const logout = () => {
-        setToken(null);
-        setEmail(null);
-        setUsername(null);
-        localStorage.removeItem('authToken');
-        localStorage.removeItem('userEmail');
-        localStorage.removeItem('username');
-    };
-
     return (
         <AuthContext.Provider value={{
-            token,
             email,
             username,
+            isAuthenticated: !!email,
+            isLoading,
             login,
-            logout,
-            isAuthenticated: !!token
+            logout
         }}>
             {children}
         </AuthContext.Provider>

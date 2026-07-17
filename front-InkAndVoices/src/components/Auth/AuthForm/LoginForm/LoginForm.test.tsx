@@ -96,7 +96,7 @@ describe('LoginForm Redirection', () => {
         const { loginUser } = await import('../../../../services/AuthService');
         vi.mocked(loginUser).mockResolvedValueOnce({
             status: 200,
-            data: { token: 'abc123', email: 'test@example.com', username: 'testuser' }
+            data: { email: 'test@example.com', username: 'testuser' }
         });
 
         const { emailInput, passwordInput, submitButton } = setupForm();
