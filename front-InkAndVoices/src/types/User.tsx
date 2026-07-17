@@ -9,18 +9,6 @@ export interface UserCardProps {
     user: User;
 }
 
-export interface SignedUserDatas {
-    email: string;
-    username: string;
-}
-
-export interface ApiError {
-    message: string;
-}
-export interface SignUpResponse {
-    status: number;
-    data: SignedUserDatas | ApiError;
-}
 export interface FormErrors {
     username?: string;
     email?: string;
@@ -28,3 +16,31 @@ export interface FormErrors {
     confirmPassword?: string;
     global?: string;
 }
+
+
+export interface ApiError {
+    message: string;
+}
+
+export interface SignUpResponse {
+    status: number;
+    data: SignedUserDatas | ApiError;
+}
+
+export interface SignedUserDatas {
+    email: string;
+    username: string;
+}
+
+export interface LoginResponse {
+    status: number;
+    data: LoggedUserDatas | ApiError;
+}
+
+// Pas de `token` ici : il vit uniquement dans le cookie httpOnly posé par le
+// backend, invisible depuis JS. Le front ne manipule que des infos d'affichage.
+export interface LoggedUserDatas {
+    email: string;
+    username: string;
+}
+

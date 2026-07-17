@@ -1,3 +1,5 @@
+
+/* ce qui contient le bordé gris, toute la page sauf le logo container */
 .auth-form-container {
     /* background-color: red; */
     width: 100%;
@@ -8,6 +10,7 @@
     justify-content: center;
 }
 
+/* bordé gris */
 .auth-form {
     border-color:#D9D9D9;
     border-style: solid;
@@ -23,14 +26,32 @@
     margin-top: 10px;
 }
 
-.auth-form-label {
-    font-family: Poppins;
-    font-size: 11px;
-    margin-bottom: 10px;
-    width: 100%;
-    align-self: flex-start;
+/* chaque ensemble label - champ - msg d'erreur */
+.auth-form-field-group {
+    display: flex;
+    flex-direction: column;
+    width: 80%;;
+    height: 25%;
+    align-items: flex-start;
+    padding: 0 30px;
+    /* background-color: #1bfdd8; */
 }
 
+/* label */
+.auth-form-label {
+    font-family: Poppins;
+    font-size: 10px;
+    width: 100%;
+    display: flex;
+    padding: 0px;
+    margin: 0px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    /* background-color: #1b9b41; */
+}
+
+/* champs */
 .auth-form-field {
     border-color:#D9D9D9;
     border-style: solid;
@@ -40,6 +61,22 @@
     color:#B3B3B3;
     font-size: 8px;
     padding: 5px;
-    /* height: 80%; */
-    width: 80%;
+    box-sizing: border-box;
+    width: 100%;
+    /* background-color: #1e1ad8; */
+}
+
+/* message d'erreur */
+.auth-form-error {
+    font-family: Arial, sans-serif;
+    font-size: 9px;
+    font-style: italic;
+    color: #ee592c;
+    margin-left: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    display: flex;
+    width: 100%;
+    text-align: left;
+    justify-content: flex-start;
 }
