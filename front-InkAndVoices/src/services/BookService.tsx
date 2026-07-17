@@ -1,10 +1,11 @@
 import type { Book } from '../types/Book';
+import { HttpError } from './HttpError';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8032';
 
 export const getBooks = async(): Promise<Book[]> => {
   try {
-    const response = await fetch(`${API_URL}api/books`, { method: 'GET' });
+    const response = await fetch(`${API_URL}/api/books`, { method: 'GET' });
     if(!response.ok) {
       throw new Error(`HTTP error. status: ${response.status}`);
     }
@@ -18,9 +19,11 @@ export const getBooks = async(): Promise<Book[]> => {
 
 export const getSingleBook = async(id: number): Promise<Book> => {
   try {
-    const response = await fetch(`${API_URL}api/books/${id}`, { method: 'GET' });
+    const response = await fetch(`${API_URL}/api/books/${id}`, { method: 'GET' });
+    const data = await response.json().catch(() => ({}));
+    
     if(!response.ok){
-      throw new Error(`HTTP error. status: ${response.status}`);
+      throw new HttpError(response.status, data);
     }
     const bookData = await response.json();
     return bookData;

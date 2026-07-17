@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import type { Book, UseSingleBookResult } from '../types/Book';
 import { getSingleBook } from '../services/BookService';
+import { HttpError } from '../services/HttpError';
+import { getBookErrorMessage } from '../utils/errorMessages';
 
 
 export function useSingleBook(id: number): UseSingleBookResult {
@@ -21,7 +23,11 @@ export function useSingleBook(id: number): UseSingleBookResult {
                 }
             } catch (error){
                 if (isMounted){
-                    setError(error instanceof Error ? error.message: 'Erreur inconnue');
+                    if (error instanceof HttpError){
+                        setError(getBookErrorMessage(error.status));
+                    } else {
+                        setError('Impossible de contacter le serveur. Vérifier votre connexion');
+                    }
                 }
             } finally {
                 if (isMounted){
