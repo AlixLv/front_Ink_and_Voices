@@ -188,7 +188,7 @@ describe('AuthService - getLoggedUser', () => {
         await getLoggedUser();
 
         const [url, options] = mockFetch.mock.calls[0];
-        expect(url).toContain('/api/users/profile');
+        expect(url).toContain('/api/users/me');
         expect(options.method).toBe('GET');
         expect(options.credentials).toBe('include');
     });

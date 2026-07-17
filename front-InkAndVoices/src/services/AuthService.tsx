@@ -77,7 +77,7 @@ export const loginUser = async(
 // personne qui utilise l'app ne peut pas mentir au serveur en éditant sa console.
 // Renvoie null si personne n'est connectée (401), ce qui est un cas normal.
 export const getLoggedUser = async (): Promise<LoggedUserDatas | null> => {
-    const response = await fetch(`${API_URL}/api/users/profile`, {
+    const response = await fetch(`${API_URL}/api/users/me`, {
         method: 'GET',
         credentials: 'include',
     });
