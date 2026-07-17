@@ -3,11 +3,12 @@
   padding: 16px 20px;
   max-width: 600px;
   width: 100%;
+  height: 100%;
   box-sizing: border-box;
 }
 
 .detailed-book-header {
-  margin-bottom: 20px;
+  margin-bottom: 8rem;
 }
 
 .detailed-book-title {

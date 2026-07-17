@@ -37,6 +37,5 @@ export function useSingleBook(id: number): UseSingleBookResult {
         };
     }, [id]);   
 
-    console.log("book received in Hook 🌸: ", book)
     return {book, isLoading, error};
 }

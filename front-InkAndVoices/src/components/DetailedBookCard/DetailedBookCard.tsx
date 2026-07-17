@@ -1,6 +1,7 @@
 import type { BookDetailsCardProps } from '../../types/Book';
 import { useSingleBook } from '../../hooks/useSingleBook';
 import './DetailedBookCard.css';
+import ThemeButton from '../ThemeButtons/ThemeButtons';
 
 export default function DetailedBookCard({ id }: BookDetailsCardProps) {
   const { book, isLoading, error } = useSingleBook(id);
@@ -12,16 +13,14 @@ export default function DetailedBookCard({ id }: BookDetailsCardProps) {
   return (
     <div className="detailed-book-card">
       <div className="detailed-book-header">
-        <h2 className="detailed-book-title">{book.title}</h2>
-        <h3 className="detailed-book-author">{book.author}</h3>
+        <h2 className="detailed-book-author">{book.author}</h2>
+        <h3 className="detailed-book-title">{book.title}</h3>
       </div>
       <div className="detailed-book-body">
         <div className="detail-row">
           <p className="detail-label">Thème</p>
           <div className="detail-themes">
-            {book.themes.map((theme) => (
-              <p className="detail-value" key={theme.id}>{theme.theme_name}</p>
-            ))}
+             <ThemeButton themes={book.themes} />
           </div>
         </div>
 
