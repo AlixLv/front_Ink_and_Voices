@@ -1,7 +1,7 @@
 import type { LoggedUserDatas, LoginResponse, SignUpResponse } from '../types/User';
 import { HttpError } from './HttpError';
-
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8032';
+
 
 export const signUpUser = async(
     username: string,
@@ -33,7 +33,6 @@ export const signUpUser = async(
 export const loginUser = async(
     email: string,
     password: string): Promise<LoginResponse> => {
-        try {
         const payload = { email, password };
         const response = await fetch(`${API_URL}/api/auth/login`, {
             method: 'POST',
@@ -54,9 +53,6 @@ export const loginUser = async(
             throw new HttpError(response.status, data);
         }
         return {status: response.status, data};
-        } catch (error) {
-            throw error;
-        }
     };
 
 // Qui est connectée ? C'est le SERVEUR qui répond, à partir du cookie httpOnly.
