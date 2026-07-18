@@ -63,11 +63,11 @@ describe('AuthService - signUpUser', () => {
         const mockFetch = vi.fn().mockResolvedValueOnce({
             status: 409,
             ok: false,
-            json: async () => ({ message: 'User already exists' })
+            json: async () => ({ message: `Un.e utilisateurice existe déjà avec cet email: ${testData.email}` })
         });
         vi.stubGlobal('fetch', mockFetch);
 
-        await expect(signUpUser(testData.username, testData.email, testData.password)).rejects.toThrow('HTTP error. status: 409');
+        await expect(signUpUser(testData.username, testData.email, testData.password)).rejects.toThrow(`Un.e utilisateurice existe déjà avec cet email: ${testData.email}`);
     });
 
     it('should handle validation error response (400)', async () => {
@@ -78,7 +78,7 @@ describe('AuthService - signUpUser', () => {
         });
         vi.stubGlobal('fetch', mockFetch);
 
-        await expect(signUpUser(testData.username, testData.email, testData.password)).rejects.toThrow('HTTP error. status: 400');
+        await expect(signUpUser(testData.username, testData.email, testData.password)).rejects.toThrow('Invalid data');
     });
 
     it('should handle server error response (500)', async () => {
@@ -89,7 +89,7 @@ describe('AuthService - signUpUser', () => {
         });
         vi.stubGlobal('fetch', mockFetch);
 
-        await expect(signUpUser(testData.username, testData.email, testData.password)).rejects.toThrow('HTTP error. status: 500');
+        await expect(signUpUser(testData.username, testData.email, testData.password)).rejects.toThrow('Internal server error');
     });
 
     it('should throw error on network failure', async () => {
@@ -164,11 +164,11 @@ describe('AuthService - loginUser', () => {
         const mockFetch = vi.fn().mockResolvedValueOnce({
             status: 401,
             ok: false,
-            json: async () => ({ message: 'Invalid email or password' })
+            json: async () => ({ message: 'Email ou mot de passe incorrect.' })
         });
         vi.stubGlobal('fetch', mockFetch);
 
-        await expect(loginUser(testData.email, 'wrongpassword')).rejects.toThrow('HTTP error. status: 401');
+        await expect(loginUser(testData.email, 'wrongpassword')).rejects.toThrow('Email ou mot de passe incorrect.');
     });
 });
 
@@ -226,7 +226,7 @@ describe('AuthService - getLoggedUser', () => {
         });
         vi.stubGlobal('fetch', mockFetch);
 
-        await expect(getLoggedUser()).rejects.toThrow('HTTP error. status: 500');
+        await expect(getLoggedUser()).rejects.toThrow('Internal server error');
     });
 });
 
