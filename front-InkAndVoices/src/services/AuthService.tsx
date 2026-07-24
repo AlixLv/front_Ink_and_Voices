@@ -20,7 +20,6 @@ export const signUpUser = async(
         // on retombe sur un objet vide plutôt que de faire planter le .json().
         const data = await response.json().catch(() => ({}));
 
-        // Réponse non-2xx : on lève une erreur typée, rattrapée par le hook.
         if (!response.ok) {
             throw new HttpError(response.status, data);
         }
