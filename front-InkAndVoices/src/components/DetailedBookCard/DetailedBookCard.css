@@ -1,0 +1,119 @@
+.detailed-book-card {
+  border-radius: 16px;
+  padding: 16px 20px;
+  max-width: 600px;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.detailed-book-header {
+  margin-bottom: 8rem;
+}
+
+.detailed-book-title {
+  font-family: Poppins, sans-serif;
+  margin: 0 0 4px;
+  font-size: 26px;
+  font-weight: 600;
+  color: black;
+  text-align: right;
+}
+
+.detailed-book-author {
+  font-family: Poppins, sans-serif;
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+  color: #000000;
+  text-align: right;
+}
+
+.detailed-book-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 15px;
+  background-color: #e8e8e8;
+  border-radius: 12px; /* coins arrondis demandés */
+}
+
+.detail-row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  margin-bottom: 15px; /* espace conservé entre chaque ligne */
+  gap: 8px;
+  text-align: left;
+}
+
+.detail-label {
+  font-family: Poppins, sans-serif;
+  margin: 0;
+  font-size: 11px;
+  font-weight: 700; /* légèrement plus bold que detail-value pour bien ressortir */
+  color: #000000;
+  flex: 0 0 140px;
+  text-align: left;
+}
+
+.detail-value {
+  font-family: Poppins, sans-serif;
+  margin: 0;
+  font-size: 12px;
+  font-weight: 500;
+  color: #000000;
+  text-align: left;
+}
+
+.detail-themes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  flex: 1;
+}
+
+/* Reuses the .theme-button visual language for consistency with BookCard's theme chips */
+.detail-themes .detail-value {
+  background-color: #ffffff;
+  border-radius: 4px;
+  padding: 2px 12px;
+  font-size: 8px;
+  font-weight: 500;
+}
+
+.detail-row-description {
+  align-items: flex-start;
+}
+
+.detail-description {
+  line-height: 1.5;
+  text-align: justify; /* description justifiée */
+}
+
+@media (max-width: 480px) {
+  .detailed-book-card {
+    padding: 12px 14px;
+    border-radius: 12px;
+  }
+
+  .detailed-book-title {
+    font-size: 17px;
+  }
+
+  .detail-row {
+    flex-direction: column;
+    gap: 2px;
+    margin-bottom: 12px; /* espace conservé même en colonne */
+  }
+
+  .detail-label {
+    flex: none;
+    font-size: 10px;
+    color: #555555; /* slight de-emphasis so label doesn't compete with value when stacked */
+  }
+
+  .detail-description {
+    text-align: left; /* évite les "trous" de justification sur petits écrans */
+  }
+}

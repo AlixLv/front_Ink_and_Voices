@@ -1,16 +1,37 @@
+export interface Theme {
+  id: number;
+  theme_name: string;
+}
+
+export interface Type {
+  id: number;
+  type_name: string;
+  url_image?: string;
+}
 export interface Book {
-  uuid: string;
+  id: number;
   title: string;
   author: string;
-  genre: string;
-  theme: string;
-  description: string;
+  type: Type;
+  publishing_house?: string;
+  publication_year?: string;
+  themes: Theme[];
+  resume?: string;
+  short_description: string;
 }
 
 export interface BookCardProps {
   book: Book;
 }
 
+export interface BookDetailsCardProps {
+  id: number;
+}
 export interface BooksListProps {
   books: Book[];
+}
+export interface UseSingleBookResult {
+    book: Book | undefined;
+    isLoading: boolean;
+    error: string | null;
 }

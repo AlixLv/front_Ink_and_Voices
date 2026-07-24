@@ -5,15 +5,15 @@ import { BrowserRouter } from 'react-router-dom';
 
 vi.mock('../../hooks/useBooks', () => ({
   useBooks: () => [
-    { uuid: '1', title: 'Book 1', author: 'Author 1' },
-    { uuid: '2', title: 'Book 2', author: 'Author 2' },
-    { uuid: '3', title: 'Book 3', author: 'Author 3' }
+    { id: 1, title: 'Book 1', author: 'Author 1' },
+    { id: 2, title: 'Book 2', author: 'Author 2' },
+    { id: 3, title: 'Book 3', author: 'Author 3' }
   ]
 }));
 
 vi.mock('../BookCard/BookCard', () => ({
   default: ({ book }: { book: any }) => (
-    <div data-testid={`book-card-${book.uuid}`}>{book.title}</div>
+    <div data-testid={`book-card-${book.id}`}>{book.title}</div>
   )
 }));
 

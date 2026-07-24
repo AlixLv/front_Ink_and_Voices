@@ -1,25 +1,46 @@
-.theme-button {
-    display: flex;
-    background-color: #ffffff;
-    color: black;
-    border-radius: 4px;
-    padding: 1px 19px 1px 19px;
-    min-width: 10px;
-    width: auto;
-    height: auto;
-    font-family: Poppins;
-    font-size: 8px;
-    font-weight: 200;
-    justify-content: center;
-    cursor: pointer;
-    border: none;
+.theme-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 4px;
 }
 
-.theme-buttons-list {
-    margin-bottom: 2px;
-    margin-right: 10px;
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 8px;
-    transform: translateY(-1px);
+.theme-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  color: black;
+  text-decoration: none;
+  border-radius: 4px;
+  padding: 2px 12px;
+  font-family: Poppins, sans-serif;
+  font-size: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.15s ease, transform 0.15s ease;
+  white-space: nowrap;
+}
+
+.theme-button:hover {
+  background-color: #f0f0f0;
+  transform: translateY(-1px);
+}
+
+.theme-button:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+@media (max-width: 480px) {
+  .theme-list {
+    justify-content: flex-start;
+  }
+
+  .theme-button {
+    padding: 3px 10px;
+    font-size: 9px; /* slightly larger for tap targets on mobile */
+  }
 }
