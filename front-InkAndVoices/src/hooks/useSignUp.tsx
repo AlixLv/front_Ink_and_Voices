@@ -1,7 +1,8 @@
-import type { ApiError, FormErrors } from '../types/User.tsx';
+import type { FormErrors } from '../types/User.tsx';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { signUpUser, HttpError } from '../services/AuthService.tsx';
+import { signUpUser } from '../services/AuthService.tsx';
+import { HttpError } from '../services/HttpError.ts';
 
 export const useSignUp = () => {
     const navigate = useNavigate();
@@ -68,21 +69,8 @@ export const useSignUp = () => {
             // le compte est créé, on redirige vers le login.
             navigate(`/login`);
         } catch (error) {
-            // Le service lève une HttpError pour les réponses non-2xx (409/400/500...),
-            // et une erreur classique pour un problème réseau. On choisit le message ici.
             if (error instanceof HttpError) {
-                // Conflit : user/email déjà existant → on affiche le message du backend
-                if (error.status === 409){
-                    setErrors({global: (error.data as ApiError).message});
-                // Erreur de validation : JSON invalide, type attendu incorrect, caractères interdits... normalement le front gère déjà la validation
-                } else if (error.status === 400){
-                    setErrors({global: "Les données entrées ne sont pas valides."});
-                // Erreur serveur : backend cassé donc db inexistante, hash du password qui échoue, var d'environnement manquantes...
-                } else if (error.status >= 500){
-                    setErrors({global: "Erreur serveur. Veuillez réessayer plus tard."});
-                } else {
-                    setErrors({global: "Une erreur est survenue, réessayez plus tard."});
-                }
+                setErrors({global: error.message});
             } else {
                 // erreur réseau (fetch a échoué, pas de réponse du serveur)
                 setErrors({global: "Une erreur est survenue, réessayez plus tard."});

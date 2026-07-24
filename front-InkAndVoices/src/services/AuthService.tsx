@@ -7,26 +7,23 @@ export const signUpUser = async(
     username: string,
     email: string,
     password: string): Promise<SignUpResponse> => {
-        try {
-        const payload = { username, email, password };
-        const response = await fetch(`${API_URL}/api/auth/signup`, {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(payload)
-        });
+    
+    const payload = { username, email, password };
+    const response = await fetch(`${API_URL}/api/auth/signup`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(payload)
+    });
 
-        // On lit le corps même en cas d'erreur : le backend y met son message
-        // (ex: "User already exists"). Si la réponse est vide (500, 503...),
-        // on retombe sur un objet vide plutôt que de faire planter le .json().
-        const data = await response.json().catch(() => ({}));
+    // On lit le corps même en cas d'erreur : le backend y met son message
+    // (ex: "User already exists"). Si la réponse est vide (500, 503...),
+    // on retombe sur un objet vide plutôt que de faire planter le .json().
+    const data = await response.json().catch(() => ({}));
 
-        if (!response.ok) {
-            throw new HttpError(response.status, data);
-        }
-        return {status: response.status, data};
-        } catch (error) {
-            throw error;
-        }
+    if (!response.ok) {
+        throw new HttpError(response.status, data);
+    }
+    return {status: response.status, data};
     };
 
 export const loginUser = async(
