@@ -1,4 +1,4 @@
-import type { FormErrors, LoggedUserDatas } from '../types/User.tsx';
+import type { FormErrors } from '../types/User.tsx';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { loginUser } from '../services/AuthService.tsx';
@@ -45,12 +45,12 @@ export const useLogin = () => {
         setIsLoading(true);
 
         try {
-            const response = await loginUser(email, password);
-            const userData = response.data as LoggedUserDatas;
+            await loginUser(email, password);
 
-            // On ne transmet QUE des infos d'affichage : le token est déjà dans
-            // le cookie httpOnly posé par le backend, le front n'y touche pas.
-            login(userData.email, userData.username);
+            // Le cookie httpOnly est déjà posé par le backend : on redemande
+            // au serveur qui est connecté plutôt que de faire confiance à la
+            // réponse du login (qui ne renvoie pas l'id).
+            await login();
 
             // Si on arrive ici, c'est que le statut est 2xx (succès)
             navigate(`/`);

@@ -32,14 +32,17 @@ export interface SignedUserDatas {
     username: string;
 }
 
+// Le login ne renvoie que email/username (même forme que SignedUserDatas) :
+// pas d'id ici, c'est /me (LoggedUserDatas) qui fait foi pour l'identité.
 export interface LoginResponse {
     status: number;
-    data: LoggedUserDatas | ApiError;
+    data: SignedUserDatas | ApiError;
 }
 
 // Pas de `token` ici : il vit uniquement dans le cookie httpOnly posé par le
 // backend, invisible depuis JS. Le front ne manipule que des infos d'affichage.
 export interface LoggedUserDatas {
+    id: string;
     email: string;
     username: string;
 }
