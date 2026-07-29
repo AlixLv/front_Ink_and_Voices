@@ -1,7 +1,8 @@
 import type { ApiError, FormErrors } from '../types/User.tsx';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { signUpUser, HttpError } from '../services/AuthService.tsx';
+import { signUpUser } from '../services/AuthService.tsx';
+import { HttpError } from '../services/HttpError.tsx';
 
 export const useSignUp = () => {
     const navigate = useNavigate();
