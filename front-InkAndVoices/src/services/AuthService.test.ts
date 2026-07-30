@@ -74,7 +74,7 @@ describe('AuthService - signUpUser', () => {
         const mockFetch = vi.fn().mockResolvedValueOnce({
             status: 400,
             ok: false,
-            json: async () => ({ message: 'Invalid data' })
+            json: async () => ({ message: 'Bad request' })
         });
         vi.stubGlobal('fetch', mockFetch);
 
