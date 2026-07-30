@@ -78,7 +78,7 @@ describe('AuthService - signUpUser', () => {
         });
         vi.stubGlobal('fetch', mockFetch);
 
-        await expect(signUpUser(testData.username, testData.email, testData.password)).rejects.toThrow('Invalid data');
+        await expect(signUpUser(testData.username, testData.email, testData.password)).rejects.toThrow('Bad request');
     });
 
     it('should handle server error response (500)', async () => {
