@@ -8,6 +8,8 @@ import { getLoggedUser, logoutUser } from '../services/AuthService';
 // NI le lire NI le voler. C'est le backend qui décide qui est connectée.
 // Ce contexte ne garde donc que des infos d'affichage (email, username).
 interface AuthContextType {
+    // Vient de GET /me (LoggedUserDatas), jamais du login : utilisé par la
+    // navbar pour construire /profile/:id.
     id: string | null;
     email: string | null;
     username: string | null;
