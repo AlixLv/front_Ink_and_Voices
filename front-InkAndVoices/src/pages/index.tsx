@@ -1,6 +1,6 @@
 import HomeHeader from '../components/HomeHeader/HomeHeader';
 import RecentBooksList from '../components/RecentBooksList/RecentBooksList';
-import '../components/RecentBooksList/RecentBooksList.css'; 
+import '../components/RecentBooksList/RecentBooksList.css';
 export default function Homepage() {
     return (
         <>

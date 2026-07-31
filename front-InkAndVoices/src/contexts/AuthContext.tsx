@@ -8,17 +8,21 @@ import { getLoggedUser, logoutUser } from '../services/AuthService';
 // NI le lire NI le voler. C'est le backend qui décide qui est connectée.
 // Ce contexte ne garde donc que des infos d'affichage (email, username).
 interface AuthContextType {
+    // Vient de GET /me (LoggedUserDatas), jamais du login : utilisé par la
+    // navbar pour construire /profile/:id.
+    id: string | null;
     email: string | null;
     username: string | null;
     isAuthenticated: boolean;
     isLoading: boolean;
-    login: (email: string, username: string) => void;
+    login: () => Promise<void>;
     logout: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
+    const [id, setId] = useState<string | null>(null);
     const [email, setEmail] = useState<string | null>(null);
     const [username, setUsername] = useState<string | null>(null);
     // true tant qu'on n'a pas demandé au serveur qui est connectée : ça évite
@@ -34,12 +38,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         getLoggedUser()
             .then((user) => {
                 if (cancelled) return;
+                setId(user?.id ?? null);
                 setEmail(user?.email ?? null);
                 setUsername(user?.username ?? null);
             })
             .catch(() => {
                 // Serveur injoignable : on considère qu'on n'est pas connectée.
                 if (cancelled) return;
+                setId(null);
                 setEmail(null);
                 setUsername(null);
             })
@@ -50,11 +56,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         return () => { cancelled = true; };
     }, []);
 
-    // Appelée après un login réussi : le cookie est déjà posé par le backend,
-    // on ne mémorise ici que de quoi afficher le pseudo dans le header.
-    const login = useCallback((newEmail: string, newUsername: string) => {
-        setEmail(newEmail);
-        setUsername(newUsername);
+    // Appelée après un login réussi : le cookie est déjà posé par le backend.
+    // On redemande au serveur "qui suis-je ?" plutôt que de faire confiance à
+    // la réponse du POST /login (qui ne renvoie pas l'id) : /me reste l'unique
+    // source de vérité, comme au chargement initial.
+    const login = useCallback(async () => {
+        const user = await getLoggedUser();
+        setId(user?.id ?? null);
+        setEmail(user?.email ?? null);
+        setUsername(user?.username ?? null);
     }, []);
 
     // On demande au backend d'expirer le cookie AVANT de vider l'affichage :
@@ -63,6 +73,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         try {
             await logoutUser();
         } finally {
+            setId(null);
             setEmail(null);
             setUsername(null);
         }
@@ -70,6 +81,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     return (
         <AuthContext.Provider value={{
+            id,
             email,
             username,
             isAuthenticated: !!email,

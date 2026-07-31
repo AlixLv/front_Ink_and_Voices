@@ -32,14 +32,20 @@ export interface SignedUserDatas {
     username: string;
 }
 
+// Le login ne renvoie que email/username (même forme que SignedUserDatas) :
+// pas d'id ici, c'est /me (LoggedUserDatas) qui fait foi pour l'identité.
 export interface LoginResponse {
     status: number;
-    data: LoggedUserDatas | ApiError;
+    data: SignedUserDatas | ApiError;
 }
 
-// Pas de `token` ici : il vit uniquement dans le cookie httpOnly posé par le
-// backend, invisible depuis JS. Le front ne manipule que des infos d'affichage.
+// Forme de la réponse de GET /api/users/me ("qui suis-je ?"), pas celle du
+// login : c'est la seule route qui renvoie un id, car c'est la seule qui doit
+// dire "voici qui tu es" (elle sert à AuthContext pour bâtir /profile/:id
+// dans la navbar). Pas de `token` ici : il vit uniquement dans le cookie
+// httpOnly posé par le backend, invisible depuis JS.
 export interface LoggedUserDatas {
+    id: string;
     email: string;
     username: string;
 }
