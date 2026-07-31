@@ -66,6 +66,24 @@
     /* background-color: #1e1ad8; */
 }
 
+/* lien vers la politique de confidentialité */
+.auth-form-legal {
+    font-family: Poppins;
+    font-size: 9px;
+    text-align: center;
+    width: 100%;
+    margin: 10px 0 0;
+}
+
+/* Le bleu de lien global (index.css) tombe à ~4.1:1 sur blanc (sous les
+   4.5:1 requis par WCAG AA) et n'est distingué du texte que par la couleur.
+   Fix local plutôt que de toucher tous les liens du site : plus foncé
+   (~6.2:1) + souligné. */
+.auth-form-legal a {
+    color: #4A4FD6;
+    text-decoration: underline;
+}
+
 /* message d'erreur */
 .auth-form-error {
     font-family: Arial, sans-serif;
