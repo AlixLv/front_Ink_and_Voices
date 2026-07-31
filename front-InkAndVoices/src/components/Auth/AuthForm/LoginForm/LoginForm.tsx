@@ -57,6 +57,9 @@ export default function LoginForm(){
                     disabled={isLoading}
                 />
             </div>
+            <p className="auth-form-switch">
+                Pas encore de compte ? <Link to="/signup">Inscrivez-vous</Link>
+            </p>
             <p className="auth-form-legal">
                 <Link to="/privacy-policy">Politique de confidentialité</Link>
             </p>

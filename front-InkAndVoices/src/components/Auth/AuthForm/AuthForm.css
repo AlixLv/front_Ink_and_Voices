@@ -69,7 +69,11 @@
 /* lien vers la politique de confidentialité */
 .auth-form-legal {
     font-family: Poppins;
-    font-size: 9px;
+}
+/* lien "pas encore de compte ?" sous le bouton de connexion */
+.auth-form-switch {
+    font-family: Poppins;
+    color: #666;
     text-align: center;
     width: 100%;
     margin: 10px 0 0;
@@ -80,6 +84,11 @@
    Fix local plutôt que de toucher tous les liens du site : plus foncé
    (~6.2:1) + souligné. */
 .auth-form-legal a {
+    color: #4A4FD6;
+    text-decoration: underline;
+}
+
+.auth-form-switch a {
     color: #4A4FD6;
     text-decoration: underline;
 }
