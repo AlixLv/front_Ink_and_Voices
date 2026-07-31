@@ -1,5 +1,6 @@
 import sarahImg from "../../assets/sarah.png";
-import whiteImg from "../../assets/white.png";
+// import whiteImg from "../../assets/white.png";
+import basicUser from "../../assets/basic-user.png";
 import { useAuth } from "../../contexts/AuthContext";
 import './ProfileHeader.css';
 
@@ -11,7 +12,7 @@ export default function ProfileHeader({ username }: ProfileHeaderProps) {
     const { isAuthenticated } = useAuth();
     let userName = username ? username : "Utilisateur";
     
-    const profileImage = isAuthenticated ? sarahImg : whiteImg;
+    const profileImage = isAuthenticated ? sarahImg : basicUser;
 
     return (
         <>

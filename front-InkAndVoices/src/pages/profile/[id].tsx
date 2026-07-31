@@ -16,7 +16,12 @@ export default function Profile() {
             <div>
                 <ProfileHeader username={username}/>
             </div>
-            <SubmitButton route="/settings" text="Paramètres" />
+            <div style={{ marginBottom: '5px' }}>
+            <SubmitButton route="/profile/settings" text="Paramètres" />
+            </div>
+            <div>
+            <SubmitButton route="/profile/logout" text="Déconnexion" />
+            </div>
             <div>
                 <ContributionsList />
             </div>

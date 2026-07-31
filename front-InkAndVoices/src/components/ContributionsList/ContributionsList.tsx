@@ -11,7 +11,7 @@ export default function ContributionList() {
       <div className="contributions-list">
 
        {/* J'ai mis plein de ContributionsCards pour avoir un rendu visuel, mais il faudrait faire un truc comme books.map(), comme dans BooksList.tsx! */}
-        <ContributionCard />
+        {/* <ContributionCard />
         <ContributionCard />
         <ContributionCard />     
         <ContributionCard />
@@ -25,7 +25,8 @@ export default function ContributionList() {
         <ContributionCard />    
           <ContributionCard />
         <ContributionCard />
-        <ContributionCard />     
+        <ContributionCard />      */}
+        Aucune contribution pour le moment. Retourne sur l'accueil et clique sur "Ajouter un livre"!
     </div>
     </>
   );
