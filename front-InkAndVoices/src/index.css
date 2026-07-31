@@ -65,6 +65,18 @@ button:focus-visible {
   }
 }
 
+/* Hauteur de la barre mobile fixe (NavBar.module.css) : réservée en bas de
+   page pour que le contenu ne se retrouve pas caché derrière elle au scroll. */
+:root {
+  --mobile-navbar-height: 84px;
+}
+
+@media (max-width: 767.98px) {
+  body {
+    padding-bottom: var(--mobile-navbar-height);
+  }
+}
+
 @media (min-width: 768px) {
   body {
     padding-left: 80px;

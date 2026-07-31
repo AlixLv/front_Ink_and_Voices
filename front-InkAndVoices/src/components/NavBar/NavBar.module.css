@@ -24,6 +24,10 @@
 
 .mobileNav .navItem {
   flex: 1;
+  /* Neutralise le padding du bouton global (index.css) pour que la hauteur
+     de la barre soit prévisible : c'est cette hauteur qu'on réserve en bas
+     de la page via --mobile-navbar-height dans index.css. */
+  padding: 8px 0;
 }
 
 /* Desktop sidebar */
