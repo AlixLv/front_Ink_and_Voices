@@ -1,0 +1,33 @@
+/* position: fixed plutôt qu'en flux normal : ça place le bouton en haut à
+   gauche de la page quel que soit le layout de la page qui l'utilise (une
+   page centrée en colonne flex, par exemple, l'aurait sinon centré comme
+   n'importe quel autre enfant). */
+.backButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 50;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 50%;
+  background-color: transparent;
+  color: #666;
+  cursor: pointer;
+}
+
+.backButton:hover {
+  background-color: #f5f5f5;
+}
+
+/* Décalé pour ne pas passer sous la sidebar desktop (NavBar, 80px de large). */
+@media (min-width: 768px) {
+  .backButton {
+    left: 92px;
+  }
+}
