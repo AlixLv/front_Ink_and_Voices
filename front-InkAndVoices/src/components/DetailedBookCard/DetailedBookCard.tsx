@@ -6,8 +6,8 @@ import ThemeButton from '../ThemeButtons/ThemeButtons';
 export default function DetailedBookCard({ id }: BookDetailsCardProps) {
   const { book, isLoading, error } = useSingleBook(id);
 
-  if (isLoading) return <p>Chargement...</p>;
-  if (error) return <p>Erreur: {error}</p>;
+  if (isLoading) return <p role="status">Chargement...</p>;
+  if (error) return <p role="alert">Erreur: {error}</p>;
   if (!book) return null;
 
   return (

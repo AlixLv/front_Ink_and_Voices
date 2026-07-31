@@ -12,7 +12,6 @@ export const useLogin = () => {
     const [errors, setErrors] = useState<FormErrors>({});
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
-
     // logique métier du formulaire
     const validateInputs = (): FormErrors => {
         const newErrors: FormErrors = {};
@@ -31,24 +30,24 @@ export const useLogin = () => {
 
         return newErrors;
     };
-    
+
     // fonction appelant le AuthService
-    const handleSubmit = async(e: React.FormEvent) =>{
-        e.preventDefault(); 
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
         setErrors({});
 
         const validationErrors = validateInputs();
-        if(Object.keys(validationErrors).length > 0) {
+        if (Object.keys(validationErrors).length > 0) {
             setErrors(validationErrors);
             return; // pas d'envoi de la requête si les inputs du formulaire sont invalides
         }
 
         setIsLoading(true);
-        
+
         try {
             const response = await loginUser(email, password);
             const userData = response.data as LoggedUserDatas;
-            
+
             // On ne transmet QUE des infos d'affichage : le token est déjà dans
             // le cookie httpOnly posé par le backend, le front n'y touche pas.
             login(userData.email, userData.username);
@@ -56,18 +55,11 @@ export const useLogin = () => {
             // Si on arrive ici, c'est que le statut est 2xx (succès)
             navigate(`/`);
         } catch (error) {
-            // Toutes les erreurs (réseau + HTTP) arrivent ici
-            let errorMessage = "Une erreur est survenue, réessayez plus tard";
-            
-            if (error instanceof Error) {
-                try {
-                    const errorData = JSON.parse(error.message);
-                    errorMessage = errorData.message || errorMessage;
-                } catch {
-                    errorMessage = error.message || errorMessage;
-                }
-            }
-            
+            const errorMessage =
+                error instanceof Error && error.message
+                    ? error.message
+                    : "Une erreur est survenue, réessayez plus tard";
+
             setErrors({ global: errorMessage });
         } finally {
             setIsLoading(false);
@@ -80,5 +72,5 @@ export const useLogin = () => {
         errors,
         isLoading,
         handleSubmit
-    }
-}
+    };
+};

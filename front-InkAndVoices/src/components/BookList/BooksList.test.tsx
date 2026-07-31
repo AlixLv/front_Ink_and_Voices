@@ -4,11 +4,15 @@ import BooksList from './BooksList';
 import { BrowserRouter } from 'react-router-dom';
 
 vi.mock('../../hooks/useBooks', () => ({
-  useBooks: () => [
-    { id: 1, title: 'Book 1', author: 'Author 1' },
-    { id: 2, title: 'Book 2', author: 'Author 2' },
-    { id: 3, title: 'Book 3', author: 'Author 3' }
-  ]
+  useBooks: () => ({
+      books: [
+      { id: 1, title: 'Book 1', author: 'Author 1' },
+      { id: 2, title: 'Book 2', author: 'Author 2' },
+      { id: 3, title: 'Book 3', author: 'Author 3' }
+      ],
+      isLoading: false,
+      error: null
+  })
 }));
 
 vi.mock('../BookCard/BookCard', () => ({
