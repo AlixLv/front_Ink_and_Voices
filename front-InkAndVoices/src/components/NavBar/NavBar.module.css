@@ -1,3 +1,9 @@
+/* .navItem est appliqué à des <button> (Profil) et des <a> (NavLink) : on
+   neutralise le style de lien par défaut pour que les deux se ressemblent. */
+.navItem {
+  text-decoration: none;
+}
+
 .icon {
   font-size: 22px;
   color: #666;
@@ -28,6 +34,11 @@
      de la barre soit prévisible : c'est cette hauteur qu'on réserve en bas
      de la page via --mobile-navbar-height dans index.css. */
   padding: 8px 0;
+}
+
+.mobileNav .navItem.active .icon,
+.mobileNav .navItem.active .label {
+  color: #FF3A75;
 }
 
 /* Desktop sidebar */
