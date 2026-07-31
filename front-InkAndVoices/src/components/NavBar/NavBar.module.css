@@ -1,7 +1,18 @@
 /* .navItem est appliqué à des <button> (Profil) et des <a> (NavLink) : on
-   neutralise le style de lien par défaut pour que les deux se ressemblent. */
+   neutralise le style de lien par défaut pour que les deux se ressemblent,
+   et on empile icône/texte verticalement (par défaut ils seraient côte à
+   côte, les spans étant inline). */
 .navItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
   text-decoration: none;
+  /* Profil est un vrai <button> : sans ça, il hérite du style bouton par
+     défaut (index.css) et garde un fond gris même hors état actif. */
+  background-color: transparent;
+  border: none;
 }
 
 .icon {
@@ -38,7 +49,7 @@
 
 .mobileNav .navItem.active .icon,
 .mobileNav .navItem.active .label {
-  color: #FF3A75;
+  color: #C2185B;
 }
 
 /* Desktop sidebar */
@@ -97,5 +108,10 @@
 
   .desktopNav .navItem.active {
     background-color: #f5f5f5;
+  }
+
+  .desktopNav .navItem.active .icon,
+  .desktopNav .navItem.active .label {
+    color: #C2185B;
   }
 }
