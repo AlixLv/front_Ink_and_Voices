@@ -6,7 +6,7 @@ import { HttpError } from '../services/HttpError';
 
 export function useBooks() {
   const [books, setBooks] = useState<Book[]>([]);
-  const [isLoading, setIsLoading] = useState<booloean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
