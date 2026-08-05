@@ -32,8 +32,3 @@ export default function Profile() {
     )
 }
 
-
-// il faut que 'image de l'utilisateur e soit pas cliquable si on n'est aps connectée, et il faut des tests,
-// et que l'url ne soit pas "undefined"
-
-
