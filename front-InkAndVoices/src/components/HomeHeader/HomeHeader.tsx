@@ -1,7 +1,6 @@
 import SubmitButton from "../SubmitButton/SubmitButton.tsx";
 import './HomeHeader.css';
 import sarahImg from "../../assets/sarah.png";
-import basicUser from "../../assets/basic-user.png";
 import logo from "../../assets/logo.svg";
 import { useAuth } from "../../contexts/AuthContext.tsx";
 import { Link } from "react-router-dom";
