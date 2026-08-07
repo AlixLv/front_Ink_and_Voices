@@ -1,4 +1,5 @@
 import { useParams } from 'react-router-dom';
+import BackButton from "../../components/BackButton/BackButton";
 import DetailedBookCard from "../../components/DetailedBookCard/DetailedBookCard";
 
 export default function BookDetailPage() {
@@ -9,5 +10,10 @@ export default function BookDetailPage() {
     return <p>Identifiant de livre invalide</p>;
   }
 
-  return <DetailedBookCard id={bookId} />;
+  return (
+    <>
+      <BackButton />
+      <DetailedBookCard id={bookId} />
+    </>
+  );
 }

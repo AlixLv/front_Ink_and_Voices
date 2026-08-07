@@ -69,11 +69,13 @@
 /* lien vers la politique de confidentialité */
 .auth-form-legal {
     font-family: Poppins;
+    font-size:9px;
 }
 /* lien "pas encore de compte ?" sous le bouton de connexion */
 .auth-form-switch {
     font-family: Poppins;
     color: #666;
+    font-size: 10px;
     text-align: center;
     width: 100%;
     margin: 10px 0 0;
