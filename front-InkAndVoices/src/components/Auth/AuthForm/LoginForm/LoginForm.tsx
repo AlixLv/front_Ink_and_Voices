@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useLogin } from '../../../../hooks/useLogin.tsx';
 import '../AuthForm.css';
 import SubmitButton from '../../../../components/SubmitButton/SubmitButton';
@@ -50,12 +51,15 @@ export default function LoginForm(){
 
                 {errors.global && <output role="alert" className="auth-form-error">{errors.global}</output>}
                 <div className="submit-button-container">
-                <SubmitButton 
+                <SubmitButton
                     text={isLoading ? 'Envoi en cours...' : 'Valider'}
                     type="submit"
                     disabled={isLoading}
                 />
             </div>
+            <p className="auth-form-legal">
+                <Link to="/privacy-policy">Politique de confidentialité</Link>
+            </p>
         </form>
     </div>
     )

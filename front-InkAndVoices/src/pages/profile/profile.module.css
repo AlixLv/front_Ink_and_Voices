@@ -1,0 +1,8 @@
+/* Le bleu de lien global (index.css) tombe à ~4.1:1 sur blanc (sous les
+   4.5:1 requis par WCAG AA) et n'est distingué du texte que par la couleur.
+   Fix local plutôt que de toucher tous les liens du site : plus foncé
+   (~6.2:1) + souligné. */
+.legalLink {
+  color: #4A4FD6;
+  text-decoration: underline;
+}
