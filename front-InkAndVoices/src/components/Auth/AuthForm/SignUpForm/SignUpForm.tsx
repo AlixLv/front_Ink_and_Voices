@@ -91,6 +91,9 @@ export default function SignUpForm(){
                     disabled={isLoading}
                 />
             </div>
+            <p className="auth-form-switch">
+                Vous avez déjà un compte ? <Link to="/login">Connectez-vous</Link>
+            </p>
             <p className="auth-form-legal">
                 <Link to="/privacy-policy">Politique de confidentialité</Link>
             </p>

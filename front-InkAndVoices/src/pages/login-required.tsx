@@ -9,6 +9,7 @@ export default function LoginRequired() {
       <p className={styles.message}>
         Vous devez être connecté·e pour accéder à cette page.
       </p>
+      <SubmitButton text="S'inscrire" route="/signup" />
       <SubmitButton text="Se connecter" route="/login" />
     </div>
   )
