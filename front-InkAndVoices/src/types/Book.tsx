@@ -35,3 +35,26 @@ export interface UseSingleBookResult {
     isLoading: boolean;
     error: string | null;
 }
+
+// Ce que le formulaire "proposer un livre" envoie à POST /api/books.
+// Pas de status ni de user_id : gérés côté backend (cf. book.schema.ts).
+export interface CreateBookInput {
+  title: string;
+  author: string;
+  publishing_house: string;
+  short_description: string;
+  publication_year: string | null;
+  resume: string | null;
+  reference_link: string | null;
+  type_id: number;
+  theme_ids: number[];
+}
+
+export interface AddBookFormErrors {
+  title?: string;
+  author?: string;
+  publishing_house?: string;
+  short_description?: string;
+  type_id?: string;
+  global?: string;
+}
