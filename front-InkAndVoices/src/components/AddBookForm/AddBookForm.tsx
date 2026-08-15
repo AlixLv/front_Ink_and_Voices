@@ -160,6 +160,15 @@ export default function AddBookForm() {
                         </select>
                     </label>
                     {errors.type_id && <output id="type-error" role="alert" className="auth-form-error">{errors.type_id}</output>}
+                    <button
+                        type="button"
+                        className={styles.suggestOptionButton}
+                        disabled
+                        aria-disabled="true"
+                        title="Cette fonctionnalité n'est pas encore disponible"
+                    >
+                        + Proposer un genre <span className={styles.comingSoon}>(bientôt disponible)</span>
+                    </button>
                 </div>
 
                 <div className={`auth-form-field-group ${styles.themeFieldGroup}`}>
@@ -179,7 +188,7 @@ export default function AddBookForm() {
                     </div>
                     <button
                         type="button"
-                        className={styles.suggestThemeButton}
+                        className={styles.suggestOptionButton}
                         disabled
                         aria-disabled="true"
                         title="Cette fonctionnalité n'est pas encore disponible"
