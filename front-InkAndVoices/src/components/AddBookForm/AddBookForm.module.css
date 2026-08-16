@@ -23,7 +23,7 @@
 
 .requiredLegend {
   font-family: Poppins;
-  font-size: 9px;
+  font-size: 0.75rem; /* 12px */
   color: #666;
   width: 100%;
   margin: 0 0 8px;
@@ -49,7 +49,7 @@
 .suggestOptionButton {
   margin-top: 10px;
   font-family: Poppins;
-  font-size: 9px;
+  font-size: 0.75rem; /* 12px */
   background: none;
   border: 1px solid #D9D9D9;
   border-radius: 8px;
@@ -75,7 +75,7 @@
   align-items: center;
   gap: 4px;
   font-family: Poppins;
-  font-size: 10px;
+  font-size: 0.875rem; /* 14px */
 }
 
 .confirmation {
@@ -83,6 +83,6 @@
   margin: 48px auto;
   padding: 24px;
   text-align: center;
-  font-size: 15px;
+  font-size: 1rem; /* 16px */
   color: #444;
 }
