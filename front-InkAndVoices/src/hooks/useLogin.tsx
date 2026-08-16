@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { loginUser } from '../services/AuthService.tsx';
 import { useAuth } from '../contexts/AuthContext.tsx';
+import { HttpError } from '../services/HttpError.ts';
 
 export const useLogin = () => {
     const navigate = useNavigate();
@@ -56,7 +57,7 @@ export const useLogin = () => {
             navigate(`/`);
         } catch (error) {
             const errorMessage =
-                error instanceof Error && error.message
+                error instanceof HttpError
                     ? error.message
                     : "Une erreur est survenue, réessayez plus tard";
 

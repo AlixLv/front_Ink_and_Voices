@@ -89,20 +89,6 @@ describe('SignUpForm Validation', () => {
         });
     });
 
-    it('should display error message when username is too short', async () => {
-        const { usernameInput, emailInput, passwordInput, confirmPasswordInput, submitButton } = setupForm();
-        
-        fireEvent.change(usernameInput, { target: { value: 'name' } });
-        fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
-        fireEvent.change(passwordInput, { target: { value: 'password123' } });
-        fireEvent.change(confirmPasswordInput, { target: { value: 'password123' } });
-        fireEvent.click(submitButton);
-        
-        await waitFor(() => {
-            expect(screen.getByText("Le nom d'utilisateurice doit contenir au moins 8 caractères.")).toBeInTheDocument();
-        });
-    });
-
     it('should display error message when no email is filled', async () => {
         const { usernameInput, emailInput, passwordInput, confirmPasswordInput, submitButton } = setupForm();
         

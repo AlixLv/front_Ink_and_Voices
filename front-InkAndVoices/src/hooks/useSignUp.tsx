@@ -21,9 +21,7 @@ export const useSignUp = () => {
 
         if (username.length <= 0) {
             newErrors.username = "Le nom d'utilisateurice ne doit pas être vide."
-        } else if (username.length < 8) {
-            newErrors.username = "Le nom d'utilisateurice doit contenir au moins 8 caractères.";
-        }
+        } 
 
         if (email.length <= 0) {
             newErrors.email = "L'email ne doit pas être vide.";

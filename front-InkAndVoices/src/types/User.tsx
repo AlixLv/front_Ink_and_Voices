@@ -24,7 +24,7 @@ export interface ApiError {
 
 export interface SignUpResponse {
     status: number;
-    data: SignedUserDatas | ApiError;
+    data: SignedUserDatas;
 }
 
 export interface SignedUserDatas {
@@ -36,7 +36,7 @@ export interface SignedUserDatas {
 // pas d'id ici, c'est /me (LoggedUserDatas) qui fait foi pour l'identité.
 export interface LoginResponse {
     status: number;
-    data: SignedUserDatas | ApiError;
+    data: SignedUserDatas;
 }
 
 // Forme de la réponse de GET /api/users/me ("qui suis-je ?"), pas celle du
