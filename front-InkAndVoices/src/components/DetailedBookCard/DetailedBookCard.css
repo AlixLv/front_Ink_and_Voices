@@ -73,15 +73,6 @@
   flex: 1;
 }
 
-/* Reuses the .theme-button visual language for consistency with BookCard's theme chips */
-.detail-themes .detail-value {
-  background-color: #ffffff;
-  border-radius: 4px;
-  padding: 2px 12px;
-  font-size: 8px;
-  font-weight: 500;
-}
-
 .detail-row-description {
   align-items: flex-start;
 }
