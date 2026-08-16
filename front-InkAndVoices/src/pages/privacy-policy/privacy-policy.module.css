@@ -92,15 +92,19 @@
   margin: 0;
 }
 
+/* #FF3A75 (rose de marque) tombe à ~3.4:1 sur blanc, sous les 4.5:1 requis
+   par WCAG AA pour du texte de cette taille. Même rose accessible que l'état
+   actif de la navbar (#C2185B, ~5.9:1). */
 .link {
-  color: #FF3A75;
+  color: #C2185B;
   text-decoration: underline;
   font-weight: 400;
 }
 
 .link:hover {
-  opacity: 0.8;
-  color: #FF3A75;
+  /* Pas d'opacity ici : elle éclaircit la couleur vers le blanc et repasse
+     sous les 4.5:1 (~4.4:1) au moment même où le lien est survolé. */
+  color: #A01449;
 }
 
 .link:focus-visible {

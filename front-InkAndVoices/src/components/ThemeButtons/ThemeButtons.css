@@ -16,7 +16,8 @@
   border-radius: 4px;
   padding: 2px 12px;
   font-family: Poppins, sans-serif;
-  font-size: 8px;
+  /* 8px, même en noir sur blanc (contraste très correct), reste dur à lire. */
+  font-size: 0.75rem; /* 12px */
   font-weight: 500;
   cursor: pointer;
   border: none;
@@ -40,7 +41,9 @@
   }
 
   .theme-button {
+    /* Le font-size 9px d'origine était pensé pour remonter depuis 8px ; la
+       base fait maintenant 0.75rem (12px), donc plus rien à corriger ici
+       à part le padding pour la zone de tap. */
     padding: 3px 10px;
-    font-size: 9px; /* slightly larger for tap targets on mobile */
   }
 }

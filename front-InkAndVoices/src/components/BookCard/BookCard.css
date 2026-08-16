@@ -82,7 +82,8 @@ a:has(> .book-card):focus-visible .book-card {
   background-color: #ffffff;
   border-radius: 8px;
   padding: 2px 6px;
-  font-size: 8px;
+  /* 8px, même en noir sur blanc (contraste très correct), reste dur à lire. */
+  font-size: 0.75rem; /* 12px */
   font-weight: bold;
   color: black;
   white-space: nowrap;
