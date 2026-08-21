@@ -1,4 +1,5 @@
 .book-card {
+  position: relative;
   background-color: #e8e8e8;
   border-radius: 16px;
   padding: 5px 15px;
@@ -8,22 +9,31 @@
   transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
 }
 
-/* Since Link wraps the card, reset anchor defaults and add interaction feedback here */
-a:has(> .book-card) {
+.book-card-link {
   text-decoration: none;
   color: inherit;
-  display: block;
 }
 
-a:has(> .book-card):hover .book-card {
+.book-card-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+}
+
+.book-card-link:focus-visible {
+  outline: none;
+}
+
+.book-card-link:focus-visible::after {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+.book-card:has(.book-card-link:hover) {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
   background-color: #dedede;
-}
-
-a:has(> .book-card):focus-visible .book-card {
-  outline: 2px solid #2563eb;
-  outline-offset: 2px;
 }
 
 .book-header {
@@ -90,6 +100,8 @@ a:has(> .book-card):focus-visible .book-card {
 }
 
 .theme-buttons-list {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
