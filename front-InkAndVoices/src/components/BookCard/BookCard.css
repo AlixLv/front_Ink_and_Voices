@@ -1,5 +1,9 @@
 .book-card {
   position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 16px;
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
@@ -9,6 +13,44 @@
   box-sizing: border-box;
   box-shadow: var(--shadow-soft);
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.book-cover {
+  flex-shrink: 0;
+  width: 64px;
+  min-height: 88px;
+  border-radius: 8px 14px 14px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 4px 0 0 rgba(0, 0, 0, 0.18), var(--shadow-soft);
+}
+
+.book-cover-0 {
+  background: linear-gradient(160deg, #FF0051 0%, #D43E3E 100%);
+}
+
+.book-cover-1 {
+  background: linear-gradient(160deg, #D43E3E 0%, #FF8800 100%);
+}
+
+.book-cover-2 {
+  background: linear-gradient(160deg, #97124A 0%, #FF0051 100%);
+}
+
+.book-cover-initial {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+
+.book-card-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .book-card-link {

@@ -33,6 +33,12 @@ export default function Search() {
         </div>
         <SubmitButton text="Rechercher" type="submit" />
       </form>
+      {submittedQuery === '' && (
+        <div className="empty-state">
+          <img src="/minilogo.svg" alt="" />
+          <p>Cherchez un livre par son titre ou le nom de son autrice ou auteur.</p>
+        </div>
+      )}
       {submittedQuery !== '' && (
         <section aria-live="polite">
           <h2>Résultats pour « {submittedQuery} »</h2>

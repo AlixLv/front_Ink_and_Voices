@@ -16,7 +16,10 @@ export default function ContributionList() {
       {error && <p role="alert">Erreur : {error}</p>}
       {!isLoading && !error && contributions.length === 0 && (
         <div className="contributions-list">
-          Aucune contribution pour le moment. Retourne sur l'accueil et clique sur "Ajouter un livre"!
+          <div className="empty-state">
+            <img src="/minilogo.svg" alt="" />
+            <p>Aucune contribution pour le moment. Retourne sur l'accueil et clique sur "Ajouter un livre"!</p>
+          </div>
         </div>
       )}
       {!isLoading && !error && contributions.length > 0 && (

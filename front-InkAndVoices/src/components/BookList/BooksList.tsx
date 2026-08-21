@@ -9,7 +9,14 @@ export default function BooksList({ filters }: { filters?: BookFilters }) {
 
   if (isLoading) return <p role="status">Chargement...</p>;
   if (error) return <p role="alert">Erreur : {error}</p>;
-  if (!books?.length) return <p>Aucun livre disponible pour le moment.</p>;
+  if (!books?.length) {
+    return (
+      <div className="empty-state">
+        <img src="/minilogo.svg" alt="" />
+        <p>Aucun livre disponible pour le moment.</p>
+      </div>
+    );
+  }
   
   return (
     <div className="recent-books-container">

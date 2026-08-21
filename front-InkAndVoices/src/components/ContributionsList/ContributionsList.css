@@ -11,6 +11,8 @@
 
 .contributions-list {
   list-style: none;
+  max-width: 600px;
+  margin-inline: auto;
   display: flex;
   flex-direction: column;
   gap: 10px;
