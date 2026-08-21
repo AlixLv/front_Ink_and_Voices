@@ -2,7 +2,7 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import BookCard from './BookCard';
-import type { Theme, Book, Type } from '../../types/Book';
+import type { Theme } from '../../types/Book';
 
 vi.mock('../ThemeButtons/ThemeButtons', () => ({
   default: ({ themes }: { themes: Theme[] }) => (

@@ -1,4 +1,3 @@
-import ContributionCard from '../ContributionCard/ContributionCard';
 import './ContributionsList.css';
 
 
