@@ -1,12 +1,14 @@
 .book-card {
   position: relative;
-  background-color: #e8e8e8;
-  border-radius: 16px;
-  padding: 5px 15px;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 14px 18px;
   max-width: 600px;
   width: 100%;
   box-sizing: border-box;
-  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 .book-card-link {
@@ -31,9 +33,9 @@
 }
 
 .book-card:has(.book-card-link:hover) {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-  background-color: #dedede;
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lift);
+  border-color: var(--color-primary);
 }
 
 .book-header {
@@ -46,13 +48,13 @@
 }
 
 .book-title {
-  font-family: Poppins, sans-serif;
+  font-family: var(--font-display);
   margin: 0;
   padding-top: 3px;
   padding-bottom: 3px;
-  font-size: 14px;
-  font-weight: 500;
-  color: #000000;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-ink);
   flex: 1;
   min-width: 0; /* required for ellipsis to work reliably inside a flex child */
   overflow: hidden;
@@ -63,9 +65,9 @@
 
 .book-author {
   margin: 0;
-  font-size: 11px;
-  font-weight: bold;
-  color: #000000;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--color-ink-soft);
   text-align: left;
 }
 
@@ -89,9 +91,9 @@
 .book-type {
   display: inline-flex;
   align-items: center;
-  background-color: #ffffff;
-  border-radius: 8px;
-  padding: 2px 6px;
+  background-color: var(--color-surface-alt);
+  border-radius: 999px;
+  padding: 2px 10px;
   /* 8px, même en noir sur blanc (contraste très correct), reste dur à lire. */
   font-size: 0.75rem; /* 12px */
   font-weight: bold;

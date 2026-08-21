@@ -1,7 +1,6 @@
 import SubmitButton from "../SubmitButton/SubmitButton.tsx";
 import './HomeHeader.css';
 import sarahImg from "../../assets/sarah.png";
-import logo from "../../assets/logo.svg";
 import { useAuth } from "../../contexts/AuthContext.tsx";
 import { Link } from "react-router-dom";
 
@@ -25,7 +24,9 @@ export default function HomeHeader() {
                     </div>
                 ) : (
                     <div className="welcome-section">
-                        <img src={logo} alt="Logo Ink and Voices" className="welcome-logo" />
+                        <img src="/minilogo.svg" alt="" className="welcome-logo" />
+                        <p className="welcome-wordmark">Ink<span aria-hidden="true">&amp;</span>Voices</p>
+                        <p className="welcome-tagline">The diversity database !</p>
                     </div>
                 )}
                 <div className="submit-button-container">
