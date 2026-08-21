@@ -143,7 +143,7 @@ export default function AddBookForm() {
 
                 <div className="auth-form-field-group">
                     <label className="auth-form-label">
-                        <span className={styles.labelText}>Genre <span className={styles.requiredMark} aria-hidden="true">*</span></span>
+                        <span className={styles.labelText}>Type <span className={styles.requiredMark} aria-hidden="true">*</span></span>
                         <select
                             className="auth-form-field"
                             value={typeId}
@@ -153,7 +153,7 @@ export default function AddBookForm() {
                             aria-invalid={!!errors.type_id}
                             aria-describedby={errors.type_id ? 'type-error' : undefined}
                         >
-                            <option value="">Sélectionner un genre</option>
+                            <option value="">Sélectionner un type</option>
                             {types.map((type) => (
                                 <option key={type.id} value={type.id}>{type.type_name}</option>
                             ))}
@@ -167,7 +167,7 @@ export default function AddBookForm() {
                         aria-disabled="true"
                         title="Cette fonctionnalité n'est pas encore disponible"
                     >
-                        + Proposer un genre <span className={styles.comingSoon}>(bientôt disponible)</span>
+                        + Proposer un type <span className={styles.comingSoon}>(bientôt disponible)</span>
                     </button>
                 </div>
 
