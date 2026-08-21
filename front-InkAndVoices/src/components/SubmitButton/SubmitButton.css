@@ -9,13 +9,6 @@
     border-radius: 7px;
     border: none;
     cursor: pointer;
-    transition: background-color 0.15s ease;
-}
-
-/* Même rose accessible que le reste du site (navbar active, liens) : #F5F5F5
-   sur #C2185B ~5.4:1, passe largement le 4.5:1 requis par WCAG AA. */
-.submit-button:hover:not(:disabled) {
-    background-color: #C2185B;
 }
 
 .submit-button:disabled {
