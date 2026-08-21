@@ -6,7 +6,7 @@ export default function ThemeButtons({ themes }: { themes: Theme[] }) {
   return (
     <div className="theme-list">
       {themes.map((theme) => (
-        <Link to="/theme" key={theme.id} className="theme-button">
+        <Link to={`/theme?id=${theme.id}`} key={theme.id} className="theme-button">
           {theme.theme_name}
         </Link>
       ))}

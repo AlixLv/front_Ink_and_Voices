@@ -25,6 +25,9 @@ export default function AdminDashboard() {
                 <li>
                     <Link to="/admin/reviews">Livres en attente de validation</Link>
                 </li>
+                <li>
+                    <Link to="/admin/validations">Historique des validations</Link>
+                </li>
             </ul>
         </main>
     );

@@ -2,9 +2,10 @@
 import BookCard from '../BookCard/BookCard';
 import './BooksList.css';
 import { useBooks } from '../../hooks/useBooks';
+import type { BookFilters } from '../../types/Book';
 
-export default function BooksList() {
-  const {books, isLoading, error} = useBooks();
+export default function BooksList({ filters }: { filters?: BookFilters }) {
+  const {books, isLoading, error} = useBooks(filters);
 
   if (isLoading) return <p role="status">Chargement...</p>;
   if (error) return <p role="alert">Erreur : {error}</p>;

@@ -1,10 +1,16 @@
-import type { Book, CreateBookInput, Theme, Type, ValidateBookInput, ValidateBookResponse } from '../types/Book';
+import type { Book, BookFilters, Contribution, CreateBookInput, Theme, Type, ValidateBookInput, ValidateBookResponse, ValidationHistoryItem } from '../types/Book';
 import { HttpError } from './HttpError';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8032';
 
-export const getBooks = async(): Promise<Book[]> => {
-  const response = await fetch(`${API_URL}/api/books`, { method: 'GET' });
+export const getBooks = async(filters?: BookFilters): Promise<Book[]> => {
+  const params = new URLSearchParams();
+  if (filters?.search) params.set('search', filters.search);
+  if (filters?.type_id) params.set('type_id', String(filters.type_id));
+  if (filters?.theme_id) params.set('theme_id', String(filters.theme_id));
+  const query = params.toString();
+
+  const response = await fetch(`${API_URL}/api/books${query ? `?${query}` : ''}`, { method: 'GET' });
   const data = await response.json().catch(() => ({}));
 
   if(!response.ok) {
@@ -81,6 +87,32 @@ export const validateBook = async(id: number, input: ValidateBookInput): Promise
     headers: { 'Content-Type': 'application/json' },
     credentials: 'include',
     body: JSON.stringify(input),
+  });
+  const data = await response.json().catch(() => ({}));
+
+  if(!response.ok) {
+    throw new HttpError(response.status, data);
+  }
+  return data;
+}
+
+export const getMyContributions = async(): Promise<Contribution[]> => {
+  const response = await fetch(`${API_URL}/api/books/mine`, {
+    method: 'GET',
+    credentials: 'include',
+  });
+  const data = await response.json().catch(() => ({}));
+
+  if(!response.ok) {
+    throw new HttpError(response.status, data);
+  }
+  return data;
+}
+
+export const getValidationHistory = async(): Promise<ValidationHistoryItem[]> => {
+  const response = await fetch(`${API_URL}/api/books/validations`, {
+    method: 'GET',
+    credentials: 'include',
   });
   const data = await response.json().catch(() => ({}));
 

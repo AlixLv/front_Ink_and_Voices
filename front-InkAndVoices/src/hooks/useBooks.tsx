@@ -1,10 +1,10 @@
 // useBooks.ts
 import { useEffect, useState } from 'react';
 import { getBooks } from '../services/BookService';
-import type { Book } from '../types/Book';
+import type { Book, BookFilters } from '../types/Book';
 import { HttpError } from '../services/HttpError';
 
-export function useBooks() {
+export function useBooks(filters?: BookFilters) {
   const [books, setBooks] = useState<Book[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -17,7 +17,7 @@ export function useBooks() {
       setError(null);
 
       try {
-        const booksData = await getBooks();
+        const booksData = await getBooks(filters);
         if (isMounted){
           setBooks(booksData);
         }
@@ -41,7 +41,7 @@ export function useBooks() {
     return () => {
       isMounted = false;
     };
-  }, []);
+  }, [filters?.search, filters?.type_id, filters?.theme_id]);
   
   return {books, isLoading, error};
 }

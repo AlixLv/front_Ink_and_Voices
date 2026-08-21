@@ -3,8 +3,11 @@ background-color: #FFFFFF;
 padding: 10px;
 display:flex;
 flex-direction: row;
-height: 120px;
+min-height: 120px;
 align-items: center;
+list-style: none;
+border-radius: 8px;
+flex-shrink: 0;
 }
 
 
@@ -61,6 +64,13 @@ align-items: center;
     width: 30%;
 }
 
+.contribution-comment {
+    padding: 6px 0 0;
+    margin: 0;
+    font-size: 13px;
+    color: #444444;
+}
+
 .contribution-state {
     background-color: #CFCFCF;
     border-radius: 5%;
@@ -71,4 +81,44 @@ align-items: center;
     width: 100%;
     height: 50px;
     font-size: 14px;
+}
+.contribution-state {
+    margin: 0;
+    align-items: center;
+    padding: 0 8px;
+    text-align: center;
+}
+
+.contribution-state-pending {
+    background-color: #EDEDED;
+    color: #1a1a1a;
+}
+
+.contribution-state-validated {
+    background-color: #D8EEDD;
+    color: #14461f;
+}
+
+.contribution-state-refused {
+    background-color: #F6DEDE;
+    color: #641818;
+}
+
+@media (max-width: 480px) {
+    .contribution-card {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+
+    .contribution-datas,
+    .contribution-state-container {
+        width: 100%;
+        height: auto;
+    }
+
+    .contribution-state {
+        height: auto;
+        padding: 8px;
+    }
 }

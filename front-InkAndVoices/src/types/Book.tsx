@@ -50,6 +50,41 @@ export interface CreateBookInput {
   theme_ids: number[];
 }
 
+export interface BookFilters {
+  search?: string;
+  type_id?: number;
+  theme_id?: number;
+}
+
+export interface Contribution {
+  id: number;
+  title: string;
+  author: string;
+  short_description: string;
+  status: 'pending' | 'validated' | 'refused';
+  created_at: string;
+  type: {
+    id: number;
+    type_name: string;
+  };
+  validation_comment: string | null;
+}
+
+export interface ValidationHistoryItem {
+  id: number;
+  status: 'pending' | 'validated' | 'refused';
+  comment: string | null;
+  validation_date: string;
+  book: {
+    id: number;
+    title: string;
+    author: string;
+  };
+  admin: {
+    username: string;
+  };
+}
+
 export interface ValidateBookInput {
   status: 'validated' | 'refused';
   comment: string | null;
