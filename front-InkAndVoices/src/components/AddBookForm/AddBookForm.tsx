@@ -173,7 +173,7 @@ export default function AddBookForm({ bookId }: { bookId?: number }) {
 
                 <div className="auth-form-field-group">
                     <label className="auth-form-label">
-                        <span className={styles.labelText}>Genre <span className={styles.requiredMark} aria-hidden="true">*</span></span>
+                        <span className={styles.labelText}>Type <span className={styles.requiredMark} aria-hidden="true">*</span></span>
                         <select
                             className="auth-form-field"
                             value={typeId}
@@ -183,7 +183,7 @@ export default function AddBookForm({ bookId }: { bookId?: number }) {
                             aria-invalid={!!errors.type_id}
                             aria-describedby={errors.type_id ? 'type-error' : undefined}
                         >
-                            <option value="">Sélectionner un genre</option>
+                            <option value="">Sélectionner un type</option>
                             {types.map((type) => (
                                 <option key={type.id} value={type.id}>{type.type_name}</option>
                             ))}
@@ -196,13 +196,13 @@ export default function AddBookForm({ bookId }: { bookId?: number }) {
                             className={styles.suggestOptionButton}
                             onClick={() => setShowTypeInput(true)}
                         >
-                            + Proposer un genre
+                            + Proposer un type
                         </button>
                     )}
                     {showTypeInput && (
                         <div className={styles.suggestOptionRow}>
                             <label className="auth-form-label">
-                                Nouveau genre
+                                Nouveau type
                                 <input
                                     className="auth-form-field"
                                     type="text"
@@ -217,7 +217,7 @@ export default function AddBookForm({ bookId }: { bookId?: number }) {
                                 onClick={handleSuggestType}
                                 disabled={isLoading || newTypeName.trim() === ''}
                             >
-                                Ajouter ce genre
+                                Ajouter ce type
                             </button>
                         </div>
                     )}

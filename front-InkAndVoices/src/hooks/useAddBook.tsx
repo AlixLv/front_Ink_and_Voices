@@ -36,7 +36,7 @@ export const useAddBook = (bookId?: number) => {
                 }
             } catch {
                 if (isMounted) {
-                    setErrors({ global: 'Impossible de charger les genres et thèmes.' });
+                    setErrors({ global: 'Impossible de charger les types et thèmes.' });
                 }
             } finally {
                 if (isMounted) setIsLoadingOptions(false);
@@ -122,7 +122,7 @@ export const useAddBook = (bookId?: number) => {
             newErrors.short_description = 'La description courte ne doit pas être vide.';
         }
         if (typeId.length === 0) {
-            newErrors.type_id = 'Choisissez un genre.';
+            newErrors.type_id = 'Choisissez un type.';
         }
 
         return newErrors;
