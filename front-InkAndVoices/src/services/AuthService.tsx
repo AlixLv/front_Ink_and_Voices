@@ -1,4 +1,4 @@
-import type { LoggedUserDatas, LoginResponse, SignUpResponse } from '../types/User';
+import type { LoggedUserDatas, LoginResponse, SignUpResponse, UpdateProfileInput, UpdateProfileResponse } from '../types/User';
 import { HttpError } from './HttpError';
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8032';
 
@@ -82,4 +82,21 @@ export const logoutUser = async (): Promise<void> => {
         method: 'DELETE',
         credentials: 'include',
     });
+};
+
+export const updateProfile = async (input: UpdateProfileInput): Promise<UpdateProfileResponse> => {
+    const response = await fetch(`${API_URL}/api/users/update-profile`, {
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        credentials: 'include',
+        body: JSON.stringify(input),
+    });
+
+    const data = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+        throw new HttpError(response.status, data);
+    }
+
+    return data as UpdateProfileResponse;
 };
