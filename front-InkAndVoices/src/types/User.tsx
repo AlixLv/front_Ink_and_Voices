@@ -48,5 +48,26 @@ export interface LoggedUserDatas {
     id: string;
     email: string;
     username: string;
+    role: 'user' | 'admin';
+}
+
+export interface UpdateProfileInput {
+    email?: string;
+    username?: string;
+    password?: string;
+}
+
+export interface UpdateProfileResponse {
+    email: string;
+    username: string;
+    requiresLogin: boolean;
+}
+
+export interface UpdateProfileFormErrors {
+    email?: string;
+    username?: string;
+    password?: string;
+    confirmPassword?: string;
+    global?: string;
 }
 
