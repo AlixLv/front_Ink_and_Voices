@@ -50,6 +50,17 @@ export interface CreateBookInput {
   theme_ids: number[];
 }
 
+export interface ValidateBookInput {
+  status: 'validated' | 'refused';
+  comment: string | null;
+}
+
+export interface ValidateBookResponse {
+  id: number;
+  status: 'validated' | 'refused';
+  comment: string | null;
+}
+
 export interface AddBookFormErrors {
   title?: string;
   author?: string;

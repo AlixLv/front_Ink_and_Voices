@@ -1,4 +1,4 @@
-import type { Book, CreateBookInput, Theme, Type } from '../types/Book';
+import type { Book, CreateBookInput, Theme, Type, ValidateBookInput, ValidateBookResponse } from '../types/Book';
 import { HttpError } from './HttpError';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8032';
@@ -61,3 +61,31 @@ export const createBook = async(input: CreateBookInput): Promise<Book> => {
   return data;
 }
 
+
+export const getPendingBooks = async(): Promise<Book[]> => {
+  const response = await fetch(`${API_URL}/api/books/pending`, {
+    method: 'GET',
+    credentials: 'include',
+  });
+  const data = await response.json().catch(() => ({}));
+
+  if(!response.ok) {
+    throw new HttpError(response.status, data);
+  }
+  return data;
+}
+
+export const validateBook = async(id: number, input: ValidateBookInput): Promise<ValidateBookResponse> => {
+  const response = await fetch(`${API_URL}/api/books/${id}/validate`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+    body: JSON.stringify(input),
+  });
+  const data = await response.json().catch(() => ({}));
+
+  if(!response.ok) {
+    throw new HttpError(response.status, data);
+  }
+  return data;
+}
