@@ -3,6 +3,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { useUpdateProfile } from '../../hooks/useUpdateProfile';
 import { deleteMyAccount } from '../../services/UserService';
+import { AVATAR_IDS, AVATAR_LABELS, avatarUrl } from '../../types/User';
 import BackButton from '../../components/BackButton/BackButton';
 import SubmitButton from '../../components/SubmitButton/SubmitButton';
 import '../../components/Auth/AuthForm/AuthForm.css';
@@ -32,6 +33,7 @@ export default function Settings() {
         username, setUsername,
         password, setPassword,
         confirmPassword, setConfirmPassword,
+        avatar, setAvatar,
         errors,
         isLoading,
         successMessage,
@@ -50,6 +52,27 @@ export default function Settings() {
             <h1>Modifier ses identifiants</h1>
             <div className="auth-form-container">
                 <form className="auth-form" onSubmit={handleSubmit} noValidate>
+                    <fieldset className={styles.avatarFieldset}>
+                        <legend className={styles.avatarLegend}>Photo de profil</legend>
+                        <div className={styles.avatarGrid} role="radiogroup" aria-label="Choisir une photo de profil">
+                            {AVATAR_IDS.map((id) => (
+                                <label key={id} className={styles.avatarOption}>
+                                    <input
+                                        type="radio"
+                                        name="avatar"
+                                        value={id}
+                                        checked={avatar === id}
+                                        onChange={() => setAvatar(id)}
+                                        disabled={isLoading}
+                                        className={styles.avatarRadio}
+                                    />
+                                    <img src={avatarUrl(id) ?? ''} alt="" className={styles.avatarImage} />
+                                    <span className={styles.avatarLabel}>{AVATAR_LABELS[id]}</span>
+                                </label>
+                            ))}
+                        </div>
+                    </fieldset>
+
                     <div className="auth-form-field-group">
                         <label className="auth-form-label">
                             Nom d'utilisateurice

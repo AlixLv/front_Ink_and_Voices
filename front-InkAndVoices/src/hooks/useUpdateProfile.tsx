@@ -10,12 +10,13 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export const useUpdateProfile = () => {
     const navigate = useNavigate();
-    const { email: currentEmail, username: currentUsername, login, logout } = useAuth();
+    const { email: currentEmail, username: currentUsername, avatar: currentAvatar, login, logout } = useAuth();
 
     const [email, setEmail] = useState<string>(currentEmail ?? '');
     const [username, setUsername] = useState<string>(currentUsername ?? '');
     const [password, setPassword] = useState<string>('');
     const [confirmPassword, setConfirmPassword] = useState<string>('');
+    const [avatar, setAvatar] = useState<string | null>(currentAvatar);
 
     const [errors, setErrors] = useState<UpdateProfileFormErrors>({});
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -36,7 +37,8 @@ export const useUpdateProfile = () => {
 
         const emailChanged = email.trim().length > 0 && email.trim() !== currentEmail;
         const usernameChanged = username.trim().length > 0 && username.trim() !== currentUsername;
-        if (!emailChanged && !usernameChanged && password.length === 0) {
+        const avatarChanged = avatar !== currentAvatar;
+        if (!emailChanged && !usernameChanged && password.length === 0 && !avatarChanged) {
             newErrors.global = 'Modifiez au moins un champ avant de valider.';
         }
 
@@ -55,6 +57,7 @@ export const useUpdateProfile = () => {
         if (email.trim().length > 0 && email.trim() !== currentEmail) input.email = email.trim();
         if (username.trim().length > 0 && username.trim() !== currentUsername) input.username = username.trim();
         if (password.length > 0) input.password = password;
+        if (avatar !== currentAvatar && avatar) input.avatar = avatar;
 
         setIsLoading(true);
         try {
@@ -88,6 +91,7 @@ export const useUpdateProfile = () => {
         username, setUsername,
         password, setPassword,
         confirmPassword, setConfirmPassword,
+        avatar, setAvatar,
         errors,
         isLoading,
         successMessage,

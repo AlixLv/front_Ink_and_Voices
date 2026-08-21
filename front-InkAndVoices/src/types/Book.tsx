@@ -57,6 +57,13 @@ export interface BookFilters {
   theme_id?: number;
 }
 
+export interface PaginatedBooks {
+  items: Book[];
+  total: number;
+  page: number;
+  page_count: number;
+}
+
 export interface Contribution {
   id: number;
   title: string;

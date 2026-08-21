@@ -2,13 +2,15 @@ import SubmitButton from "../SubmitButton/SubmitButton.tsx";
 import './HomeHeader.css';
 import sarahImg from "../../assets/sarah.png";
 import { useAuth } from "../../contexts/AuthContext.tsx";
+import { avatarUrl } from "../../types/User";
 import { Link } from "react-router-dom";
 
 
 
 export default function HomeHeader() {
-    const { username, id, isAuthenticated } = useAuth();
+    const { username, id, avatar, isAuthenticated } = useAuth();
     const displayName = isAuthenticated && username ? username : "Utilisateur";
+    const avatarSrc = avatarUrl(avatar) ?? sarahImg;
 
     return (
         <>
@@ -17,7 +19,7 @@ export default function HomeHeader() {
                     <div className="user-card">
                         <div className="user-icon-container">
                             <Link to={`/profile/${id}`}>
-                                <img src={sarahImg} alt="Icône utilisateur" className="user-icon" />
+                                <img src={avatarSrc} alt="Icône utilisateur" className="user-icon" />
                             </Link>
                         </div>
                         <div className="user-name">Hey {displayName} !!!</div>

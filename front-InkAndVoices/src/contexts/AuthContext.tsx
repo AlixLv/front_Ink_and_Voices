@@ -13,6 +13,7 @@ interface AuthContextType {
     id: string | null;
     email: string | null;
     username: string | null;
+    avatar: string | null;
     isAdmin: boolean;
     isAuthenticated: boolean;
     isLoading: boolean;
@@ -27,6 +28,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [email, setEmail] = useState<string | null>(null);
     const [username, setUsername] = useState<string | null>(null);
     const [role, setRole] = useState<'user' | 'admin' | null>(null);
+    const [avatar, setAvatar] = useState<string | null>(null);
     // true tant qu'on n'a pas demandé au serveur qui est connectée : ça évite
     // d'afficher brièvement "déconnectée" alors que le cookie est valide.
     const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -44,6 +46,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
                 setEmail(user?.email ?? null);
                 setUsername(user?.username ?? null);
                 setRole(user?.role ?? null);
+                setAvatar(user?.avatar ?? null);
             })
             .catch(() => {
                 // Serveur injoignable : on considère qu'on n'est pas connectée.
@@ -52,6 +55,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
                 setEmail(null);
                 setUsername(null);
                 setRole(null);
+                setAvatar(null);
             })
             .finally(() => {
                 if (!cancelled) setIsLoading(false);
@@ -70,6 +74,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         setEmail(user?.email ?? null);
         setUsername(user?.username ?? null);
         setRole(user?.role ?? null);
+        setAvatar(user?.avatar ?? null);
     }, []);
 
     // On demande au backend d'expirer le cookie AVANT de vider l'affichage :
@@ -82,6 +87,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             setEmail(null);
             setUsername(null);
             setRole(null);
+            setAvatar(null);
         }
     }, []);
 
@@ -90,6 +96,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             id,
             email,
             username,
+            avatar,
             isAdmin: role === 'admin',
             isAuthenticated: !!email,
             isLoading,

@@ -49,12 +49,28 @@ export interface LoggedUserDatas {
     email: string;
     username: string;
     role: 'user' | 'admin';
+    avatar: string | null;
 }
+
+export const AVATAR_IDS = ['inky-01', 'inky-02', 'inky-03', 'inky-04', 'inky-05', 'inky-06'] as const;
+
+export const AVATAR_LABELS: Record<string, string> = {
+    'inky-01': 'Livre ouvert',
+    'inky-02': "Goutte d'encre",
+    'inky-03': 'Plume',
+    'inky-04': 'Étoile',
+    'inky-05': 'Cœur',
+    'inky-06': 'Bulle de parole',
+};
+
+export const avatarUrl = (avatar: string | null | undefined): string | null =>
+    avatar ? `/avatars/${avatar}.svg` : null;
 
 export interface UpdateProfileInput {
     email?: string;
     username?: string;
     password?: string;
+    avatar?: string;
 }
 
 export interface UpdateProfileResponse {

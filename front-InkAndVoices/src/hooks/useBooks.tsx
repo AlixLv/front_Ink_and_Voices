@@ -8,6 +8,13 @@ export function useBooks(filters?: BookFilters) {
   const [books, setBooks] = useState<Book[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [page, setPage] = useState<number>(1);
+  const [pageCount, setPageCount] = useState<number>(1);
+  const [total, setTotal] = useState<number>(0);
+
+  useEffect(() => {
+    setPage(1);
+  }, [filters?.search, filters?.type_id, filters?.theme_id]);
 
   useEffect(() => {
     let isMounted = true;
@@ -17,9 +24,11 @@ export function useBooks(filters?: BookFilters) {
       setError(null);
 
       try {
-        const booksData = await getBooks(filters);
+        const booksData = await getBooks(filters, page);
         if (isMounted){
-          setBooks(booksData);
+          setBooks(booksData.items);
+          setPageCount(booksData.page_count);
+          setTotal(booksData.total);
         }
       } catch (error){
         if (isMounted){
@@ -35,13 +44,13 @@ export function useBooks(filters?: BookFilters) {
         }
       }
     };
-    
+
     fetchBooks();
 
     return () => {
       isMounted = false;
     };
-  }, [filters?.search, filters?.type_id, filters?.theme_id]);
-  
-  return {books, isLoading, error};
+  }, [filters?.search, filters?.type_id, filters?.theme_id, page]);
+
+  return {books, isLoading, error, page, setPage, pageCount, total};
 }
