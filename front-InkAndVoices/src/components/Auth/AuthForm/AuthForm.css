@@ -40,7 +40,9 @@
 /* label */
 .auth-form-label {
     font-family: Poppins;
-    font-size: 10px;
+    /* rem plutôt que px : respecte la taille de texte réglée par
+       l'utilisateurice dans son navigateur (contrairement à px). */
+    font-size: 0.875rem; /* 14px */
     width: 100%;
     display: flex;
     padding: 0px;
@@ -58,9 +60,12 @@
     border-width: 1px;
     border-radius : 10%;
     font-family: Poppins;
-    color:#B3B3B3;
-    font-size: 8px;
-    padding: 5px;
+    /* #B3B3B3 tombait à ~2.1:1 sur blanc (très sous les 4.5:1 requis par
+       WCAG AA). 1rem (16px) aussi : sous ce seuil, iOS Safari zoome
+       automatiquement la page à chaque focus sur le champ. */
+    color: #333333;
+    font-size: 1rem; /* 16px */
+    padding: 8px;
     box-sizing: border-box;
     width: 100%;
     /* background-color: #1e1ad8; */
@@ -69,13 +74,13 @@
 /* lien vers la politique de confidentialité */
 .auth-form-legal {
     font-family: Poppins;
-    font-size:9px;
+    font-size: 0.75rem; /* 12px */
 }
 /* lien "pas encore de compte ?" sous le bouton de connexion */
 .auth-form-switch {
     font-family: Poppins;
     color: #666;
-    font-size: 10px;
+    font-size: 0.75rem; /* 12px */
     text-align: center;
     width: 100%;
     margin: 10px 0 0;
@@ -98,9 +103,12 @@
 /* message d'erreur */
 .auth-form-error {
     font-family: Arial, sans-serif;
-    font-size: 9px;
+    font-size: 0.75rem; /* 12px */
     font-style: italic;
-    color: #ee592c;
+    /* #ee592c tombait à ~3.4:1 sur blanc, sous les 4.5:1 requis par WCAG AA
+       pour du texte de cette taille. Même rouge que .requiredMark
+       (AddBookForm), ~5.4:1. */
+    color: #C0392B;
     margin-left: 0px;
     padding: 0px;
     box-sizing: border-box;

@@ -1,0 +1,88 @@
+/* Conteneur/form dédiés : .auth-form-container/.auth-form (AuthForm.css)
+   sont pensés pour les formulaires courts (login/signup, hauteur 62vh
+   centrée) — bien trop contraint pour ce formulaire à 9 champs, qui se
+   retrouvait écrasé/poussé en bas de son cadre. */
+.formContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 24px 0 48px;
+}
+
+.form {
+  border-color: #D9D9D9;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 480px;
+  padding: 30px 0 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.requiredLegend {
+  font-family: Poppins;
+  font-size: 0.75rem; /* 12px */
+  color: #666;
+  width: 100%;
+  margin: 0 0 8px;
+}
+
+/* "Titre *" doivent former un seul item du label (flex-direction: column
+   dans .auth-form-label) : sans ce wrapper, le texte et l'astérisque sont
+   deux enfants distincts et se retrouvent chacun sur leur propre ligne. */
+.labelText {
+  display: inline-block;
+}
+
+.requiredMark {
+  color: #C0392B;
+}
+
+/* Espace ce bloc du champ suivant (le bouton "Proposer ce livre" arrivait
+   collé juste en dessous des cases à cocher). */
+.themeFieldGroup {
+  margin-bottom: 16px;
+}
+
+.suggestOptionButton {
+  margin-top: 10px;
+  font-family: Poppins;
+  font-size: 0.75rem; /* 12px */
+  background: none;
+  border: 1px solid #D9D9D9;
+  border-radius: 8px;
+  padding: 4px 8px;
+  color: #999;
+  cursor: not-allowed;
+}
+
+.comingSoon {
+  font-style: italic;
+}
+
+.themeCheckboxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  width: 100%;
+  margin-top: 4px;
+}
+
+.themeCheckboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: Poppins;
+  font-size: 0.875rem; /* 14px */
+}
+
+.confirmation {
+  max-width: 320px;
+  margin: 48px auto;
+  padding: 24px;
+  text-align: center;
+  font-size: 1rem; /* 16px */
+  color: #444;
+}
