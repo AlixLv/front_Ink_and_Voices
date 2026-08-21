@@ -1,10 +1,12 @@
-import BackButton from "../components/BackButton/BackButton";
+import BackButton from '../components/BackButton/BackButton';
+import styles from './placeholder.module.css';
 
 export default function Search() {
   return (
-    <>
+    <main className={styles.page}>
       <BackButton />
-      <div>Cette page est en cours. Vous trouverez bientôt  ici une page de recherche de livres.</div>
-    </>
+      <h1>Recherche</h1>
+      <p>Cette page est en cours. Vous trouverez bientôt ici une page de recherche de livres.</p>
+    </main>
   );
 }

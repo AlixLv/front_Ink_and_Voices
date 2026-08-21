@@ -82,6 +82,12 @@
   text-align: justify; /* description justifiée */
 }
 
+@media (max-width: 767.98px) {
+  .detailed-book-header {
+    margin-bottom: 2.5rem;
+  }
+}
+
 @media (max-width: 480px) {
   .detailed-book-card {
     padding: 12px 14px;

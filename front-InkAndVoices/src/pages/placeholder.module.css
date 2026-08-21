@@ -1,0 +1,16 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 56px 16px 24px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.page h1 {
+  margin: 0;
+}
+
+.page p {
+  margin: 0;
+}
