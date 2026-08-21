@@ -121,3 +121,60 @@ export const getValidationHistory = async(): Promise<ValidationHistoryItem[]> =>
   }
   return data;
 }
+
+export const updateBook = async(id: number, input: CreateBookInput): Promise<Book> => {
+  const response = await fetch(`${API_URL}/api/books/${id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+    body: JSON.stringify(input),
+  });
+  const data = await response.json().catch(() => ({}));
+
+  if(!response.ok) {
+    throw new HttpError(response.status, data);
+  }
+  return data;
+}
+
+export const deleteBook = async(id: number): Promise<void> => {
+  const response = await fetch(`${API_URL}/api/books/${id}`, {
+    method: 'DELETE',
+    credentials: 'include',
+  });
+  const data = await response.json().catch(() => ({}));
+
+  if(!response.ok) {
+    throw new HttpError(response.status, data);
+  }
+}
+
+export const createType = async(typeName: string): Promise<Type> => {
+  const response = await fetch(`${API_URL}/api/types`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+    body: JSON.stringify({ type_name: typeName }),
+  });
+  const data = await response.json().catch(() => ({}));
+
+  if(!response.ok) {
+    throw new HttpError(response.status, data);
+  }
+  return data;
+}
+
+export const createTheme = async(themeName: string): Promise<Theme> => {
+  const response = await fetch(`${API_URL}/api/themes`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+    body: JSON.stringify({ theme_name: themeName }),
+  });
+  const data = await response.json().catch(() => ({}));
+
+  if(!response.ok) {
+    throw new HttpError(response.status, data);
+  }
+  return data;
+}

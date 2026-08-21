@@ -1,4 +1,5 @@
 import './ContributionCard.css';
+import { Link } from 'react-router-dom';
 import type { Contribution } from '../../types/Book';
 
 const STATUS_LABELS: Record<Contribution['status'], string> = {
@@ -7,7 +8,15 @@ const STATUS_LABELS: Record<Contribution['status'], string> = {
     refused: 'Refusé',
 };
 
-export default function ContributionCard({ contribution }: { contribution: Contribution }) {
+export default function ContributionCard({
+    contribution,
+    onWithdraw,
+    isWithdrawing,
+}: {
+    contribution: Contribution;
+    onWithdraw: (id: number) => void;
+    isWithdrawing: boolean;
+}) {
     const submittedDate = new Date(contribution.created_at).toLocaleDateString('fr-FR');
 
     return (
@@ -20,6 +29,26 @@ export default function ContributionCard({ contribution }: { contribution: Contr
                     <p className="contribution-comment">
                         Commentaire : {contribution.validation_comment}
                     </p>
+                )}
+                {contribution.status === 'pending' && (
+                    <div className="contribution-actions">
+                        <Link
+                            to={`/edit-book/${contribution.id}`}
+                            className="contribution-action-link"
+                            aria-label={`Modifier « ${contribution.title} »`}
+                        >
+                            Modifier
+                        </Link>
+                        <button
+                            type="button"
+                            className="contribution-action-button"
+                            disabled={isWithdrawing}
+                            aria-label={`Retirer « ${contribution.title} »`}
+                            onClick={() => onWithdraw(contribution.id)}
+                        >
+                            {isWithdrawing ? 'Retrait…' : 'Retirer'}
+                        </button>
+                    </div>
                 )}
             </div>
             <div className="contribution-state-container">

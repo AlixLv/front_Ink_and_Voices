@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import type { AddBookFormErrors, Theme, Type } from '../types/Book';
-import { createBook, getThemes, getTypes } from '../services/BookService';
+import { createBook, updateBook, getSingleBook, getThemes, getTypes, createType, createTheme } from '../services/BookService';
 import { HttpError } from '../services/HttpError';
 
-export const useAddBook = () => {
+export const useAddBook = (bookId?: number) => {
     const [title, setTitle] = useState<string>('');
     const [author, setAuthor] = useState<string>('');
     const [publishingHouse, setPublishingHouse] = useState<string>('');
@@ -21,6 +21,7 @@ export const useAddBook = () => {
     const [errors, setErrors] = useState<AddBookFormErrors>({});
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [isSuccess, setIsSuccess] = useState<boolean>(false);
+    const [suggestionError, setSuggestionError] = useState<string | null>(null);
 
     // types/thèmes disponibles pour peupler le select et les checkboxes
     useEffect(() => {
@@ -46,6 +47,58 @@ export const useAddBook = () => {
 
         return () => { isMounted = false; };
     }, []);
+
+    useEffect(() => {
+        if (!bookId) return;
+        let isMounted = true;
+
+        getSingleBook(bookId)
+            .then((book) => {
+                if (!isMounted) return;
+                setTitle(book.title);
+                setAuthor(book.author);
+                setPublishingHouse(book.publishing_house ?? '');
+                setShortDescription(book.short_description);
+                setPublicationYear(book.publication_year ?? '');
+                setResume(book.resume ?? '');
+                setReferenceLink(book.reference_link ?? '');
+                setTypeId(String(book.type.id));
+                setThemeIds(book.themes.map((theme) => theme.id));
+            })
+            .catch(() => {
+                if (isMounted) {
+                    setErrors({ global: 'Impossible de charger cette suggestion.' });
+                }
+            });
+
+        return () => { isMounted = false; };
+    }, [bookId]);
+
+    const suggestType = async (name: string): Promise<boolean> => {
+        setSuggestionError(null);
+        try {
+            const created = await createType(name.trim());
+            setTypes((current) => [...current, created].sort((a, b) => a.type_name.localeCompare(b.type_name)));
+            setTypeId(String(created.id));
+            return true;
+        } catch (e) {
+            setSuggestionError(e instanceof HttpError ? e.message : "L'ajout a échoué, réessayez plus tard.");
+            return false;
+        }
+    };
+
+    const suggestTheme = async (name: string): Promise<boolean> => {
+        setSuggestionError(null);
+        try {
+            const created = await createTheme(name.trim());
+            setThemes((current) => [...current, created].sort((a, b) => a.theme_name.localeCompare(b.theme_name)));
+            setThemeIds((current) => [...current, created.id]);
+            return true;
+        } catch (e) {
+            setSuggestionError(e instanceof HttpError ? e.message : "L'ajout a échoué, réessayez plus tard.");
+            return false;
+        }
+    };
 
     const toggleTheme = (id: number) => {
         setThemeIds((current) =>
@@ -101,7 +154,7 @@ export const useAddBook = () => {
         setIsLoading(true);
 
         try {
-            await createBook({
+            const input = {
                 title,
                 author,
                 publishing_house: publishingHouse,
@@ -111,9 +164,14 @@ export const useAddBook = () => {
                 reference_link: referenceLink || null,
                 type_id: Number(typeId),
                 theme_ids: themeIds,
-            });
+            };
 
-            resetForm();
+            if (bookId) {
+                await updateBook(bookId, input);
+            } else {
+                await createBook(input);
+                resetForm();
+            }
             setIsSuccess(true);
         } catch (error) {
             if (error instanceof HttpError) {
@@ -141,5 +199,9 @@ export const useAddBook = () => {
         isLoading,
         isSuccess,
         handleSubmit,
+        suggestType,
+        suggestTheme,
+        suggestionError,
+        isEditing: Boolean(bookId),
     };
 };

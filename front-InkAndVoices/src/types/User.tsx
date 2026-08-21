@@ -71,3 +71,12 @@ export interface UpdateProfileFormErrors {
     global?: string;
 }
 
+
+export interface AdminUser {
+    id: string;
+    email: string;
+    username: string;
+    role: 'user' | 'admin';
+    created_at: string;
+    contributions_count: number;
+}

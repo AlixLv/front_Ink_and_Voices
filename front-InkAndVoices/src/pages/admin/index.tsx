@@ -28,6 +28,9 @@ export default function AdminDashboard() {
                 <li>
                     <Link to="/admin/validations">Historique des validations</Link>
                 </li>
+                <li>
+                    <Link to="/admin/users">Comptes</Link>
+                </li>
             </ul>
         </main>
     );

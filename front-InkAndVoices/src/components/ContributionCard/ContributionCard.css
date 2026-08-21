@@ -122,3 +122,28 @@ flex-shrink: 0;
         padding: 8px;
     }
 }
+
+.contribution-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-top: 8px;
+}
+
+.contribution-action-link,
+.contribution-action-button {
+    font-size: 13px;
+    font-family: inherit;
+    color: #1a1a1a;
+    background-color: transparent;
+    border: 1px solid #767676;
+    border-radius: 6px;
+    padding: 4px 12px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.contribution-action-button:disabled {
+    opacity: 0.6;
+    cursor: default;
+}

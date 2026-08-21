@@ -16,7 +16,8 @@ export interface Book {
   publishing_house?: string;
   publication_year?: string;
   themes: Theme[];
-  resume?: string;
+  resume?: string | null;
+  reference_link?: string | null;
   short_description: string;
 }
 

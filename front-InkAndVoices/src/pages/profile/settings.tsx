@@ -1,12 +1,32 @@
-import { Navigate } from 'react-router-dom';
+import { useState } from 'react';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { useUpdateProfile } from '../../hooks/useUpdateProfile';
+import { deleteMyAccount } from '../../services/UserService';
 import BackButton from '../../components/BackButton/BackButton';
 import SubmitButton from '../../components/SubmitButton/SubmitButton';
 import '../../components/Auth/AuthForm/AuthForm.css';
+import styles from './settings.module.css';
 
 export default function Settings() {
-    const { isAuthenticated, isLoading: isAuthLoading } = useAuth();
+    const navigate = useNavigate();
+    const { isAuthenticated, isLoading: isAuthLoading, logout } = useAuth();
+    const [showDeleteConfirm, setShowDeleteConfirm] = useState<boolean>(false);
+    const [isDeleting, setIsDeleting] = useState<boolean>(false);
+    const [deleteError, setDeleteError] = useState<string | null>(null);
+
+    const handleDeleteAccount = async () => {
+        setIsDeleting(true);
+        setDeleteError(null);
+        try {
+            await deleteMyAccount();
+            await logout();
+            navigate('/', { replace: true });
+        } catch {
+            setDeleteError('La suppression a échoué. Réessayez plus tard.');
+            setIsDeleting(false);
+        }
+    };
     const {
         email, setEmail,
         username, setUsername,
@@ -110,6 +130,47 @@ export default function Settings() {
                     </div>
                 </form>
             </div>
+
+            <section className={styles.dangerZone} aria-labelledby="delete-account-title">
+                <h2 id="delete-account-title">Supprimer mon compte</h2>
+                <p>
+                    La suppression est définitive : votre compte et vos suggestions de livres
+                    seront effacés, conformément à votre droit à l'effacement (RGPD).
+                </p>
+                {!showDeleteConfirm && (
+                    <button
+                        type="button"
+                        className={styles.dangerButton}
+                        onClick={() => setShowDeleteConfirm(true)}
+                    >
+                        Supprimer mon compte
+                    </button>
+                )}
+                {showDeleteConfirm && (
+                    <div className={styles.dangerConfirm}>
+                        <p>Confirmez-vous la suppression définitive de votre compte ?</p>
+                        <div className={styles.dangerActions}>
+                            <button
+                                type="button"
+                                className={styles.dangerButton}
+                                disabled={isDeleting}
+                                onClick={handleDeleteAccount}
+                            >
+                                {isDeleting ? 'Suppression…' : 'Oui, supprimer définitivement'}
+                            </button>
+                            <button
+                                type="button"
+                                className={styles.cancelButton}
+                                disabled={isDeleting}
+                                onClick={() => setShowDeleteConfirm(false)}
+                            >
+                                Annuler
+                            </button>
+                        </div>
+                    </div>
+                )}
+                {deleteError && <p role="alert" className="auth-form-error">{deleteError}</p>}
+            </section>
         </main>
     );
 }
