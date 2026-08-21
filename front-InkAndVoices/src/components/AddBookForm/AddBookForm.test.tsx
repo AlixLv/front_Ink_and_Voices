@@ -24,7 +24,7 @@ const fillRequiredFields = () => {
     fireEvent.change(screen.getByLabelText(/Autrice \/ auteur/), { target: { value: 'Autrice Test' } });
     fireEvent.change(screen.getByLabelText(/Maison d'édition/), { target: { value: 'Maison Test' } });
     fireEvent.change(screen.getByLabelText(/Description courte/), { target: { value: 'Une description.' } });
-    fireEvent.change(screen.getByLabelText(/Genre/), { target: { value: '1' } });
+    fireEvent.change(screen.getByLabelText(/Type/), { target: { value: '1' } });
 };
 
 describe('AddBookForm Validation', () => {
@@ -51,7 +51,7 @@ describe('AddBookForm Validation', () => {
         expect(screen.getByText("Le nom de l'autrice ou de l'auteur ne doit pas être vide.")).toBeInTheDocument();
         expect(screen.getByText("La maison d'édition ne doit pas être vide.")).toBeInTheDocument();
         expect(screen.getByText('La description courte ne doit pas être vide.')).toBeInTheDocument();
-        expect(screen.getByText('Choisissez un genre.')).toBeInTheDocument();
+        expect(screen.getByText('Choisissez un type.')).toBeInTheDocument();
         expect(createBook).not.toHaveBeenCalled();
     });
 });
