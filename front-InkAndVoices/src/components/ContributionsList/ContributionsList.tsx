@@ -1,19 +1,39 @@
-import ContributionCard from '../ContributionCard/ContributionCard';
 import './ContributionsList.css';
+import ContributionCard from '../ContributionCard/ContributionCard';
+import { useMyContributions } from '../../hooks/useMyContributions';
 
 
 export default function ContributionList() {
+  const { contributions, isLoading, error, withdraw, withdrawingId, feedback } = useMyContributions();
+
   return (
     <>
       <div>
-          <h1 className="contributions-title">Tes contributions</h1>
+          <h2 className="contributions-title">Tes contributions</h2>
       </div>
-      <div className="contributions-list">
-
-        {/* Rajouter des ContributionCards quand la feature sera implémentée. Pour l'instant, un message indique qu'il n'y a aucune contribution 
-        <ContributionCard /> */}
-        Aucune contribution pour le moment. Retourne sur l'accueil et clique sur "Ajouter un livre"!
-    </div>
+      <p aria-live="polite" role="status">{feedback}</p>
+      {isLoading && <p role="status">Chargement de tes contributions…</p>}
+      {error && <p role="alert">Erreur : {error}</p>}
+      {!isLoading && !error && contributions.length === 0 && (
+        <div className="contributions-list">
+          <div className="empty-state">
+            <img src="/minilogo.svg" alt="" />
+            <p>Aucune contribution pour le moment. Retourne sur l'accueil et clique sur "Ajouter un livre"!</p>
+          </div>
+        </div>
+      )}
+      {!isLoading && !error && contributions.length > 0 && (
+        <ul className="contributions-list">
+          {contributions.map((contribution) => (
+            <ContributionCard
+              key={contribution.id}
+              contribution={contribution}
+              onWithdraw={withdraw}
+              isWithdrawing={withdrawingId === contribution.id}
+            />
+          ))}
+        </ul>
+      )}
     </>
   );
 }

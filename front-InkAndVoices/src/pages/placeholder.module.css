@@ -1,0 +1,29 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 56px 16px 24px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.page h1 {
+  margin: 0;
+}
+
+.page p {
+  margin: 0;
+}
+
+.page :global(.theme-list) {
+  justify-content: flex-start;
+}
+
+.page :global(.theme-button) {
+  border: 1px solid #767676;
+}
+
+.page :global(.theme-button[aria-pressed="true"]) {
+  background-color: #1a1a1a;
+  color: #ffffff;
+}

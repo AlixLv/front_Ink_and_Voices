@@ -1,10 +1,23 @@
 .recent-books-title {
-    font-family: 'Poppins';
-    font-weight: bold;
-    font-size: 18px;
-    padding: 0px;
-    margin: 0px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.25rem;
+    padding: 0;
+    margin: 0;
     text-align: left;
-    color: rgb(0, 0, 0);
-    padding-top: 10px;
+    color: var(--color-ink);
+    padding-top: 22px;
+    padding-bottom: 4px;
+    display: inline-block;
+    position: relative;
+}
+
+.recent-books-title::after {
+    content: '';
+    display: block;
+    width: 44px;
+    height: 4px;
+    border-radius: 999px;
+    margin-top: 4px;
+    background: var(--gradient-brand);
 }

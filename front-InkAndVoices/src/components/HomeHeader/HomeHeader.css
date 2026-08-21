@@ -3,15 +3,27 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    padding: 10px;
-    padding-bottom: 10px;
-    /* Sans ça, ce bloc s'étire sur toute la largeur de la page en desktop
-       (contrairement à .book-card, capée à 600px) : le bouton "Ajouter un
-       livre", centré dans cette largeur, se retrouve loin à droite de la
-       liste de livres au lieu d'être aligné avec elle. */
+    gap: 14px;
+    padding: 22px 20px;
     max-width: 600px;
+    margin-inline: auto;
     box-sizing: border-box;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+    position: relative;
+    overflow: hidden;
+}
+
+.home-card-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: var(--gradient-brand);
 }
 
 .user-card {
@@ -19,35 +31,80 @@
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
-    margin: 0px;
-    padding: 0px;
+    gap: 16px;
+    margin: 0;
+    padding: 0;
     width: 100%;
-    border-radius: 8px;
+    border-radius: var(--radius-sm);
 }
 
 .user-icon-container {
     display: flex;
     justify-content: center;
-    width: 80px;
-    height: 80px;
+    flex-shrink: 0;
+    width: 72px;
+    height: 72px;
     border-radius: 50%;
-    margin-right: 20px;
-    margin-left: -20px;
 }
 
-
 .user-icon {
-    width: 80px;
-    height: 80px;
+    width: 72px;
+    height: 72px;
     border-radius: 50%;
     object-fit: cover;
+    border: 2px solid var(--color-border);
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.user-icon-container a:hover .user-icon,
+.user-icon-container a:focus-visible .user-icon {
+    border-color: var(--color-primary);
+    transform: scale(1.04);
 }
 
 .user-name {
-    font-family: 'Poppins';
-    font-weight: medium;
-    font-size: 17px;
-    color: rgb(0, 0, 0);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: var(--color-ink);
+}
+
+.welcome-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding-top: 6px;
+}
+
+.welcome-logo {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+}
+
+.welcome-wordmark {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--color-ink);
+    margin: 0;
+}
+
+.welcome-wordmark span {
+    background: var(--gradient-brand);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    padding: 0 2px;
+}
+
+.welcome-tagline {
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    color: var(--color-ink-soft);
+    margin: 0;
 }
 
 .submit-button-container {
@@ -56,5 +113,4 @@
     align-items: center;
     align-self: stretch;
     width: 100%;
-    height: 60px;
 }

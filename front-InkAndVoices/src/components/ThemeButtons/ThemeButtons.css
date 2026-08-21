@@ -10,8 +10,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background-color: #ffffff;
-  color: black;
+  background-color: var(--color-primary-soft);
+  color: var(--color-primary-dark);
   text-decoration: none;
   border-radius: 4px;
   padding: 2px 12px;
@@ -26,7 +26,8 @@
 }
 
 .theme-button:hover {
-  background-color: #f0f0f0;
+  background-color: var(--color-primary);
+  color: #ffffff;
   transform: translateY(-1px);
 }
 

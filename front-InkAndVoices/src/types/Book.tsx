@@ -16,7 +16,8 @@ export interface Book {
   publishing_house?: string;
   publication_year?: string;
   themes: Theme[];
-  resume?: string;
+  resume?: string | null;
+  reference_link?: string | null;
   short_description: string;
 }
 
@@ -48,6 +49,59 @@ export interface CreateBookInput {
   reference_link: string | null;
   type_id: number;
   theme_ids: number[];
+}
+
+export interface BookFilters {
+  search?: string;
+  type_id?: number;
+  theme_id?: number;
+}
+
+export interface PaginatedBooks {
+  items: Book[];
+  total: number;
+  page: number;
+  page_count: number;
+}
+
+export interface Contribution {
+  id: number;
+  title: string;
+  author: string;
+  short_description: string;
+  status: 'pending' | 'validated' | 'refused';
+  created_at: string;
+  type: {
+    id: number;
+    type_name: string;
+  };
+  validation_comment: string | null;
+}
+
+export interface ValidationHistoryItem {
+  id: number;
+  status: 'pending' | 'validated' | 'refused';
+  comment: string | null;
+  validation_date: string;
+  book: {
+    id: number;
+    title: string;
+    author: string;
+  };
+  admin: {
+    username: string;
+  };
+}
+
+export interface ValidateBookInput {
+  status: 'validated' | 'refused';
+  comment: string | null;
+}
+
+export interface ValidateBookResponse {
+  id: number;
+  status: 'validated' | 'refused';
+  comment: string | null;
 }
 
 export interface AddBookFormErrors {

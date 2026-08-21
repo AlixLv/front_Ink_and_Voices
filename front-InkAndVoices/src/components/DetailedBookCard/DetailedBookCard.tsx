@@ -13,8 +13,14 @@ export default function DetailedBookCard({ id }: BookDetailsCardProps) {
   return (
     <div className="detailed-book-card">
       <div className="detailed-book-header">
-        <h2 className="detailed-book-author">{book.author}</h2>
-        <h3 className="detailed-book-title">{book.title}</h3>
+        <div className={`detailed-book-cover book-cover-${book.id % 3}`} aria-hidden="true">
+          <img src="/minilogo.svg" alt="" className="detailed-book-cover-icon" />
+          <span className="detailed-book-cover-initial">{book.title.charAt(0).toUpperCase()}</span>
+        </div>
+        <div className="detailed-book-titles">
+          <h2 className="detailed-book-author">{book.author}</h2>
+          <h3 className="detailed-book-title">{book.title}</h3>
+        </div>
       </div>
       <div className="detailed-book-body">
         <div className="detail-row">

@@ -1,9 +1,56 @@
 .recent-books-container {
-   display: flex;
-   flex-direction: column;
-   align-items: stretch;
-   gap: 13px;
+   display: grid;
+   grid-template-columns: 1fr;
+   gap: 16px;
+   max-width: 960px;
+   margin-inline: auto;
    margin-top: 10px;
-   /* background-color: #cf0d0d; */
-   
  }
+
+@media (min-width: 900px) {
+  .recent-books-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.books-count {
+  margin: 8px 0 0;
+  font-size: 0.85rem;
+  color: var(--color-ink-soft);
+}
+
+.books-pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.books-pagination-button {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  padding: 8px 18px;
+  font-family: var(--font-display);
+  color: var(--color-ink);
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.books-pagination-button:hover:not(:disabled) {
+  border-color: var(--color-primary);
+  background-color: var(--color-primary-soft);
+}
+
+.books-pagination-button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.books-pagination-status {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--color-ink-soft);
+}

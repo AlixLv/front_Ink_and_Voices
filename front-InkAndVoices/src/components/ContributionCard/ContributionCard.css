@@ -1,10 +1,14 @@
 .contribution-card {
-background-color: #FFFFFF;
-padding: 10px;
+background-color: var(--color-surface);
+border: 1px solid var(--color-border);
+padding: 12px;
 display:flex;
 flex-direction: row;
-height: 120px;
+min-height: 120px;
 align-items: center;
+list-style: none;
+border-radius: 8px;
+flex-shrink: 0;
 }
 
 
@@ -61,6 +65,13 @@ align-items: center;
     width: 30%;
 }
 
+.contribution-comment {
+    padding: 6px 0 0;
+    margin: 0;
+    font-size: 13px;
+    color: #444444;
+}
+
 .contribution-state {
     background-color: #CFCFCF;
     border-radius: 5%;
@@ -71,4 +82,69 @@ align-items: center;
     width: 100%;
     height: 50px;
     font-size: 14px;
+}
+.contribution-state {
+    margin: 0;
+    align-items: center;
+    padding: 0 8px;
+    text-align: center;
+}
+
+.contribution-state-pending {
+    background-color: #EDEDED;
+    color: #1a1a1a;
+}
+
+.contribution-state-validated {
+    background-color: #D8EEDD;
+    color: #14461f;
+}
+
+.contribution-state-refused {
+    background-color: #F6DEDE;
+    color: #641818;
+}
+
+@media (max-width: 480px) {
+    .contribution-card {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+
+    .contribution-datas,
+    .contribution-state-container {
+        width: 100%;
+        height: auto;
+    }
+
+    .contribution-state {
+        height: auto;
+        padding: 8px;
+    }
+}
+
+.contribution-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-top: 8px;
+}
+
+.contribution-action-link,
+.contribution-action-button {
+    font-size: 13px;
+    font-family: inherit;
+    color: #1a1a1a;
+    background-color: transparent;
+    border: 1px solid #767676;
+    border-radius: 6px;
+    padding: 4px 12px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.contribution-action-button:disabled {
+    opacity: 0.6;
+    cursor: default;
 }

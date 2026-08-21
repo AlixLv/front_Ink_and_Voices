@@ -1,9 +1,10 @@
+import { useState } from 'react';
 import { useAddBook } from '../../hooks/useAddBook';
 import '../Auth/AuthForm/AuthForm.css';
 import styles from './AddBookForm.module.css';
 import SubmitButton from '../SubmitButton/SubmitButton';
 
-export default function AddBookForm() {
+export default function AddBookForm({ bookId }: { bookId?: number }) {
     const {
         title, setTitle,
         author, setAuthor,
@@ -19,12 +20,41 @@ export default function AddBookForm() {
         isLoading,
         isSuccess,
         handleSubmit,
-    } = useAddBook();
+        suggestType,
+        suggestTheme,
+        suggestionError,
+        isEditing,
+    } = useAddBook(bookId);
+
+    const [newTypeName, setNewTypeName] = useState<string>('');
+    const [newThemeName, setNewThemeName] = useState<string>('');
+    const [showTypeInput, setShowTypeInput] = useState<boolean>(false);
+    const [showThemeInput, setShowThemeInput] = useState<boolean>(false);
+
+    const handleSuggestType = async () => {
+        if (newTypeName.trim() === '') return;
+        const created = await suggestType(newTypeName);
+        if (created) {
+            setNewTypeName('');
+            setShowTypeInput(false);
+        }
+    };
+
+    const handleSuggestTheme = async () => {
+        if (newThemeName.trim() === '') return;
+        const created = await suggestTheme(newThemeName);
+        if (created) {
+            setNewThemeName('');
+            setShowThemeInput(false);
+        }
+    };
 
     if (isSuccess) {
         return (
             <div className={styles.confirmation} role="status">
-                Merci ! Votre suggestion a bien été envoyée et est en attente de validation.
+                {isEditing
+                    ? 'Votre suggestion a bien été mise à jour.'
+                    : 'Merci ! Votre suggestion a bien été envoyée et est en attente de validation.'}
             </div>
         );
     }
@@ -160,15 +190,37 @@ export default function AddBookForm() {
                         </select>
                     </label>
                     {errors.type_id && <output id="type-error" role="alert" className="auth-form-error">{errors.type_id}</output>}
-                    <button
-                        type="button"
-                        className={styles.suggestOptionButton}
-                        disabled
-                        aria-disabled="true"
-                        title="Cette fonctionnalité n'est pas encore disponible"
-                    >
-                        + Proposer un type <span className={styles.comingSoon}>(bientôt disponible)</span>
-                    </button>
+                    {!showTypeInput && (
+                        <button
+                            type="button"
+                            className={styles.suggestOptionButton}
+                            onClick={() => setShowTypeInput(true)}
+                        >
+                            + Proposer un type
+                        </button>
+                    )}
+                    {showTypeInput && (
+                        <div className={styles.suggestOptionRow}>
+                            <label className="auth-form-label">
+                                Nouveau type
+                                <input
+                                    className="auth-form-field"
+                                    type="text"
+                                    value={newTypeName}
+                                    onChange={(e) => setNewTypeName(e.target.value)}
+                                    disabled={isLoading}
+                                />
+                            </label>
+                            <button
+                                type="button"
+                                className={styles.suggestOptionButton}
+                                onClick={handleSuggestType}
+                                disabled={isLoading || newTypeName.trim() === ''}
+                            >
+                                Ajouter ce type
+                            </button>
+                        </div>
+                    )}
                 </div>
 
                 <div className={`auth-form-field-group ${styles.themeFieldGroup}`}>
@@ -186,21 +238,44 @@ export default function AddBookForm() {
                             </label>
                         ))}
                     </div>
-                    <button
-                        type="button"
-                        className={styles.suggestOptionButton}
-                        disabled
-                        aria-disabled="true"
-                        title="Cette fonctionnalité n'est pas encore disponible"
-                    >
-                        + Proposer un thème <span className={styles.comingSoon}>(bientôt disponible)</span>
-                    </button>
+                    {!showThemeInput && (
+                        <button
+                            type="button"
+                            className={styles.suggestOptionButton}
+                            onClick={() => setShowThemeInput(true)}
+                        >
+                            + Proposer un thème
+                        </button>
+                    )}
+                    {showThemeInput && (
+                        <div className={styles.suggestOptionRow}>
+                            <label className="auth-form-label">
+                                Nouveau thème
+                                <input
+                                    className="auth-form-field"
+                                    type="text"
+                                    value={newThemeName}
+                                    onChange={(e) => setNewThemeName(e.target.value)}
+                                    disabled={isLoading}
+                                />
+                            </label>
+                            <button
+                                type="button"
+                                className={styles.suggestOptionButton}
+                                onClick={handleSuggestTheme}
+                                disabled={isLoading || newThemeName.trim() === ''}
+                            >
+                                Ajouter ce thème
+                            </button>
+                        </div>
+                    )}
                 </div>
 
+                {suggestionError && <output role="alert" className="auth-form-error">{suggestionError}</output>}
                 {errors.global && <output role="alert" className="auth-form-error">{errors.global}</output>}
                 <div className="submit-button-container">
                     <SubmitButton
-                        text={isLoading ? 'Envoi en cours...' : 'Proposer ce livre'}
+                        text={isLoading ? 'Envoi en cours...' : isEditing ? 'Enregistrer les modifications' : 'Proposer ce livre'}
                         type="submit"
                         disabled={isLoading || isLoadingOptions}
                     />

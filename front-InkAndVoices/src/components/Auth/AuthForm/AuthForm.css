@@ -1,10 +1,8 @@
 
 /* ce qui contient le bordé gris, toute la page sauf le logo container */
 .auth-form-container {
-    /* background-color: red; */
     width: 100%;
-    height: 62vh;
-    margin: 0px;
+    margin: 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -12,29 +10,30 @@
 
 /* bordé gris */
 .auth-form {
-    border-color:#D9D9D9;
-    border-style: solid;
-    border-width: 1px;
-    border-radius : 3%;
-    height: 80%;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
     width: 90%;
-    padding: 30px 0 15px 0;
+    max-width: 440px;
+    padding: 30px 0 22px;
     display: flex;
     flex-direction: column;
-    align-self: flex-start;
-    /* background-color: yellow; */
+    align-items: center;
+    gap: 16px;
     margin-top: 10px;
+    box-sizing: border-box;
 }
 
 /* chaque ensemble label - champ - msg d'erreur */
 .auth-form-field-group {
     display: flex;
     flex-direction: column;
-    width: 80%;;
-    height: 25%;
+    gap: 4px;
+    width: 100%;
     align-items: flex-start;
     padding: 0 30px;
-    /* background-color: #1bfdd8; */
+    box-sizing: border-box;
 }
 
 /* label */
@@ -55,20 +54,31 @@
 
 /* champs */
 .auth-form-field {
-    border-color:#D9D9D9;
-    border-style: solid;
-    border-width: 1px;
-    border-radius : 10%;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background-color: var(--color-bg);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
     font-family: Poppins;
     /* #B3B3B3 tombait à ~2.1:1 sur blanc (très sous les 4.5:1 requis par
        WCAG AA). 1rem (16px) aussi : sous ce seuil, iOS Safari zoome
        automatiquement la page à chaque focus sur le champ. */
     color: #333333;
     font-size: 1rem; /* 16px */
-    padding: 8px;
+    padding: 10px 12px;
     box-sizing: border-box;
     width: 100%;
-    /* background-color: #1e1ad8; */
+    margin-top: 4px;
+}
+
+.auth-form-field:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--color-primary-soft);
+    outline: none;
+}
+
+.auth-form-field:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 1px;
 }
 
 /* lien vers la politique de confidentialité */
@@ -91,12 +101,12 @@
    Fix local plutôt que de toucher tous les liens du site : plus foncé
    (~6.2:1) + souligné. */
 .auth-form-legal a {
-    color: #4A4FD6;
+    color: var(--color-primary-dark);
     text-decoration: underline;
 }
 
 .auth-form-switch a {
-    color: #4A4FD6;
+    color: var(--color-primary-dark);
     text-decoration: underline;
 }
 

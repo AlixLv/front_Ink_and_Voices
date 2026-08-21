@@ -1,0 +1,120 @@
+.dangerZone {
+    max-width: 420px;
+    margin: 32px auto 0;
+    padding: 16px;
+    border: 1px solid #b91c1c;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-align: left;
+}
+
+.dangerZone h2 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #b91c1c;
+}
+
+.dangerZone p {
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+.dangerButton {
+    background-color: #b91c1c;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.dangerButton:disabled {
+    opacity: 0.6;
+    cursor: default;
+}
+
+.cancelButton {
+    background-color: transparent;
+    color: inherit;
+    border: 1px solid #767676;
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.dangerConfirm {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.dangerActions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.avatarFieldset {
+    border: none;
+    margin: 0;
+    padding: 0 30px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.avatarLegend {
+    font-family: var(--font-display);
+    font-size: 0.875rem;
+    padding: 0;
+    margin-bottom: 8px;
+}
+
+.avatarGrid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.avatarOption {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    padding: 6px;
+    border: 2px solid transparent;
+    border-radius: var(--radius-md);
+}
+
+.avatarOption:has(.avatarRadio:checked) {
+    border-color: var(--color-primary);
+    background-color: var(--color-primary-soft);
+}
+
+.avatarOption:has(.avatarRadio:focus-visible) {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+}
+
+.avatarRadio {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+}
+
+.avatarImage {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+}
+
+.avatarLabel {
+    font-size: 0.7rem;
+    color: var(--color-ink-soft);
+}

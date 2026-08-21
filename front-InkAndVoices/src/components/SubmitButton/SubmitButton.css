@@ -1,14 +1,25 @@
 .submit-button {
-    background-color: #2C2C2C;
-    color: #F5F5F5;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 1rem; /* 16px, était 12px */
+    background-color: var(--color-primary);
+    color: #FFFFFF;
+    font-family: var(--font-display);
+    font-size: 1rem;
     width: 220px;
-    padding: 10px 0;
-    font-weight: lighter;
-    border-radius: 7px;
+    max-width: 100%;
+    padding: 12px 0;
+    font-weight: 500;
+    border-radius: 999px;
     border: none;
     cursor: pointer;
+    box-shadow: var(--shadow-soft);
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Même rose accessible que le reste du site (navbar active, liens) : #F5F5F5
+   sur #C2185B ~5.4:1, passe largement le 4.5:1 requis par WCAG AA. */
+.submit-button:hover:not(:disabled) {
+    background-color: var(--color-primary-dark);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-lift);
 }
 
 .submit-button:disabled {
