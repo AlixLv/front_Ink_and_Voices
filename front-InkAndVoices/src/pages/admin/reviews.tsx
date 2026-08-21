@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { usePendingBooks } from '../../hooks/usePendingBooks';
 import BackButton from '../../components/BackButton/BackButton';
-import SubmitButton from '../../components/SubmitButton/SubmitButton';
+import '../../components/SubmitButton/SubmitButton.css';
 import type { Book } from '../../types/Book';
 import styles from './admin.module.css';
 
@@ -42,16 +42,24 @@ function PendingBookCard({
                 />
             </label>
             <div className={styles.actions}>
-                <SubmitButton
-                    text={isProcessing ? 'Envoi…' : 'Valider'}
+                <button
+                    type="button"
+                    className="submit-button"
                     disabled={isProcessing}
+                    aria-label={`Valider « ${book.title} »`}
                     onClick={() => onReview(book.id, 'validated', comment)}
-                />
-                <SubmitButton
-                    text={isProcessing ? 'Envoi…' : 'Refuser'}
+                >
+                    {isProcessing ? 'Envoi…' : 'Valider'}
+                </button>
+                <button
+                    type="button"
+                    className="submit-button"
                     disabled={isProcessing}
+                    aria-label={`Refuser « ${book.title} »`}
                     onClick={() => onReview(book.id, 'refused', comment)}
-                />
+                >
+                    {isProcessing ? 'Envoi…' : 'Refuser'}
+                </button>
             </div>
         </li>
     );
