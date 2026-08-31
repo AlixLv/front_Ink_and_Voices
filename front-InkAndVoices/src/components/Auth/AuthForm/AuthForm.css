@@ -31,7 +31,11 @@
     display: flex;
     flex-direction: column;
     width: 80%;;
-    height: 25%;
+    /* Pas de height fixe : un groupe doit s'ajuster à son contenu. Un
+       height:25% ici (pensé pour le login à 2 champs) coupait la hauteur de
+       chaque groupe sans jamais couper le contenu (pas d'overflow:hidden) :
+       du texte long (ex. une description en lecture seule) débordait
+       simplement par-dessus ce qui suit, au lieu d'agrandir son propre bloc. */
     align-items: flex-start;
     padding: 0 30px;
     /* background-color: #1bfdd8; */

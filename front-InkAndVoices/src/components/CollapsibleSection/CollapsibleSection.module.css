@@ -1,0 +1,45 @@
+.section {
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 0;
+  margin-bottom: 10px;
+  cursor: pointer;
+  color: #000000;
+}
+
+.title {
+  font-family: 'Poppins';
+  font-weight: bold;
+  font-size: 1.125rem; /* 18px, cohérent avec .recent-books-title */
+}
+
+/* Chevron ">" au repos (fermé), pivoté à 90deg pour pointer vers le bas
+   (ouvert) — plutôt que deux icônes séparées. */
+.chevron,
+.chevronOpen {
+  flex-shrink: 0;
+  transition: transform 0.15s ease;
+}
+
+.chevron {
+  transform: rotate(0deg);
+}
+
+.chevronOpen {
+  transform: rotate(90deg);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  margin-bottom: 20px;
+}

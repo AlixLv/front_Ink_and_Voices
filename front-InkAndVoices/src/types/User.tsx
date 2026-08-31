@@ -44,9 +44,12 @@ export interface LoginResponse {
 // dire "voici qui tu es" (elle sert à AuthContext pour bâtir /profile/:id
 // dans la navbar). Pas de `token` ici : il vit uniquement dans le cookie
 // httpOnly posé par le backend, invisible depuis JS.
+export type Role = 'user' | 'admin';
+
 export interface LoggedUserDatas {
     id: string;
     email: string;
     username: string;
+    role: Role;
 }
 

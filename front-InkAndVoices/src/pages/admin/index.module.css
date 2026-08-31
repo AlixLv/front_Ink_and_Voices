@@ -1,0 +1,15 @@
+.sections {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.empty {
+  font-size: 0.875rem; /* 14px */
+  color: #555555;
+  margin: 0;
+}
+
+.error {
+  color: #C0392B;
+}
