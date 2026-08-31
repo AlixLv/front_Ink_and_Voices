@@ -31,6 +31,11 @@
   flex-direction: column;
   gap: 2px;
   min-width: 0;
+  /* #root { text-align: center } (App.css) hérite jusqu'ici. .texts se
+     dimensionne sur son enfant le plus large (le titre, en gras) : un
+     auteur·ice plus court que le titre se retrouvait centré dans cette
+     largeur au lieu de rester collé à gauche comme le titre. */
+  text-align: left;
 }
 
 .title {
@@ -45,6 +50,11 @@
 }
 
 .author {
+  /* Sans ça, hérite du fallback global (system-ui/Helvetica...) au lieu de
+     Poppins comme .title : polices différentes = crénage différent = les
+     deux lignes semblent désalignées bien qu'elles partagent le même bord
+     gauche. */
+  font-family: Poppins, sans-serif;
   margin: 0;
   font-size: 0.875rem; /* 14px */
   color: #555555;

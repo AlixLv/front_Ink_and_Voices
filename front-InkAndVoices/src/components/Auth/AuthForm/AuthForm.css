@@ -72,6 +72,11 @@
     padding: 8px;
     box-sizing: border-box;
     width: 100%;
+    /* #root { text-align: center } (App.css) hérite jusqu'ici, et rien ne le
+       recouvrait avant : ça centrait le texte saisi dans TOUS les champs de
+       TOUS les formulaires (login/signup/add-book), pas seulement les <div>
+       en lecture seule d'AdminBookDetail où ça a été repéré. */
+    text-align: left;
     /* background-color: #1e1ad8; */
 }
 
