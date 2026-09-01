@@ -1,4 +1,4 @@
-import type { Book, CreateBookInput, Theme, Type } from '../types/Book';
+import type { Book, CreateBookInput, MyBook, Theme, Type } from '../types/Book';
 import { HttpError } from './HttpError';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8032';
@@ -46,6 +46,19 @@ export const getThemes = async(): Promise<Theme[]> => {
 
 // Route protégée : credentials 'include' pour que le cookie httpOnly parte
 // avec la requête (même raison que loginUser dans AuthService).
+export const getMyBooks = async(): Promise<MyBook[]> => {
+  const response = await fetch(`${API_URL}/api/books/mine`, {
+    method: 'GET',
+    credentials: 'include',
+  });
+  const data = await response.json().catch(() => ({}));
+
+  if(!response.ok) {
+    throw new HttpError(response.status, data);
+  }
+  return data;
+}
+
 export const createBook = async(input: CreateBookInput): Promise<Book> => {
   const response = await fetch(`${API_URL}/api/books`, {
     method: 'POST',

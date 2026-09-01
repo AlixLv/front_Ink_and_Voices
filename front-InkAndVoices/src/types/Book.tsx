@@ -76,3 +76,10 @@ export interface AdminBook extends Book {
 
 export type BookStatus = 'pending' | 'validated' | 'refused';
 export type BookValidationStatus = 'validated' | 'refused';
+
+// Réponse de GET /api/books/mine ("mes contributions", page profil) : les
+// suggestions de la personne connectée, quel que soit leur statut.
+export interface MyBook extends Book {
+  created_at: string;
+  status: BookStatus;
+}
