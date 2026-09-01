@@ -1,0 +1,64 @@
+.link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.row {
+  background-color: #e8e8e8;
+  border-radius: 16px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  transition: background-color 0.15s ease, transform 0.15s ease;
+}
+
+.link:hover .row {
+  background-color: #dedede;
+  transform: translateY(-2px);
+}
+
+.link:focus-visible .row {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+.texts {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  /* #root { text-align: center } (App.css) hérite jusqu'ici. .texts se
+     dimensionne sur son enfant le plus large (le titre, en gras) : un
+     auteur·ice plus court que le titre se retrouvait centré dans cette
+     largeur au lieu de rester collé à gauche comme le titre. */
+  text-align: left;
+}
+
+.title {
+  font-family: Poppins, sans-serif;
+  margin: 0;
+  font-size: 1rem; /* 16px */
+  font-weight: 700;
+  color: #000000;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.author {
+  /* Sans ça, hérite du fallback global (system-ui/Helvetica...) au lieu de
+     Poppins comme .title : polices différentes = crénage différent = les
+     deux lignes semblent désalignées bien qu'elles partagent le même bord
+     gauche. */
+  font-family: Poppins, sans-serif;
+  margin: 0;
+  font-size: 0.875rem; /* 14px */
+  color: #555555;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

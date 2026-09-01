@@ -1,0 +1,52 @@
+.title {
+  font-family: 'Poppins';
+  font-weight: bold;
+  font-size: 1.25rem; /* 20px */
+  color: #000000;
+  margin: 0 0 8px;
+  padding: 0 30px;
+}
+
+/* Mêmes width/padding que .auth-form-field-group (AuthForm.css), copiés en
+   dur plutôt que combinés via une deuxième classe : la combinaison
+   auth-form-field-group + .actions laissait le flex-direction:column du
+   premier gagner sur le flex-direction:row voulu ici (ordre de cascade non
+   garanti entre deux classes de même spécificité). En étant la seule classe
+   sur cet élément, .actions garde le contrôle total de son layout. */
+.actions {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  width: 80%;
+  padding: 0 30px;
+  margin-top: 16px;
+}
+
+.validateButton,
+.refuseButton {
+  flex: 1;
+  border-radius: 7px;
+  padding: 10px 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1rem; /* 16px */
+  font-weight: lighter;
+  cursor: pointer;
+}
+
+.validateButton {
+  background-color: #2C2C2C;
+  color: #F5F5F5;
+  border: none;
+}
+
+.refuseButton {
+  background-color: transparent;
+  color: #2C2C2C;
+  border: 1px solid #2C2C2C;
+}
+
+.validateButton:disabled,
+.refuseButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}

@@ -8,8 +8,8 @@ import SubmitButton from '../../components/SubmitButton/SubmitButton';
 
 
 export default function Profile() {
-    const { username } = useAuth();
-    
+    const { username, isAdmin } = useAuth();
+
     return (
         <>
         <BackButton />
@@ -19,6 +19,11 @@ export default function Profile() {
             <div style={{ marginBottom: '5px' }}>
             <SubmitButton route="/profile/settings" text="Paramètres" />
             </div>
+            {isAdmin && (
+                <div style={{ marginBottom: '5px' }}>
+                <SubmitButton route="/admin" text="Tableau de bord admin" />
+                </div>
+            )}
             <div>
             <SubmitButton route="/profile/logout" text="Déconnexion" />
             </div>

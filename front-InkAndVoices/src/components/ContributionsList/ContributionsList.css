@@ -1,10 +1,11 @@
+/* Même style de titre de section que .recent-books-title (homepage) et les
+   CollapsibleSection du dashboard admin : gras, pas de soulignement. */
 .contributions-title {
     font-family: 'Poppins', sans-serif;
-    text-decoration: underline;
-    font-weight: normal;
-    font-size: 18px;
+    font-weight: bold;
+    font-size: 1.125rem; /* 18px */
+    color: #000000;
     justify-self: flex-start;
-    /* background-color: red; */
     margin-top: 20px;
     margin-bottom: 0px;
 }
@@ -14,11 +15,10 @@
   flex-direction: column;
   gap: 10px;
   background-color: #F1F1F1;
-  border-radius: 2%;
-  height: 40vh;
+  border-radius: 12px;
+  max-height: 40vh;
   overflow-y: auto;
-  padding: 20px;
+  padding: 16px;
   margin: 0px;
   margin-top: 8px;
-  border: 4px solid #F1F1F1;
 }

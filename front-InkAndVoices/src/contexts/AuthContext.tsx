@@ -1,6 +1,7 @@
 import { createContext, useState, useContext, useEffect, useCallback } from 'react';
 import type { ReactNode } from 'react';
 import { getLoggedUser, logoutUser } from '../services/AuthService';
+import type { Role } from '../types/User';
 
 // Le token n'apparaît nulle part ici, et c'est volontaire.
 // Il est stocké par le backend dans un cookie httpOnly : le navigateur l'envoie
@@ -13,7 +14,11 @@ interface AuthContextType {
     id: string | null;
     email: string | null;
     username: string | null;
+    role: Role | null;
     isAuthenticated: boolean;
+    // Dérivé de role : évite à chaque composant de comparer role === 'admin'
+    // lui-même (et d'oublier de gérer le cas role === null pendant isLoading).
+    isAdmin: boolean;
     isLoading: boolean;
     login: () => Promise<void>;
     logout: () => Promise<void>;
@@ -25,6 +30,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [id, setId] = useState<string | null>(null);
     const [email, setEmail] = useState<string | null>(null);
     const [username, setUsername] = useState<string | null>(null);
+    const [role, setRole] = useState<Role | null>(null);
     // true tant qu'on n'a pas demandé au serveur qui est connectée : ça évite
     // d'afficher brièvement "déconnectée" alors que le cookie est valide.
     const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -41,6 +47,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
                 setId(user?.id ?? null);
                 setEmail(user?.email ?? null);
                 setUsername(user?.username ?? null);
+                setRole(user?.role ?? null);
             })
             .catch(() => {
                 // Serveur injoignable : on considère qu'on n'est pas connectée.
@@ -48,6 +55,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
                 setId(null);
                 setEmail(null);
                 setUsername(null);
+                setRole(null);
             })
             .finally(() => {
                 if (!cancelled) setIsLoading(false);
@@ -65,6 +73,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         setId(user?.id ?? null);
         setEmail(user?.email ?? null);
         setUsername(user?.username ?? null);
+        setRole(user?.role ?? null);
     }, []);
 
     // On demande au backend d'expirer le cookie AVANT de vider l'affichage :
@@ -76,6 +85,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             setId(null);
             setEmail(null);
             setUsername(null);
+            setRole(null);
         }
     }, []);
 
@@ -84,7 +94,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             id,
             email,
             username,
+            role,
             isAuthenticated: !!email,
+            isAdmin: role === 'admin',
             isLoading,
             login,
             logout
