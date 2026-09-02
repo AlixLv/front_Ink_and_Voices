@@ -1,6 +1,6 @@
 import SubmitButton from "../SubmitButton/SubmitButton.tsx";
+import UserAvatar from "../UserAvatar/UserAvatar.tsx";
 import './HomeHeader.css';
-import sarahImg from "../../assets/sarah.png";
 import logo from "../../assets/logo.svg";
 import { useAuth } from "../../contexts/AuthContext.tsx";
 import { Link } from "react-router-dom";
@@ -18,7 +18,7 @@ export default function HomeHeader() {
                     <div className="user-card">
                         <div className="user-icon-container">
                             <Link to={`/profile/${id}`}>
-                                <img src={sarahImg} alt="Icône utilisateur" className="user-icon" />
+                                <UserAvatar username={displayName} size={80} />
                             </Link>
                         </div>
                         <div className="user-name">Hey {displayName} !!!</div>
