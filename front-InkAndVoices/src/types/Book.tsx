@@ -18,6 +18,9 @@ export interface Book {
   themes: Theme[];
   resume?: string;
   short_description: string;
+  // Déjà renvoyé par GET /api/books/:id (bookDetailSchema côté back), mais
+  // absent du type jusqu'ici.
+  reference_link?: string | null;
 }
 
 export interface BookCardProps {
@@ -57,4 +60,26 @@ export interface AddBookFormErrors {
   short_description?: string;
   type_id?: string;
   global?: string;
+}
+
+// Réponse de GET /api/admin/books?status=... : un livre (quel que soit son
+// statut), avec en plus l'identité de qui l'a suggéré (jamais exposé sur
+// les routes publiques).
+export interface AdminBook extends Book {
+  created_at: string;
+  user: {
+    id: string;
+    username: string;
+    email: string;
+  };
+}
+
+export type BookStatus = 'pending' | 'validated' | 'refused';
+export type BookValidationStatus = 'validated' | 'refused';
+
+// Réponse de GET /api/books/mine ("mes contributions", page profil) : les
+// suggestions de la personne connectée, quel que soit leur statut.
+export interface MyBook extends Book {
+  created_at: string;
+  status: BookStatus;
 }

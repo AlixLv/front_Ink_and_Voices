@@ -10,6 +10,10 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  /* #root { text-align: center } (App.css) hérite jusqu'ici et rien ne le
+     recouvrait : tout le texte de la page (paragraphes multi-lignes)
+     rendait centré au lieu d'aligné à gauche. */
+  text-align: left;
 }
 
 .header {
@@ -149,6 +153,9 @@
   font-weight: 500;
   cursor: pointer;
   transition: background-color 0.2s;
+  /* .container est passé à text-align: left pour le corps du texte ;
+     un bouton pleine largeur doit rester centré comme .submit-button. */
+  text-align: center;
 }
 
 .returnButton:hover {

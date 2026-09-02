@@ -1,0 +1,6 @@
+/* #root { text-align: center } (App.css) hérite jusqu'ici : sans ça, les
+   messages de chargement/erreur/introuvable ci-dessous rendaient centrés
+   au lieu d'alignés à gauche comme le reste de la page. */
+.message {
+  text-align: left;
+}

@@ -1,37 +1,16 @@
 .profile-header-container {
-    /* padding: 20px; */
     padding-top: 0px;
     padding-bottom: 0px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* background-color: yellow; */
     margin: 0px;
     margin-bottom: 10px;
+    gap: 10px;
 }
-
-
-.profile-user-icon-container {
-    display: flex;
-    padding: 10px;
-    padding-bottom: 0px;
-    width: 100px;
-    height: 100px;
-    /* background-color: green; */
-}
-
-.profile-user-icon {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    object-fit: cover;
-    /* background-color: blue; */
-}
-
 
 .profile-user-name {
     font-family: 'Poppins';
     font-weight: 600;
     font-size: 27px;
-    /* background-color: pink; */
 }
