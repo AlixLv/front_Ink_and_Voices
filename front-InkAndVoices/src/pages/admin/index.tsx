@@ -12,7 +12,7 @@ export default function AdminDashboard() {
         <AdminGate>
             <BackButton />
 
-            {isLoading && <p role="status">Chargement...</p>}
+            {isLoading && <p role="status" className={styles.status}>Chargement...</p>}
             {error && <p role="alert" className={styles.error}>{error}</p>}
 
             {!isLoading && !error && (
